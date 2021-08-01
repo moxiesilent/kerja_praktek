@@ -1,40 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-<div class="container">
-<div class="top-right links">
-  <a href="{{ url('/home') }}" class="btn btn-default">Home</a>
+@extends('layouts.argon')
+@section('content')
+<h2>Daftar Matakuliah</h2><br>
+<div class="card">
+  <div class="card-header border-0">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="mb-0">Daftar Matakuliah</h3>
+      </div>
+      <div class="col text-right">
+      <a href="" role="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah">
+        Tambah Matakuliah
+      </a>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th>Kode MK</th>
+          <th>Nama Matakuliah</th>
+          <th>Jumlah SKS</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($data as $d)
+          <tr>
+          <td>{{$d->kodemk}}</td>
+          <td>{{$d->namamk}}</td>
+          <td>{{$d->sks}}</td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
 </div>
-  <h2>Tabel Prestasi</h2><br>
-  <a href="{{url('matakuliahs/create')}}" class="btn btn-primary" role="button">Tambah matakuliah baru</a>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Kode MK</th>
-        <th>Nama Matakuliah</th>
-        <th>Jumlah SKS</th>
-      </tr>
-    </thead>
-    <tbody>
-    @foreach($data as $d)
-      <tr>
-        <td>{{$d->kodemk}}</td>
-        <td>{{$d->namamk}}</td>
-        <td>{{$d->sks}}</td>
-      </tr>
-    @endforeach
-    </tbody>
-  </table>
-</div>
 
-</body>
-</html>
+<!-- Modal -->
+<div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTambahLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" action="{{url('matakuliahs')}}">
+      @csrf
+        <div class="form-group">
+          <label for="nama">Nama Matakuliah</label>
+          <input type="text" class="form-control" id="nama" placeholder="Bahasa Indonesia" name="nama">
+        </div>
+        <div class="form-group">
+          <label for="kode">Kode Matakuliah</label>
+          <input type="text" class="form-control" id="kode" placeholder="KMP xxxx" name="kode">
+        </div>
+        <div class="form-group">
+          <label for="sks">Jumlah SKS</label>
+          <input type="text" class="form-control" id="sks" placeholder="xx (angka)" name="sks">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
