@@ -24,6 +24,7 @@
           <th>Email</th>
           <th>Jabatan</th>
           <th>Bidang Keahlian</th>
+          <th>Foto</th>
         </tr>
       </thead>
       <tbody>
@@ -35,7 +36,7 @@
           <td>{{$d->email}}</td>          
           <td>{{$d->jabatan}}</td>
           <td>{{$d->bidangkeahlian}}</td>
-          <!-- <td>{{$d->foto}}</td> -->
+          <td>{{$d->foto}}</td>
           </tr>
         @endforeach
       </tbody>
@@ -70,9 +71,18 @@
         </div>
         <div class="form-group">
           <label for="tanggallahir">Tanggal Lahir</label>
-          <input type="text" class="form-control datepicker" id="tanggallahir" placeholder="01/01/1990" name="tanggallahir">
+          <input type="date" class="form-control datepicker" id="tanggallahir" placeholder="01/01/1990" name="tanggallahir">
+        </div>
+        <div class="form-group">
+          <label for="jabatan">Jabatan</label>
+          <input type="text" class="form-control" id="jabatan" placeholder="Dosen" name="jabatan">
+        </div>
+        <div class="form-group">
+          <label for="bidang">Bidang Keahlian</label>
+          <textarea class="form-control" id="bidang" placeholder="Olahraga Pendidikan, Ilmu Kesehatan Olahraga, Pendidikan Olahraga, ..." name="bidang"></textarea>
         </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -26,7 +26,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        //
+        return view('dosen.create');
     }
 
     /**
@@ -37,7 +37,15 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Dosen();
+        $data->nip = $request->get('nip');
+        $data->nama = $request->get('nama');
+        $data->email = $request->get('email');
+        $data->tanggallahir = $request->get('tanggallahir');
+        $data->jabatan = $request->get('jabatan');
+        $data->bidangkeahlian = $request->get('bidang');
+        $data->save();
+        return redirect()->route('dosens.index')->with('status','dosen baru berhasil ditambahkan');
     }
 
     /**
