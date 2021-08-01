@@ -21,16 +21,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/prestasis','PrestasiController@index');
+Route::get('/prestasi','PrestasiController@index');
 Route::resource('prestasis','PrestasiController');
 
-Route::get('/mahasiswas','MahasiswaController@index');
+Route::get('/mahasiswa','MahasiswaController@index');
 Route::resource('mahasiswas','MahasiswaController');
 
-Route::get('/dosens','DosenController@index');
+Route::get('/dosen','DosenController@index');
 Route::resource('dosens','DosenController');
 
-Route::get('/matakuliahs','MatakuliahController@index');
+Route::get('/matakuliah','MatakuliahController@index');
 Route::resource('matakuliahs','MatakuliahController');
 
 Route::get('/ceklayout',function(){
