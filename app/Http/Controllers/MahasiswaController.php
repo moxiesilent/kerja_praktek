@@ -37,7 +37,14 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Mahasiswa();
+        $data->idmahasiswa = $request->get('idmahasiswa');
+        $data->email = $request->get('email');
+        $data->nama = $request->get('nama');
+        $data->tanggallahir = $request->get('tanggallahir');
+        $data->telepon = $request->get('telepon');
+        $data->save();
+        return redirect()->route('mahasiswas.index')->with('status','mahasiswa berhasil ditambahkan');
     }
 
     /**
