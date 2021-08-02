@@ -23,6 +23,7 @@
           <th scope="col">Tahun</th>
           <th scope="col">Tingkat</th>
           <th scope="col">Prestasi yang dicapai</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -33,6 +34,8 @@
             <td>{{$d->tahun}}</td>
             <td>{{$d->tingkat}}</td>
             <td>{{$d->prestasi}}</td>
+            <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{$d->idprestasi}})">edit</a>
+                <a href="{{url('prestasis/'.$d->idprestasi.'/edit')}}" class="btn-sm btn-warning">editt</a></td>
           </tr>
         @endforeach
       </tbody>
@@ -82,4 +85,30 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+    </div>
+  </div>
+</div>
+
+@endsection
+
+@section('javascript')
+<script>
+function getEditForm(id){
+  $.ajax({
+    type:'POST',
+    url:'{{route("prestasi.getEditForm")}}',
+    data:{'_token':'<?php echo csrf_token() ?>',
+          'id': id
+        },
+        success: function(data){
+          $('#modalEdit').html(data.msg)
+        }
+  });
+}
+</script>
 @endsection

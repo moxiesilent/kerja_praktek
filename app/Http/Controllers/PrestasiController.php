@@ -65,7 +65,8 @@ class PrestasiController extends Controller
      */
     public function edit(Prestasi $prestasi)
     {
-        //
+        $data = $prestasi;
+        return view("Prestasi.edit",compact('data'));
     }
 
     /**
@@ -89,5 +90,14 @@ class PrestasiController extends Controller
     public function destroy(Prestasi $prestasi)
     {
         //
+    }
+
+    public function getEditForm(Request $Request){
+        $idprestasi = $request->get("id");
+        $data = Prestasi::find($idprestasi);
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('prestasi.getEditForm',compact('data'))->render()
+        ),200);
     }
 }

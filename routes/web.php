@@ -33,6 +33,8 @@ Route::resource('dosens','DosenController');
 Route::get('/matakuliah','MatakuliahController@index');
 Route::resource('matakuliahs','MatakuliahController');
 
+Route::post('/prestasi/getEditForm','PrestasiController@getEditForm')->name('prestasi.getEditForm');
+
 Route::get('/ceklayout',function(){
     return view('layouts.argon');
 });
