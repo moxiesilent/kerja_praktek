@@ -1,6 +1,7 @@
 @extends('layouts.argon')
 @section('content')
 <h2>Tabel Prestasi</h2><br>
+
 <div class="card">
   <div class="card-header border-0">
     <div class="row align-items-center">
@@ -14,6 +15,11 @@
       </div>
     </div>
   </div>
+   @if(session('status'))
+      <div class="alert alert-success" role="alert">
+          {{session('status')}}
+      </div>
+    @endif
   <div class="table-responsive">
     <table class="table align-items-center table-flush">
       <thead class="thead-light">

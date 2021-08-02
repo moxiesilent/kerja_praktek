@@ -78,7 +78,12 @@ class PrestasiController extends Controller
      */
     public function update(Request $request, Prestasi $prestasi)
     {
-        //
+        $prestasi->namakegiatan=$request->get('kegiatan');
+        $prestasi->tingkat=$request->get('tingkat');
+        $prestasi->prestasi=$request->get('prestasi');
+        $prestasi->tahun=$request->get('tahun');
+        $prestasi->save();
+        return redirect()->route('prestasis.index')->with('status','prestasi berhasil diubah'); 
     }
 
     /**
