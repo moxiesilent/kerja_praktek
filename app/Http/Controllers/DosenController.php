@@ -67,7 +67,8 @@ class DosenController extends Controller
      */
     public function edit(Dosen $dosen)
     {
-        //
+        $data = $dosen;
+        return view("Dosen.edit",compact('data'));
     }
 
     /**
@@ -79,7 +80,14 @@ class DosenController extends Controller
      */
     public function update(Request $request, Dosen $dosen)
     {
-        //
+        $dosen->nama=$request->get('nama');
+        $dosen->email=$request->get('email');
+        $dosen->tanggallahir=$request->get('tanggallahir');
+        $dosen->jabatan=$request->get('jabatan');
+        $dosen->bidangkeahlian=$request->get('bidang');
+        // $dosen->foto=$request->get('foto');
+        $dosen->save();
+        return redirect()->route('dosens.index')->with('status','data dosen berhasil diubah'); 
     }
 
     /**
@@ -90,6 +98,13 @@ class DosenController extends Controller
      */
     public function destroy(Dosen $dosen)
     {
-        //
+        try{
+            $dosen->delete();
+            return redirect()->route('dosens.index')->with('status','data dosen berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return redirect()->route('dosens.index')->with('error', $msg);
+        }
     }
 }

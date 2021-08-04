@@ -34,6 +34,9 @@ Route::get('/matakuliah','MatakuliahController@index');
 Route::resource('matakuliahs','MatakuliahController');
 
 Route::post('/prestasi/getEditForm','PrestasiController@getEditForm')->name('prestasi.getEditForm');
+Route::post('/dosen/getEditForm','DosenController@getEditForm')->name('dosen.getEditForm');
+Route::post('/mahasiswa/getEditForm','MahasiswaController@getEditForm')->name('mahasiswa.getEditForm');
+Route::post('/matakuliah/getEditForm','MatakuliahController@getEditForm')->name('matakuliah.getEditForm');
 
 Route::get('/ceklayout',function(){
     return view('layouts.argon');

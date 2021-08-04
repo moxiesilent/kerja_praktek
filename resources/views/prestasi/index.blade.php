@@ -20,6 +20,11 @@
           {{session('status')}}
       </div>
     @endif
+    @if(session('error'))
+      <div class="alert alert-danger" role="alert">
+          {{session('error')}}
+      </div>
+    @endif
   <div class="table-responsive">
     <table class="table align-items-center table-flush">
       <thead class="thead-light">
@@ -40,8 +45,14 @@
             <td>{{$d->tahun}}</td>
             <td>{{$d->tingkat}}</td>
             <td>{{$d->prestasi}}</td>
-            <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{$d->idprestasi}})">edit</a>
-                <a href="{{url('prestasis/'.$d->idprestasi.'/edit')}}" class="btn-sm btn-warning">editt</a></td>
+            <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{ $d->idprestasi }})">edit</a>
+                <a href="{{url('prestasis/'.$d->idprestasi.'/edit')}}" class="btn-sm btn-warning">editt</a>
+                <form method="POST" action="{{url('prestasis/'.$d->idprestasi)}}">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
+                </form>
+            </td>
           </tr>
         @endforeach
       </tbody>
@@ -95,7 +106,7 @@
 <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      
+
     </div>
   </div>
 </div>
@@ -104,12 +115,12 @@
 
 @section('javascript')
 <script>
-function getEditForm(id){
+function getEditForm(idprestasi){
   $.ajax({
     type:'POST',
     url:'{{route("prestasi.getEditForm")}}',
     data:{'_token':'<?php echo csrf_token() ?>',
-          'id': id
+          'idprestasi': idprestasi
         },
         success: function(data){
           $('#modalEdit').html(data.msg)

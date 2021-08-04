@@ -64,7 +64,8 @@ class MatakuliahController extends Controller
      */
     public function edit(Matakuliah $matakuliah)
     {
-        //
+        $data = $matakuliah;
+        return view("Matakuliah.edit",compact('data'));
     }
 
     /**
@@ -76,7 +77,10 @@ class MatakuliahController extends Controller
      */
     public function update(Request $request, Matakuliah $matakuliah)
     {
-        //
+        $matakuliah->namamk=$request->get('namamk');
+        $matakuliah->sks=$request->get('sks');
+        $matakuliah->save();
+        return redirect()->route('matakuliahs.index')->with('status','data matakuliah berhasil diubah'); 
     }
 
     /**
@@ -87,6 +91,13 @@ class MatakuliahController extends Controller
      */
     public function destroy(Matakuliah $matakuliah)
     {
-        //
+        try{
+            $matakuliah->delete();
+            return redirect()->route('matakuliahs.index')->with('status','data matakuliah berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return redirect()->route('matakuliahs.index')->with('error', $msg);
+        }
     }
 }

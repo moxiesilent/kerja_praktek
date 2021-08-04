@@ -66,7 +66,8 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        $data = $mahasiswa;
+        return view("Mahasiswa.edit",compact('data'));
     }
 
     /**
@@ -78,7 +79,12 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->nama=$request->get('nama');
+        $mahasiswa->email=$request->get('email');
+        $mahasiswa->tanggallahir=$request->get('tanggallahir');
+        $mahasiswa->telepon=$request->get('telepon');
+        $mahasiswa->save();
+        return redirect()->route('mahasiswas.index')->with('status','data mahasiswa berhasil diubah'); 
     }
 
     /**
@@ -89,6 +95,13 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        try{
+            $mahasiswa->delete();
+            return redirect()->route('mahasiswas.index')->with('status','data mahasiswa berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return redirect()->route('mahasiswas.index')->with('error', $msg);
+        }
     }
 }

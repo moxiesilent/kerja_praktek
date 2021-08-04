@@ -94,11 +94,18 @@ class PrestasiController extends Controller
      */
     public function destroy(Prestasi $prestasi)
     {
-        //
+        try{
+            $prestasi->delete();
+            return redirect()->route('prestasis.index')->with('status','data prestasi berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return redirect()->route('prestasis.index')->with('error', $msg);
+        }
     }
 
     public function getEditForm(Request $Request){
-        $idprestasi = $request->get("id");
+        $idprestasi = $request->get("idprestasi");
         $data = Prestasi::find($idprestasi);
         return response()->json(array(
             'status'=>'oke',
