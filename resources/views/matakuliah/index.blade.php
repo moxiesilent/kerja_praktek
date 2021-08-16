@@ -12,6 +12,16 @@
         Tambah Matakuliah
       </a>
       </div>
+      @if(session('status'))
+      <div class="alert alert-success" role="alert">
+          {{session('status')}}
+      </div>
+    @endif
+    @if(session('error'))
+      <div class="alert alert-danger" role="alert">
+          {{session('error')}}
+      </div>
+    @endif
     </div>
   </div>
   <div class="table-responsive">
@@ -21,6 +31,7 @@
           <th>Kode MK</th>
           <th>Nama Matakuliah</th>
           <th>Jumlah SKS</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +40,14 @@
           <td>{{$d->kodemk}}</td>
           <td>{{$d->namamk}}</td>
           <td>{{$d->sks}}</td>
+          <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{ $d->kodemk }})">edit</a>
+                <a href="{{url('matakuliahs/'.$d->kodemk.'/edit')}}" class="btn-sm btn-warning">editt</a>
+                <form method="POST" action="{{url('matakuliahs/'.$d->kodemk)}}">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
+                </form>
+            </td>
           </tr>
         @endforeach
       </tbody>

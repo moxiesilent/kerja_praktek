@@ -77,7 +77,7 @@ class MatakuliahController extends Controller
      */
     public function update(Request $request, Matakuliah $matakuliah)
     {
-        $matakuliah->namamk=$request->get('namamk');
+        $matakuliah->namamk=$request->get('nama');
         $matakuliah->sks=$request->get('sks');
         $matakuliah->save();
         return redirect()->route('matakuliahs.index')->with('status','data matakuliah berhasil diubah'); 
