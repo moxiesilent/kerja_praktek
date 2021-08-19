@@ -12,7 +12,9 @@
         Tambah Matakuliah
       </a>
       </div>
-      @if(session('status'))
+      <br>
+    </div>
+    @if(session('status'))
       <div class="alert alert-success" role="alert">
           {{session('status')}}
       </div>
@@ -22,7 +24,6 @@
           {{session('error')}}
       </div>
     @endif
-    </div>
   </div>
   <div class="table-responsive">
     <table class="table align-items-center table-flush">

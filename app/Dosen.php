@@ -8,4 +8,5 @@ class Dosen extends Model
 {
     public $timestamps=false;
     protected $primaryKey = 'nip';
+    protected $keyType = 'string';
 }

@@ -13,6 +13,16 @@
       </a>
       </div>
     </div>
+    @if(session('status'))
+      <div class="alert alert-success" role="alert">
+          {{session('status')}}
+      </div>
+    @endif
+    @if(session('error'))
+      <div class="alert alert-danger" role="alert">
+          {{session('error')}}
+      </div>
+    @endif
   </div>
   <div class="table-responsive">
     <table class="table align-items-center table-flush">
@@ -25,6 +35,7 @@
           <th>Jabatan</th>
           <th>Bidang Keahlian</th>
           <th>Foto</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +48,14 @@
           <td>{{$d->jabatan}}</td>
           <td>{{$d->bidangkeahlian}}</td>
           <td>{{$d->foto}}</td>
+          <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{ $d->nip }})">edit</a>
+                <a href="{{url('dosens/'.$d->nip.'/edit')}}" class="btn-sm btn-warning">editt</a>
+                <form method="POST" action="{{url('dosens/'.$d->nip)}}">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
+                </form>
+            </td>
           </tr>
         @endforeach
       </tbody>
