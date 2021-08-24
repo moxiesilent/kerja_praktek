@@ -38,6 +38,13 @@ class DosenController extends Controller
     public function store(Request $request)
     {
         $data = new Dosen();
+
+        $file=$request->file('foto');
+        $imgFolder='images';
+        $imgFile=time().'_'.$file->getClientOriginalName();
+        $file->move($imgFolder,$imgFile);
+        $data->foto=$imgFile;
+
         $data->nip = $request->get('nip');
         $data->nama = $request->get('nama');
         $data->email = $request->get('email');

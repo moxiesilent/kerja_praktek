@@ -47,7 +47,7 @@
           <td>{{$d->email}}</td>          
           <td>{{$d->jabatan}}</td>
           <td>{{$d->bidangkeahlian}}</td>
-          <td>{{$d->foto}}</td>
+          <td><img src="{{asset('images/'.$d->foto)}}" height='100px'/></td>
           <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{ $d->nip }})">edit</a>
                 <a href="{{url('dosens/'.$d->nip.'/edit')}}" class="btn-sm btn-warning">editt</a>
                 <form method="POST" action="{{url('dosens/'.$d->nip)}}">
@@ -74,7 +74,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="{{url('dosens')}}">
+      <form enctype="multipart/form-data" method="POST" action="{{url('dosens')}}">
       @csrf
         <div class="form-group">
           <label for="nip">NIP</label>
@@ -99,6 +99,10 @@
         <div class="form-group">
           <label for="bidang">Bidang Keahlian</label>
           <textarea class="form-control" id="bidang" placeholder="Olahraga Pendidikan, Ilmu Kesehatan Olahraga, Pendidikan Olahraga, ..." name="bidang"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="foto">Foto</label>
+          <input type="file" class="form-control" id="foto" name="foto">
         </div>
       </div>
 
