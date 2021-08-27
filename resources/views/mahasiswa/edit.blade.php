@@ -7,6 +7,7 @@
     <div class="row align-items-center">
     <form method="POST" action="{{url('mahasiswas/'.$data->idmahasiswa)}}">
       @csrf
+      @method('PUT')
         <div class="form-group">
           <label for="idmahasiswa">Nomor Mahasiswa</label>
           <input type="text" class="form-control" id="idmahasiswa" name="idmahasiswa" value="{{$data->idmmahasiswa}}" disabled>

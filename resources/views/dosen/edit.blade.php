@@ -12,8 +12,9 @@
       </div>
     </div>
   </div>
-    <form method="POST" action="{{url('dosens/'.$data->nip)}}">
+    <form method="POST" action="{{url('dosens/'.$data->nip)}}" enctype="multipart/form-data">
       @csrf
+      @method('PUT')
         <div class="form-group">
           <label for="nip">NIP</label>
           <input type="text" class="form-control" id="nip" name="nip" value="{{$data->nip}}">
@@ -38,10 +39,15 @@
           <label for="bidang">Bidang Keahlian</label>
           <textarea class="form-control" id="bidang" name="bidang">{{$data->bidangkeahlian}}</textarea>
         </div>
+        <div class="form-group">
+          <label for="foto">Foto</label>
+          <input type="file" class="form-control" id="foto" name="foto">
+          <img src="{{asset('images/'.$data->foto)}}" height='100px'/>
+        </div>
       </div>
             <div>
                 <a href="{{url('dosens')}}" class="btn btn-default" role="button">Back</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>      
       </div>

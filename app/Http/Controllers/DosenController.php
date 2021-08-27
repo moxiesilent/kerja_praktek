@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use DB;
 
 class DosenController extends Controller
@@ -38,7 +39,7 @@ class DosenController extends Controller
     public function store(Request $request)
     {
         $data = new Dosen();
-
+        
         $file=$request->file('foto');
         $imgFolder='images';
         $imgFile=time().'_'.$file->getClientOriginalName();
@@ -92,7 +93,17 @@ class DosenController extends Controller
         $dosen->tanggallahir=$request->get('tanggallahir');
         $dosen->jabatan=$request->get('jabatan');
         $dosen->bidangkeahlian=$request->get('bidang');
-        // $dosen->foto=$request->get('foto');
+        if($request->hasFile('foto')){
+            // $dest='images/'.$dosen->foto;
+            // if(File::file_exists($dest)){
+            //     File::delete($dest); 
+            // }
+            $file=$request->file('foto');
+            $imgFolder='images';
+            $imgFile=time().'_'.$file->getClientOriginalName();
+            $file->move($imgFolder,$imgFile);
+            $dosen->foto=$imgFile;
+        }
         $dosen->save();
         return redirect()->route('dosens.index')->with('status','data dosen berhasil diubah'); 
     }
