@@ -10,7 +10,7 @@
       @method('PUT')
         <div class="form-group">
           <label for="idmahasiswa">Nomor Mahasiswa</label>
-          <input type="text" class="form-control" id="idmahasiswa" name="idmahasiswa" value="{{$data->idmmahasiswa}}" disabled>
+          <input type="text" class="form-control" id="idmahasiswa" name="idmahasiswa" value="{{$data->idmahasiswa}}" disabled>
         </div>
         <div class="form-group">
           <label for="nama">Nama Lengkap</label>

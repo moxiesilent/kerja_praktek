@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dosen;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Facade\File;
 use DB;
 
 class DosenController extends Controller
@@ -94,10 +94,10 @@ class DosenController extends Controller
         $dosen->jabatan=$request->get('jabatan');
         $dosen->bidangkeahlian=$request->get('bidang');
         if($request->hasFile('foto')){
-            // $dest='images/'.$dosen->foto;
-            // if(File::file_exists($dest)){
-            //     File::delete($dest); 
-            // }
+            $dest='images/'.$dosen->foto;
+            if(file_exists($dest)){
+                @unlink($dest); 
+            }
             $file=$request->file('foto');
             $imgFolder='images';
             $imgFile=time().'_'.$file->getClientOriginalName();

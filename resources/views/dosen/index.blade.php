@@ -43,7 +43,7 @@
           <tr>
           <td>{{$d->nip}}</td>
           <td>{{$d->nama}}</td>
-          <td>{{$d->tanggallahir}}</td>
+          <td>{{date('d-m-Y',strtotime($d->tanggallahir))}}</td>
           <td>{{$d->email}}</td>          
           <td>{{$d->jabatan}}</td>
           <td>{{$d->bidangkeahlian}}</td>

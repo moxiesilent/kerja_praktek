@@ -42,7 +42,7 @@
             <td>{{$d->idmahasiswa}}</td>
             <td>{{$d->nama}}</td>
             <td>{{$d->email}}</td>
-            <td>{{$d->tanggallahir}}</td>
+            <td>{{date('d-m-Y',strtotime($d->tanggallahir))}}</td>
             <td>{{$d->telepon}}</td>
             <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{ $d->idmahasiswa }})">edit</a>
                 <a href="{{url('mahasiswas/'.$d->idmahasiswa.'/edit')}}" class="btn-sm btn-warning">editt</a>
