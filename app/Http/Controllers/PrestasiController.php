@@ -104,7 +104,7 @@ class PrestasiController extends Controller
         }
     }
 
-    public function getEditForm(Request $Request){
+    public function getEditForm(Request $request){
         $idprestasi = $request->get("idprestasi");
         $data = Prestasi::find($idprestasi);
         return response()->json(array(
