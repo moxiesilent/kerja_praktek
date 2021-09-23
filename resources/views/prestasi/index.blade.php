@@ -95,8 +95,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="{{url('prestasis')}}" class="btn btn-default" role="button">Back</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{url('prestasis')}}" class="btn btn-default" role="button">Kembali</a>
+        <button type="submit" class="btn btn-primary">Tambah</button>
       </form>
       </div>
     </div>
