@@ -33,6 +33,12 @@ Route::resource('dosens','DosenController');
 Route::get('/matakuliah','MatakuliahController@index');
 Route::resource('matakuliahs','MatakuliahController');
 
+Route::get('/jabatan','JabatanController@index');
+Route::resource('jabatans','JabatanController');
+
+Route::get('/semester','SemesterController@index');
+Route::resource('semesters','SemesterController');
+
 Route::post('/prestasi/getEditForm','PrestasiController@getEditForm')->name('prestasi.getEditForm');
 Route::post('/dosen/getEditForm','DosenController@getEditForm')->name('dosen.getEditForm');
 Route::post('/mahasiswa/getEditForm','MahasiswaController@getEditForm')->name('mahasiswa.getEditForm');
