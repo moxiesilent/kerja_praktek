@@ -84,6 +84,13 @@ class JabatanController extends Controller
      */
     public function destroy(Jabatan $jabatan)
     {
-        //
+        try{
+            $matakuliah->delete();
+            return redirect()->route('jabatans.index')->with('status','data jabatan berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return redirect()->route('jabatans.index')->with('error', $msg);
+        }
     }
 }

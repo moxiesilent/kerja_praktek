@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dosen;
+use App\Jabatan;
 use Illuminate\Http\Request;
 use Illuminate\Facade\File;
 use DB;
@@ -17,6 +18,8 @@ class DosenController extends Controller
     public function index()
     {
         $data = Dosen::all();
+        // $jbt = Jabatan::all();
+        // return view("dosen.index",compact('data','jbt'));
         return view("dosen.index",compact('data'));
     }
 
@@ -124,5 +127,14 @@ class DosenController extends Controller
             $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
             return redirect()->route('dosens.index')->with('error', $msg);
         }
+    }
+
+    public function getEditForm(Request $request){
+        $nip = $request->get("nip");
+        $data = Dosen::find($nip);
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('dosen.getEditForm',compact('data'))->render()
+        ),200);
     }
 }

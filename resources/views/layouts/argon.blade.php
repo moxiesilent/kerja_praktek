@@ -33,6 +33,7 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{asset('assets/css/argon.css?v=1.2.0')}}" type="text/css">
+  <link rel="stylesheet" href="{{asset('assets/vendor/select2/dist/css/select2.min.css')}}" type="text/css">
 </head>
 
 <body>
@@ -81,9 +82,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/login.html">
+              <a class="nav-link" href="{{url('jabatans')}}">
                 <i class="ni ni-key-25 text-info"></i>
-                <span class="nav-link-text">Login</span>
+                <span class="nav-link-text">Jabatan</span>
               </a>
             </li>
             <li class="nav-item">
@@ -339,6 +340,7 @@
   <script src="{{asset('assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
   <script src="{{asset('assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
   <script src="{{asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/select2/dist/js/select2.min.js')}}"></script>
   @yield("javascript")
   <!-- Argon JS -->
   <script src="{{asset('assets/js/argon.js?v=1.2.0')}}"></script>

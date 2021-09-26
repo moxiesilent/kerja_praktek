@@ -44,11 +44,11 @@
           <td>{{$d->nip}}</td>
           <td>{{$d->nama}}</td>
           <td>{{date('d-m-Y',strtotime($d->tanggallahir))}}</td>
-          <td>{{$d->email}}</td>          
+          <td>{{$d->email}}</td>
           <td>{{$d->jabatan}}</td>
           <td>{{$d->bidangkeahlian}}</td>
           <td><img src="{{asset('images/'.$d->foto)}}" height='100px'/></td>
-          <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{ $d->nip }})">edit</a>
+          <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm( {{ $d->nip }} )">edit</a>
                 <a href="{{url('dosens/'.$d->nip.'/edit')}}" class="btn-sm btn-warning">editt</a>
                 <form method="POST" action="{{url('dosens/'.$d->nip)}}">
                 @csrf
@@ -90,11 +90,11 @@
         </div>
         <div class="form-group">
           <label for="tanggallahir">Tanggal Lahir</label>
-          <input type="date" class="form-control datepicker" id="tanggallahir" placeholder="01/01/1990" name="tanggallahir">
+          <input type="date" class="form-control" id="tanggallahir" placeholder="01/01/1990" name="tanggallahir">
         </div>
         <div class="form-group">
           <label for="jabatan">Jabatan</label>
-          <input type="text" class="form-control" id="jabatan" placeholder="Dosen" name="jabatan">
+          <input type="text" class="form-control" id="jabatan" placeholder="dosen" name="jabatan">
         </div>
         <div class="form-group">
           <label for="bidang">Bidang Keahlian</label>
@@ -114,5 +114,29 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
 @endsection
 
+@section('javascript')
+<script>
+function getEditForm(nip){
+  $.ajax({
+    type:'POST',
+    url:'{{route("dosen.getEditForm")}}',
+    data:{'_token':'<?php echo csrf_token() ?>',
+          'nip': nip
+        },
+        success: function(data){
+          $('#modalEdit').html(data.msg)
+        }
+  });
+}
+</script>
+@endsection
