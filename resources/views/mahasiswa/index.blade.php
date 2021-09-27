@@ -86,7 +86,7 @@
         </div>
         <div class="form-group">
           <label for="tanggallahir">Tanggal Lahir</label>
-          <input type="date" class="form-control datepicker" id="tanggallahir" placeholder="01/01/1990" name="tanggallahir">
+          <input type="date" class="form-control" id="tanggallahir" placeholder="01/01/1990" name="tanggallahir">
         </div>
         <div class="form-group">
           <label for="telepon">Nomor Telepon</label>
