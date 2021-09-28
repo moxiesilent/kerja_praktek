@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Semester;
+use App\Mengajar;
 use Illuminate\Http\Request;
-use DB;
 
-class SemesterController extends Controller
+class MengajarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class SemesterController extends Controller
      */
     public function index()
     {
-        $data = Semester::all();
-        return view("semester.index",compact('data'));
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class SemesterController extends Controller
      */
     public function create()
     {
-        return view('semester.create');
+        //
     }
 
     /**
@@ -37,19 +35,16 @@ class SemesterController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Semester();
-        $data->nama_semester = $request->get('nama');
-        $data->save();
-        return redirect()->route('semester.index')->with('status','semester telah ditambahkan');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Semester  $semester
+     * @param  \App\Mengajar  $mengajar
      * @return \Illuminate\Http\Response
      */
-    public function show(Semester $semester)
+    public function show(Mengajar $mengajar)
     {
         //
     }
@@ -57,10 +52,10 @@ class SemesterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Semester  $semester
+     * @param  \App\Mengajar  $mengajar
      * @return \Illuminate\Http\Response
      */
-    public function edit(Semester $semester)
+    public function edit(Mengajar $mengajar)
     {
         //
     }
@@ -69,10 +64,10 @@ class SemesterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Semester  $semester
+     * @param  \App\Mengajar  $mengajar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Semester $semester)
+    public function update(Request $request, Mengajar $mengajar)
     {
         //
     }
@@ -80,18 +75,11 @@ class SemesterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Semester  $semester
+     * @param  \App\Mengajar  $mengajar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Semester $semester)
+    public function destroy(Mengajar $mengajar)
     {
-        try{
-            $semester->delete();
-            return redirect()->route('semesters.index')->with('status','data semester berhasil dihapus');       
-        }
-        catch(\PDOException $e){
-            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
-            return redirect()->route('semesters.index')->with('error', $msg);
-        }
+        //
     }
 }

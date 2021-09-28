@@ -82,9 +82,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('jabatans')}}">
+              <a class="nav-link" href="{{url('semesters')}}">
                 <i class="ni ni-key-25 text-info"></i>
-                <span class="nav-link-text">Jabatan</span>
+                <span class="nav-link-text">Semester</span>
               </a>
             </li>
             <li class="nav-item">
