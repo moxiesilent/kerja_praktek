@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Mengajar;
+use App\Pertemuan;
 use Illuminate\Http\Request;
-use DB;
 
-class MengajarController extends Controller
+class PertemuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +41,10 @@ class MengajarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Mengajar  $mengajar
+     * @param  \App\Pertemuan  $pertemuan
      * @return \Illuminate\Http\Response
      */
-    public function show(Mengajar $mengajar)
+    public function show(Pertemuan $pertemuan)
     {
         //
     }
@@ -53,10 +52,10 @@ class MengajarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Mengajar  $mengajar
+     * @param  \App\Pertemuan  $pertemuan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mengajar $mengajar)
+    public function edit(Pertemuan $pertemuan)
     {
         //
     }
@@ -65,10 +64,10 @@ class MengajarController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Mengajar  $mengajar
+     * @param  \App\Pertemuan  $pertemuan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mengajar $mengajar)
+    public function update(Request $request, Pertemuan $pertemuan)
     {
         //
     }
@@ -76,10 +75,10 @@ class MengajarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Mengajar  $mengajar
+     * @param  \App\Pertemuan  $pertemuan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mengajar $mengajar)
+    public function destroy(Pertemuan $pertemuan)
     {
         //
     }

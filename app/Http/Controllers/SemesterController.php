@@ -62,7 +62,8 @@ class SemesterController extends Controller
      */
     public function edit(Semester $semester)
     {
-        //
+        $data = $semester;
+        return view("semester.edit",compact('data'));
     }
 
     /**
@@ -74,7 +75,9 @@ class SemesterController extends Controller
      */
     public function update(Request $request, Semester $semester)
     {
-        //
+        $semester->nama_semester=$request->get('nama');
+        $semester->save();
+        return redirect()->route('semesters.index')->with('status','semester berhasil diubah'); 
     }
 
     /**
