@@ -1,0 +1,27 @@
+.baris {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+  }
+  .kolom {
+    flex: 33%;
+    padding: 0px 4px;
+  }
+  .kolom img {
+    margin-top: 8px;
+    vertical-align: middle;
+  }
+  .baris:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .containimg{
+    margin: auto;
+  }
+  .image{
+    width:100%;
+  }
+  .image:hover{
+    transform: scale(1.2);
+  }

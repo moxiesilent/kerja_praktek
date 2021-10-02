@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'DosenController@dosenkelanding');
+Route::view('/sambutan', 'sambutan');
+Route::view('/visimisi', 'visimisi');
+Route::view('/tentangkami', 'tentang');
+Route::view('/struktur', 'struktur');
+Route::get('/profildosen', 'DosenController@profilDosen');
+Route::view('/kurikulum', 'kurikulum');
+Route::get('/jurnal', 'JurnalController@index');
+Route::get('/penelitian', 'PenelitianController@index');
 
 Auth::routes();
 
