@@ -5,7 +5,8 @@
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Halaman login dosen</h3>
+        <h3 class="mb-0">Halaman login dosen</h3><br>
+        {{ auth()->user()->name }}
       </div>
       <div class="col text-right">
       </div>

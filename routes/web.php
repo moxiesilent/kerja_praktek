@@ -42,7 +42,10 @@ Route::resource('matakuliahs','MatakuliahController');
 Route::get('/semester','SemesterController@index')->name('semester');
 Route::resource('semesters','SemesterController');
 
+Route::get('/mengajar','MengajarController@index');
 Route::get('/dashboard','DashboardController@index');
+Route::get('/loginmahasiswa','LoginmahasiswaController@index');
+Route::get('/logindosen','LogindosenController@index');
 
 Route::post('/prestasi/getEditForm','PrestasiController@getEditForm')->name('prestasi.getEditForm');
 Route::post('/dosen/getEditForm','DosenController@getEditForm')->name('dosen.getEditForm');

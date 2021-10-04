@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mengajar;
+use App\Dosen;
+use App\Semester;
+use App\Matakuliah;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
@@ -16,13 +19,16 @@ class MengajarController extends Controller
      */
     public function index()
     {
-        $currentuserid = Auth::user()->email;
-        $queryRaw = DB::select(DB::raw("SELECT matakuliahs.kodemk, matakuliahs.namamk, jammulai,
-        jamberakhir,ruangan, semesters.nama_semester FROM mengajars inner join dosens on mengajars.dosen_nip = dosens.nip 
-        inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk INNER JOIN semesters on 
-        mengajars.semester_idsemester = semesters.idsemester where dosens.email = '$currentuserid'"));
+        // $data = Mengajar::all();
+        $dosen = Dosen::all();
+        $matakuliah = Matakuliah::all();
 
-        return view("logindosen.index",["data"=>$queryRaw]);
+        $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, mengajars.dosen2 as dosen2, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
+        matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan FROM `mengajars` inner join dosens on mengajars.dosen_nip = dosens.nip 
+        inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
+        semester_idsemester = semesters.idsemester"));
+
+        return view("mengajar.index",compact('data', 'dosen', 'matakuliah'));
     }
 
     /**
