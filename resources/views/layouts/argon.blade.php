@@ -88,9 +88,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/register.html">
+              <a class="nav-link" href="{{url('mengajars')}}">
                 <i class="ni ni-circle-08 text-pink"></i>
-                <span class="nav-link-text">Register</span>
+                <span class="nav-link-text">Belajar Mengajar</span>
               </a>
             </li>
             <li class="nav-item">

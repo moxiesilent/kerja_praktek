@@ -43,6 +43,8 @@ Route::get('/semester','SemesterController@index')->name('semester');
 Route::resource('semesters','SemesterController');
 
 Route::get('/mengajar','MengajarController@index');
+Route::resource('mengajars','MengajarController');
+
 Route::get('/dashboard','DashboardController@index');
 Route::get('/loginmahasiswa','LoginmahasiswaController@index');
 Route::get('/logindosen','LogindosenController@index');

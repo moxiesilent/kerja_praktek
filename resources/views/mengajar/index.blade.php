@@ -6,11 +6,11 @@
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Tabel Pembelajaran</h3>
+        <h3 class="mb-0">Jadwal</h3>
       </div>
       <div class="col text-right">
       <a href="" role="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah">
-        Tambah Pembelajaran
+        Tambah Jadwal
       </a>
       </div>
     </div>
@@ -90,6 +90,14 @@
         <form method="POST" action="{{url('mengajars')}}">
         @csrf
         <div class="form-group">
+          <label for="semester">Semester</label>
+          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Semester" name="semester">
+            @foreach($semester as $sm)
+                <option value="{{$sm->idsemester}}">{{$sm->nama_semester}}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="form-group">
           <label for="dosen">Dosen Pengasuh 1</label>
           <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen1">
             @foreach($dosen as $dos)
@@ -100,6 +108,7 @@
         <div class="form-group">
           <label for="dosen">Dosen Pengasuh 2 (optional)</label>
           <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen2">
+            <option value="">Tidak ada dosen pengasuh 2</option>
             @foreach($dosen as $dos)
                 <option value="{{$dos->nip}}">{{$dos->nama}}</option>
             @endforeach
@@ -128,6 +137,14 @@
         <div class="form-group">
           <label for="ruangan">Ruangan</label>
           <input type="text" class="form-control" id="ruangan" placeholder="Lapangan Bola" name="ruangan">
+        </div>
+        <div class="form-group">
+          <label for="jammulai">Jam Mulai</label>
+          <input type="text" class="form-control" id="jammulai" placeholder="00:00" name="jammulai">
+        </div>
+        <div class="form-group">
+          <label for="jamberakhir">Jam Selesai</label>
+          <input type="text" class="form-control" id="jamberakhir" placeholder="00:00" name="jamberakhir">
         </div>
         <div class="form-group">
           <label for="sks">SKS</label>
