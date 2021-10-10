@@ -32,7 +32,7 @@
           <th>Kode MK</th>
           <th>Nama Matakuliah</th>
           <th>Jumlah SKS</th>
-          <th scope="col">Action</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -41,14 +41,23 @@
           <td>{{$d->kodemk}}</td>
           <td>{{$d->namamk}}</td>
           <td>{{$d->sks}}</td>
-          <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{ $d->kodemk }})">edit</a>
-                <a href="{{url('matakuliahs/'.$d->kodemk.'/edit')}}" class="btn-sm btn-warning">editt</a>
-                <form method="POST" action="{{url('matakuliahs/'.$d->kodemk)}}">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
-                </form>
-            </td>
+          <td class="text-right">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <div class="dropdown-item">
+                    <a class="dropdown-item" href="{{url('matakuliahs/'.$d->kodemk.'/edit')}}">Edit</a>
+                  </div> 
+                    <form class="dropdown-item" method="POST" action="{{url('matakuliahs/'.$d->kodemk)}}">
+                      @csrf
+                      @method('DELETE')
+                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                    </form>
+                </div>
+            </div>
+          </td>
           </tr>
         @endforeach
       </tbody>

@@ -58,43 +58,43 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('prestasis')}}">
+              <a class="nav-link" href="{{url('prestasi')}}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Prestasi</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('dosens')}}">
+              <a class="nav-link" href="{{url('dosen')}}">
                 <i class="ni ni-pin-3 text-primary"></i>
                 <span class="nav-link-text">Dosen</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('matakuliahs')}}">
+              <a class="nav-link" href="{{url('matakuliah')}}">
                 <i class="ni ni-single-02 text-yellow"></i>
                 <span class="nav-link-text">Matakuliah</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('mahasiswas')}}">
+              <a class="nav-link" href="{{url('mahasiswa')}}">
                 <i class="ni ni-bullet-list-67 text-default"></i>
                 <span class="nav-link-text">Mahasiswa</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('semesters')}}">
+              <a class="nav-link" href="{{url('semester')}}">
                 <i class="ni ni-key-25 text-info"></i>
                 <span class="nav-link-text">Semester</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('mengajars')}}">
+              <a class="nav-link" href="{{url('mengajar')}}">
                 <i class="ni ni-circle-08 text-pink"></i>
-                <span class="nav-link-text">Belajar Mengajar</span>
+                <span class="nav-link-text">Jadwal</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('jurnals')}}">
+              <a class="nav-link" href="{{url('jurnal')}}">
                 <i class="ni ni-send text-dark"></i>
                 <span class="nav-link-text">Jurnal</span>
               </a>

@@ -34,7 +34,7 @@
           <th scope="col">Tahun</th>
           <th scope="col">Tingkat</th>
           <th scope="col">Prestasi yang dicapai</th>
-          <th scope="col">Action</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -45,14 +45,23 @@
             <td>{{$d->tahun}}</td>
             <td>{{$d->tingkat}}</td>
             <td>{{$d->prestasi}}</td>
-            <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm({{ $d->idprestasi }})">edit</a>
-                <a href="{{url('prestasis/'.$d->idprestasi.'/edit')}}" class="btn-sm btn-warning">editt</a>
-                <form method="POST" action="{{url('prestasis/'.$d->idprestasi)}}">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
-                </form>
-            </td>
+            <td class="text-right">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <div class="dropdown-item">
+                    <a class="dropdown-item" href="{{url('prestasis/'.$d->idprestasi.'/edit')}}">Edit</a>
+                  </div> 
+                    <form class="dropdown-item" method="POST" action="{{url('prestasis/'.$d->idprestasi)}}">
+                      @csrf
+                      @method('DELETE')
+                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                    </form>
+                </div>
+            </div>
+          </td>
           </tr>
         @endforeach
       </tbody>
@@ -111,21 +120,4 @@
   </div>
 </div>
 
-@endsection
-
-@section('javascript')
-<script>
-function getEditForm(idprestasi){
-  $.ajax({
-    type:'POST',
-    url:'{{route("prestasi.getEditForm")}}',
-    data:{'_token':'<?php echo csrf_token() ?>',
-          'idprestasi': idprestasi
-        },
-        success: function(data){
-          $('#modalEdit').html(data.msg)
-        }
-  });
-}
-</script>
 @endsection

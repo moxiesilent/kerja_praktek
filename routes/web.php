@@ -27,7 +27,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/prestasi','PrestasiController@index');
+Route::get('/prestasi','PrestasiController@index')->name('prestasi');
 Route::resource('prestasis','PrestasiController');
 
 Route::get('/mahasiswa','MahasiswaController@index');
@@ -48,11 +48,6 @@ Route::resource('mengajars','MengajarController');
 Route::get('/dashboard','DashboardController@index');
 Route::get('/loginmahasiswa','LoginmahasiswaController@index');
 Route::get('/logindosen','LogindosenController@index');
-
-Route::post('/prestasi/getEditForm','PrestasiController@getEditForm')->name('prestasi.getEditForm');
-Route::post('/dosen/getEditForm','DosenController@getEditForm')->name('dosen.getEditForm');
-Route::post('/mahasiswa/getEditForm','MahasiswaController@getEditForm')->name('mahasiswa.getEditForm');
-Route::post('/matakuliah/getEditForm','MatakuliahController@getEditForm')->name('matakuliah.getEditForm');
 
 Route::get('/ceklayout',function(){
     return view('layouts.argon');

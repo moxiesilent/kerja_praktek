@@ -48,14 +48,23 @@
           <td>{{$d->jabatan}}</td>
           <td>{{$d->bidangkeahlian}}</td>
           <td><img src="{{asset('images/'.$d->foto)}}" height='100px'/></td>
-          <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm( {{ $d->nip }} )">edit</a>
-                <a href="{{url('dosens/'.$d->nip.'/edit')}}" class="btn-sm btn-warning">editt</a>
-                <form method="POST" action="{{url('dosens/'.$d->nip)}}">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
-                </form>
-            </td>
+          <td class="text-right">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <div class="dropdown-item">
+                    <a class="dropdown-item" href="{{url('dosens/'.$d->nip.'/edit')}}">Edit</a>
+                  </div> 
+                    <form class="dropdown-item" method="POST" action="{{url('dosens/'.$d->nip)}}">
+                      @csrf
+                      @method('DELETE')
+                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                    </form>
+                </div>
+            </div>
+          </td>
           </tr>
         @endforeach
       </tbody>
@@ -122,21 +131,4 @@
     </div>
   </div>
 </div>
-@endsection
-
-@section('javascript')
-<script>
-function getEditForm(nip){
-  $.ajax({
-    type:'POST',
-    url:'{{route("dosen.getEditForm")}}',
-    data:{'_token':'<?php echo csrf_token() ?>',
-          'nip': nip
-        },
-        success: function(data){
-          $('#modalEdit').html(data.msg)
-        }
-  });
-}
-</script>
 @endsection

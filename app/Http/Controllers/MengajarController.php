@@ -24,7 +24,7 @@ class MengajarController extends Controller
         $semester = Semester::all();
         $matakuliah = Matakuliah::all();
 
-        $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, mengajars.dosen2 as dosen2, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
+        $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
         matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan, semesters.nama_semester as semester FROM `mengajars` inner join dosens on mengajars.dosen_nip = dosens.nip 
         inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
         semester_idsemester = semesters.idsemester"));
@@ -51,8 +51,7 @@ class MengajarController extends Controller
     public function store(Request $request)
     {
         $data = new Mengajar();
-        $data->dosen_nip = $request->get('dosen1');
-        $data->dosen2 = $request->get('dosen2');
+        $data->dosen_nip = $request->get('dosen');
         $data->matakuliah_kodemk = $request->get('matakuliah');
         $data->jammulai = $request->get('jammulai');
         $data->jamberakhir = $request->get('jamberakhir');
@@ -61,7 +60,7 @@ class MengajarController extends Controller
         $data->hari = $request->get('hari');
         $data->semester_idsemester = $request->get('semester');
         $data->save();
-        return redirect()->route('prestasis.index')->with('status','prestasi telah ditambahkan');
+        return redirect()->route('mengajars.index')->with('status','jadwal baru telah ditambahkan');
     }
 
     /**
@@ -83,7 +82,11 @@ class MengajarController extends Controller
      */
     public function edit(Mengajar $mengajar)
     {
-        //
+        $dosen = Dosen::all();
+        $semester = Semester::all();
+        $matakuliah = Matakuliah::all();
+        $data = $mengajar;
+        return view("Mengajar.edit",compact('data','dosen','semester','matakuliah'));
     }
 
     /**
@@ -95,7 +98,16 @@ class MengajarController extends Controller
      */
     public function update(Request $request, Mengajar $mengajar)
     {
-        //
+        $mengajar->dosen_nip = $request->get('dosen');
+        $mengajar->matakuliah_kodemk = $request->get('matakuliah');
+        $mengajar->jammulai = $request->get('jammulai');
+        $mengajar->jamberakhir = $request->get('jamberakhir');
+        $mengajar->ruangan = $request->get('ruangan');
+        $mengajar->sks = $request->get('sks');
+        $mengajar->hari = $request->get('hari');
+        $mengajar->semester_idsemester = $request->get('semester');
+        $mengajar->save();
+        return redirect()->route('mengajars.index')->with('status','jadwal telah diubah');
     }
 
     /**
@@ -119,7 +131,7 @@ class MengajarController extends Controller
     public function getMengajars(Request $request){
         $idsemester = $request->get("idsemester");
 
-        $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, mengajars.dosen2 as dosen2, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
+        $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
         matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan FROM `mengajars` inner join dosens on mengajars.dosen_nip = dosens.nip 
         inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
         semester_idsemester = semesters.idsemester where semesters.idsemester = '$idsemester'"));

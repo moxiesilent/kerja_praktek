@@ -31,7 +31,7 @@
         <tr>
           <th>Id Semester</th>
           <th>Nama Semester</th>
-          <th scope="col">Action</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -39,12 +39,23 @@
           <tr>
           <td>{{$d->idsemester}}</td>
           <td>{{$d->nama_semester}}</td>
-          <td><form method="POST" action="{{url('semesters/'.$d->idsemester)}}">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
-                </form>
-            </td>
+          <td class="text-right">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <div class="dropdown-item">
+                    <a class="dropdown-item" href="{{url('semesters/'.$d->idsemester.'/edit')}}">Edit</a>
+                  </div> 
+                    <form class="dropdown-item" method="POST" action="{{url('semesters/'.$d->idsemester)}}">
+                      @csrf
+                      @method('DELETE')
+                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                    </form>
+                </div>
+            </div>
+          </td>
           </tr>
         @endforeach
       </tbody>
