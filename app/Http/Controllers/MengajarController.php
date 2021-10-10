@@ -25,7 +25,7 @@ class MengajarController extends Controller
         $matakuliah = Matakuliah::all();
 
         $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, mengajars.dosen2 as dosen2, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
-        matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan FROM `mengajars` inner join dosens on mengajars.dosen_nip = dosens.nip 
+        matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan, semesters.nama_semester as semester FROM `mengajars` inner join dosens on mengajars.dosen_nip = dosens.nip 
         inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
         semester_idsemester = semesters.idsemester"));
 
@@ -59,7 +59,7 @@ class MengajarController extends Controller
         $data->ruangan = $request->get('ruangan');
         $data->sks = $request->get('sks');
         $data->hari = $request->get('hari');
-        $data->semester_idsemester = $request->get('tahun');
+        $data->semester_idsemester = $request->get('semester');
         $data->save();
         return redirect()->route('prestasis.index')->with('status','prestasi telah ditambahkan');
     }

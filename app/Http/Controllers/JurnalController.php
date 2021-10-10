@@ -25,7 +25,7 @@ class JurnalController extends Controller
      */
     public function create()
     {
-        //
+        return view('jurnal.create');
     }
 
     /**
@@ -36,7 +36,14 @@ class JurnalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Jurnal();
+        $data->judul = $request->get('judul');
+        $data->tingkat = $request->get('tingkat');
+        $data->nama_penulis = $request->get('penulis');
+        $data->tahun = $request->get('tahun');
+        $data->lokasi = $request->get('lokasi');
+        $data->save();
+        return redirect()->route('jurnals.index')->with('status','jurnal baru telah ditambahkan');
     }
 
     /**
@@ -58,7 +65,8 @@ class JurnalController extends Controller
      */
     public function edit(Jurnal $jurnal)
     {
-        //
+        $data = $jurnal;
+        return view("jurnal.edit",compact('data'));
     }
 
     /**
@@ -70,7 +78,13 @@ class JurnalController extends Controller
      */
     public function update(Request $request, Jurnal $jurnal)
     {
-        //
+        $jurnal->judul = $request->get('judul');
+        $jurnal->tingkat = $request->get('tingkat');
+        $jurnal->nama_penulis = $request->get('penulis');
+        $jurnal->tahun = $request->get('tahun');
+        $jurnal->lokasi = $request->get('lokasi');
+        $jurnal->save();
+        return redirect()->route('jurnals.index')->with('status','jurnal berhasil diubah');
     }
 
     /**
@@ -81,6 +95,13 @@ class JurnalController extends Controller
      */
     public function destroy(Jurnal $jurnal)
     {
-        //
+        try{
+            $jurnal->delete();
+            return redirect()->route('jurnals.index')->with('status','data jurnal berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return redirect()->route('jurnals.index')->with('error', $msg);
+        }
     }
 }

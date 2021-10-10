@@ -38,6 +38,7 @@
           <th scope="col">SKS</th>
           <th scope="col">Ruangan</th>
           <th scope="col">Dosen</th>
+          <th scope="col">Semester</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -52,15 +53,12 @@
             <td>{{$d->namamk}}</td>
             <td>{{$d->sks}}</td>
             <td>{{$d->ruangan}}</td>
-            
             @if( $d->dosen2 == '')
                 <td>{{$d->dosen}}</td>
-                
             @else
                 <td>{{$d->dosen}} / {{$d->dosen2}}</td>
-            
             @endif
-            
+            <td>{{$d->semester}}</td>
             <td><a href="{{url('mengajars/'.$d->idmengajars.'/edit')}}" class="btn-sm btn-warning">edit</a>
                 <form method="POST" action="{{url('mengajars/'.$d->idmengajars)}}">
                 @csrf

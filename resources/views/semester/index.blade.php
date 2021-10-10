@@ -39,8 +39,7 @@
           <tr>
           <td>{{$d->idsemester}}</td>
           <td>{{$d->nama_semester}}</td>
-          <td><a href="{{url('semesters/'.$d->idsemester.'/edit')}}" class="btn-sm btn-warning">editt</a>
-                <form method="POST" action="{{url('semesters/'.$d->idsemester)}}">
+          <td><form method="POST" action="{{url('semesters/'.$d->idsemester)}}">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
