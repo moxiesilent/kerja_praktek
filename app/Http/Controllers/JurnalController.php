@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Jurnal;
+use App\Dosen;
 use Illuminate\Http\Request;
+use DB;
 
 class JurnalController extends Controller
 {
@@ -14,8 +16,13 @@ class JurnalController extends Controller
      */
     public function index()
     {
-        $data = Jurnal::all();
-        return view("jurnal",compact('data'));
+        // $jurnal = Jurnal::all();
+        $dosen = Dosen::all();
+
+        $data = DB::select(DB::raw("SELECT jurnals.id as id, judul, tahun, lokasi, tingkat, dosens.nama as dosen FROM jurnals 
+        INNER JOIN dosens ON jurnals.dosens_nip = dosens.nip"));
+
+        return view("jurnal.index",compact('data','dosen'));
     }
 
     /**
@@ -39,7 +46,7 @@ class JurnalController extends Controller
         $data = new Jurnal();
         $data->judul = $request->get('judul');
         $data->tingkat = $request->get('tingkat');
-        $data->nama_penulis = $request->get('penulis');
+        $data->dosens_nip = $request->get('dosen');
         $data->tahun = $request->get('tahun');
         $data->lokasi = $request->get('lokasi');
         $data->save();

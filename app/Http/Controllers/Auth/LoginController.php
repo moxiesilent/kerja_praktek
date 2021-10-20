@@ -36,7 +36,7 @@ class LoginController extends Controller
         } else if ($user->sebagai == "dosen"){
             return redirect('/logindosen');
         } else{
-            return redirect('');
+            return redirect('/');
         }
     }
 

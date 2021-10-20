@@ -1,4 +1,14 @@
 @extends('layouts.argon')
+@section('sidenav')
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link active" href="{{url('loginmahasiswa')}}">
+      <i class="ni ni-tv-2 text-primary"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+</ul>
+@endsection
 @section('content')
 <h2>Daftar Matakuliah</h2><br>
 <div class="card">

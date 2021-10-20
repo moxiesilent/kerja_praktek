@@ -21,7 +21,11 @@ Route::view('/struktur', 'struktur');
 Route::get('/profildosen', 'DosenController@profilDosen');
 Route::view('/kurikulum', 'kurikulum');
 Route::get('/jurnal', 'JurnalController@index');
+Route::resource('jurnals', 'JurnalController');
 Route::get('/penelitian', 'PenelitianController@index');
+
+Route::get('/matakuliahDosen', 'loginDosenController@matakuliahDosen');
+Route::get('/matakuliahDosen/{id}', 'loginDosenController@getPertemuan');
 
 Auth::routes();
 
