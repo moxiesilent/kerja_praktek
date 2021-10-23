@@ -6,6 +6,10 @@
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Dashboard</span>
     </a>
+    <a class="nav-link" href="">
+      <i class="ni ni-tv-2 text-primary"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
   </li>
 </ul>
 @endsection

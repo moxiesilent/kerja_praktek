@@ -24,7 +24,15 @@
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Daftar Matakuliah</h3>
+        <h3 class="mb-0">Tugas</h3>
+      </div>
+      <div class="col text-right">
+      <a href="" data-toggle="modal" data-target="#modalTambah">
+        <button class="btn btn-icon btn-primary" type="button">
+          <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+          <span class="btn-inner--text">Tugas Baru</span>
+        </button>
+      </a>
       </div>
       <br>
     </div>
@@ -43,28 +51,18 @@
     <table class="table align-items-center table-flush">
       <thead class="thead-light">
         <tr>
-          <th>Kode Matakuliah</th>
-          <th>Nama Matakuliah</th>
-          <th>Hari</th>
-          <th>Jam Mulai</th>
-          <th>Jam Berakhir</th>
-          <th>SKS</th>
-          <th>Ruangan</th>
-          <th>Semester</th>
+          <th>NIM</th>
+          <th>Nama Mahasiswa</th>
+          <th>Tanggal Pengumpulan</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         @foreach($data as $d)
           <tr>
-            <td>{{$d->kodemk}}</td>
-            <td>{{$d->namamk}}</td>
-            <td>{{$d->hari}}</td>
-            <td>{{$d->jammulai}}</td>
-            <td>{{$d->jamberakhir}}</td>
-            <td>{{$d->sks}}</td>
-            <td>{{$d->ruangan}}</td>
-            <td>{{$d->semester}}</td>
+            <td>{{$d->nim}}</td>
+            <td>{{$d->namamhs}}</td>
+            <td>{{$d->tanggal}}</td>
             <td class="text-right">
             <div class="dropdown">
                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,7 +70,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                   <div class="dropdown-item">
-                    <a class="dropdown-item" href="{{url('matakuliahDosen/'.$d->idmengajars)}}">Pilih</a>
+                    <a class="dropdown-item" href="">Download File</a>
                   </div>
                 </div>
             </div>
@@ -81,6 +79,33 @@
         @endforeach
       </tbody>
     </table>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTambahLabel">Tambah Materi Baru</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" action="{{url('pertemuans')}}">
+      @csrf
+        <div class="form-group">
+          <label for="tanggal">Tanggal</label>
+          <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="tanggal" id="tanggal">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 @endsection

@@ -24,12 +24,19 @@ Route::get('/jurnal', 'JurnalController@index');
 Route::resource('jurnals', 'JurnalController');
 Route::get('/penelitian', 'PenelitianController@index');
 
-Route::get('/matakuliahDosen', 'loginDosenController@matakuliahDosen');
-Route::get('/matakuliahDosen/{id}', 'loginDosenController@getPertemuan');
+Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen');
+Route::get('/matakuliahDosen/{id}', 'LogindosenController@getPertemuan');
+Route::get('/matakuliahDosen/pertemuan/{id}', 'LogindosenController@getMateri');
+Route::get('/matakuliahDosen/tugas/{id}', 'LogindosenController@getTugas');
+Route::resource('materis','MateriController');
+Route::resource('tugass','TugasController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/pertemuan','PertemuanController@index');
+Route::resource('pertemuans','PertemuanController');
 
 Route::get('/prestasi','PrestasiController@index')->name('prestasi');
 Route::resource('prestasis','PrestasiController');

@@ -25,7 +25,7 @@ class MengajarController extends Controller
         $matakuliah = Matakuliah::all();
 
         $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
-        matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan, semesters.nama_semester as semester FROM `mengajars` inner join dosens on mengajars.dosen_nip = dosens.nip 
+        matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan, semesters.nama_semester as semester FROM `mengajars` inner join dosens on mengajars.dosens_nip = dosens.nip 
         inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
         semester_idsemester = semesters.idsemester"));
 
@@ -51,7 +51,7 @@ class MengajarController extends Controller
     public function store(Request $request)
     {
         $data = new Mengajar();
-        $data->dosen_nip = $request->get('dosen');
+        $data->dosens_nip = $request->get('dosen');
         $data->matakuliah_kodemk = $request->get('matakuliah');
         $data->jammulai = $request->get('jammulai');
         $data->jamberakhir = $request->get('jamberakhir');
@@ -98,7 +98,7 @@ class MengajarController extends Controller
      */
     public function update(Request $request, Mengajar $mengajar)
     {
-        $mengajar->dosen_nip = $request->get('dosen');
+        $mengajar->dosens_nip = $request->get('dosen');
         $mengajar->matakuliah_kodemk = $request->get('matakuliah');
         $mengajar->jammulai = $request->get('jammulai');
         $mengajar->jamberakhir = $request->get('jamberakhir');
@@ -132,7 +132,7 @@ class MengajarController extends Controller
         $idsemester = $request->get("idsemester");
 
         $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
-        matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan FROM `mengajars` inner join dosens on mengajars.dosen_nip = dosens.nip 
+        matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan FROM `mengajars` inner join dosens on mengajars.dosens_nip = dosens.nip 
         inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
         semester_idsemester = semesters.idsemester where semesters.idsemester = '$idsemester'"));
 

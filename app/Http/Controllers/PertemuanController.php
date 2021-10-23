@@ -35,7 +35,12 @@ class PertemuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Pertemuan();
+        $data->mengajars_idmengajars = $request->get('idmengajar');
+        $data->tanggal = $request->get('tanggal');
+        $data->topik = $request->get('topik');
+        $data->save();
+        return back();
     }
 
     /**
