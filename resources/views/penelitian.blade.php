@@ -41,7 +41,7 @@
           @endforeach
         </table><br>
         <h2 class="font-600">Publikasi Pengabdian</h2>
-        <table style="width: 100%; color: black;">De
+        <table style="width: 100%; color: black;">
           <tr>
             <th style="width: 10%;">Tahun</th>
             <th style="width: 60%;">Judul Penelitian</th>

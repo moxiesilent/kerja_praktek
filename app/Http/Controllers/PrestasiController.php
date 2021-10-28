@@ -19,6 +19,12 @@ class PrestasiController extends Controller
         return view("prestasi.index",compact('data'));
     }
 
+    public function prestasikewebprofile()
+    {
+        $data = Prestasi::all();
+        return view("prestasimahasiswa",compact('data'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

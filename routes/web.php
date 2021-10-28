@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'DosenController@dosenkelanding');
+Route::get('/', 'ArtikelController@artikelkeindex');
 Route::view('/sambutan', 'sambutan');
 Route::view('/visimisi', 'visimisi');
 Route::view('/tentangkami', 'tentang');
@@ -22,6 +22,8 @@ Route::get('/profildosen', 'DosenController@profilDosen');
 Route::view('/kurikulum', 'kurikulum');
 Route::get('/jurnal', 'JurnalController@index');
 Route::get('/penelitian', 'PenelitianController@index');
+Route::get('/prestasimahasiswa','PrestasiController@prestasikewebprofile');
+Route::resource('artikels','ArtikelController');
 
 Auth::routes();
 

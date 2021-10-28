@@ -23,12 +23,6 @@ class DosenController extends Controller
         return view("dosen.index",compact('data'));
     }
 
-    public function dosenkelanding()
-    {
-        $data = Dosen::all();
-        return view("index",compact('data'));
-    }
-
     public function profilDosen()
     {
         $data = Dosen::all();

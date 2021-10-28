@@ -146,12 +146,12 @@
       <div class="row mt-50">
         
           <div class="slick testimonial"> 
-           	@foreach($data as $d)
+           	@foreach($dosen as $d)
             <!--=== Slide ===-->
             <div class="testimonial-item">
                 <div class="col-md-12">
                     <div class="testimonial-content"> 
-                    <div class="team-member-container gallery-image-hover"> <img src="{{asset('images/'.$d->foto)}}" class="img-responsive" alt="team-01">
+                    <div class="team-member-container gallery-image-hover"> <img src="{{asset('images/'.$d->foto)}}" class="img-responsive" alt="team-01" style="height: 440px; width: 390px;">
                         <div class="member-caption">
                         <div class="member-description">
                             <div class="member-description-wrap">
@@ -266,46 +266,20 @@
   			</div>
   		</div>
       <div class="row mt-50">
-        <div class="col-md-4">
-          <div class="post">
-            <div class="post-img"> <img class="img-responsive" src="assets/images/post/post-01.jpg" alt=""/> </div>
+          @foreach($data as $d)
+          <div class="col-md-4 col-sm-6">
+            <div class="post mb-20">
+            <div class="post-img"> <img class="img-responsive" src="{{asset('assets/undana/artikel/'.$d->gambar)}}" alt="" style="width: 1620px; heigh: 1020px;"/> </div>
             <div class="post-info">
-              <h3><a href="blog-grid.html">Kobe Steel plant that supplied plane 
-			  components being checked</a></h3>
-              <h6 class="purple-color">News</h6>
-              <p>7 hours ago</p>
-              <a class="readmore" href="#"><span>Baca Selengkapnya <i class="eicon mdi mdi-arrow-right"></i></span></a> </div>
+              <h3><a href="/artikels/{{$d->idartikels}}">{{$d->judul}}</a></h3>
+              <p>{{$d->tanggal}}</p>
+              <a class="readmore" href="/artikels/{{$d->idartikels}}"><span>Baca lebih lanjut <i class="eicon mdi mdi-arrow-right"></i></span></a> </div>
+            </div>
           </div>
-        </div>
-        <!--=== Post End ===-->
-        
-        <div class="col-md-4">
-          <div class="post">
-            <div class="post-img"> <img class="img-responsive" src="assets/images/post/post-02.jpg" alt=""/> </div>
-            <div class="post-info">
-              <h3><a href="blog-grid.html">They say that a picture is worth a 
-			  thousand words</a></h3>
-              <h6 class="pink-color">Events</h6>
-              <p>Yesterday</p>
-              <a class="readmore" href="#"><span>Baca Selengkapnya <i class="eicon mdi mdi-arrow-right"></i></span></a> </div>
-          </div>
-        </div>
-        <!--=== Post End ===-->
-        
-        <div class="col-md-4">
-          <div class="post">
-            <div class="post-img"> <img class="img-responsive" src="assets/images/post/post-03.jpg" alt=""/> </div>
-            <div class="post-info">
-              <h3><a href="blog-grid.html">NewsBike | NY News Satire, Parody
-			  and Spoof News</a></h3>
-              <h6 class="blue-color">Blog</h6>
-              <p>December 21, 2017</p>
-              <a class="readmore" href="#"><span>Baca Selengkapnya <i class="eicon mdi mdi-arrow-right"></i></span></a> </div>
-          </div>
-        </div>
+          @endforeach
         <!--=== Post End ===--> 
         <div class="col-md-4"></div>
-        <div class="col-md-4"><a class="btn btn-gradient btn-md" href="blog.html" style="width: 100%;">Lihat Lebih Banyak</a></div>
+        <div class="col-md-4"><a class="btn btn-gradient btn-md" href="artikels" style="width: 100%;">Lihat Lebih Banyak</a></div>
         <div class="col-md-4"></div>
         
       </div>

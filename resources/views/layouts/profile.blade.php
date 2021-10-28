@@ -32,11 +32,7 @@
 <body>
 
 <!--=== Loader Start ======-->
-<div id="loader-overlay">
-  <div class="loader">
-    <div class="loader-inner"></div>
-  </div>
-</div>
+
 <!--=== Loader End ======--> 
 
 <!--=== Wrapper Start ===-->
@@ -64,6 +60,7 @@
               <li><a href="/tentangkami">Tentang Kami</a></li>
               <li><a href="/struktur">Struktur Organisasi</a></li>
               <li><a href="/profildosen">Profil Para Pengajar</a></li>
+              <li><a href="/artikels">Artikel</a></li>
             </ul>
           </li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Akademik</a>
@@ -76,7 +73,7 @@
           </li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kemahasiswaan</a>
             <ul class="dropdown-menu">
-              <li><a href="prestasi.html">Prestasi</a></li>
+              <li><a href="/prestasimahasiswa">Prestasi</a></li>
               <li><a href="blog-details.html">Himpunan Mahasiswa</a></li>
             </ul>
           </li>
@@ -114,11 +111,11 @@
             <div class="widget widget-links">
               <h5 class="widget-title">Tautan Cepat</h5>
               <ul>
-                <li><a href="/sambutan">Sambutan</a></li>
-                <li><a href="visimisi.html">Visi & Misi</a></li>
-                <li><a href="profildosen.html">Profil Para Pengajar</a></li>
-                <li><a href="jurnaldosen.html">Jurnal Penelitian Dosen</a></li>
-                <li><a href="kurikulum.html">Kurikulum Pembelajaran</a></li>
+                <li><a href="/artikels">Artikel</a></li>
+                <li><a href="/visimisi">Visi & Misi</a></li>
+                <li><a href="/profildosen">Profil Para Pengajar</a></li>
+                <li><a href="/jurnal">Jurnal Penelitian Dosen</a></li>
+                <li><a href="/kurikulum">Kurikulum Pembelajaran</a></li>
               </ul>
             </div>
           </div>
@@ -139,7 +136,7 @@
       <div class="container">
        <div class="row">
         	<div class="col-md-2 col-md-offset-5">
-        		<div class="logo-footer"><a href="index.html"><img class="img-responsive" src="assets/undana/navbarfix.png" alt="chaos-logo"/></a></div>
+        		<div class="logo-footer"><a href="index.html"><img class="img-responsive" src="{{asset('assets/undana/navbarfix.png')}}" alt="chaos-logo"/></a></div>
         	</div>
         </div>
         <div class="row">
@@ -157,10 +154,10 @@
 <!--=== Wrapper End ===--> 
 
 <!--=== Javascript Plugins ===--> 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/smoothscroll.js"></script>  
-<script src="assets/js/plugins.js"></script> 
-<script src="assets/js/master.js"></script>  
+<script src="{{asset('assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('assets/js/smoothscroll.js')}}"></script>  
+<script src="{{asset('assets/js/plugins.js')}}"></script> 
+<script src="{{asset('assets/js/master.js')}}"></script>  
 <!--=== Javascript Plugins End ===-->
 
 </body>
