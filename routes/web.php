@@ -21,15 +21,26 @@ Route::view('/struktur', 'struktur');
 Route::get('/profildosen', 'DosenController@profilDosen');
 Route::view('/kurikulum', 'kurikulum');
 Route::get('/jurnal', 'JurnalController@index');
+Route::resource('jurnals', 'JurnalController');
 Route::get('/penelitian', 'PenelitianController@index');
 Route::get('/prestasimahasiswa','PrestasiController@prestasikewebprofile');
 Route::resource('artikels','ArtikelController');
+
+Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen');
+Route::get('/matakuliahDosen/{id}', 'LogindosenController@getPertemuan');
+Route::get('/matakuliahDosen/pertemuan/{id}', 'LogindosenController@getMateri');
+Route::get('/matakuliahDosen/tugas/{id}', 'LogindosenController@getTugas');
+Route::resource('materis','MateriController');
+Route::resource('tugass','TugasController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/prestasi','PrestasiController@index');
+Route::get('/pertemuan','PertemuanController@index');
+Route::resource('pertemuans','PertemuanController');
+
+Route::get('/prestasi','PrestasiController@index')->name('prestasi');
 Route::resource('prestasis','PrestasiController');
 
 Route::get('/mahasiswa','MahasiswaController@index');
@@ -44,12 +55,12 @@ Route::resource('matakuliahs','MatakuliahController');
 Route::get('/semester','SemesterController@index')->name('semester');
 Route::resource('semesters','SemesterController');
 
-Route::get('/dashboard','DashboardController@index');
+Route::get('/mengajar','MengajarController@index');
+Route::resource('mengajars','MengajarController');
 
-Route::post('/prestasi/getEditForm','PrestasiController@getEditForm')->name('prestasi.getEditForm');
-Route::post('/dosen/getEditForm','DosenController@getEditForm')->name('dosen.getEditForm');
-Route::post('/mahasiswa/getEditForm','MahasiswaController@getEditForm')->name('mahasiswa.getEditForm');
-Route::post('/matakuliah/getEditForm','MatakuliahController@getEditForm')->name('matakuliah.getEditForm');
+Route::get('/dashboard','DashboardController@index');
+Route::get('/loginmahasiswa','LoginmahasiswaController@index');
+Route::get('/logindosen','LogindosenController@index');
 
 Route::get('/ceklayout',function(){
     return view('layouts.argon');

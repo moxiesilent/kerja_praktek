@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Dosen;
-use App\Jabatan;
 use Illuminate\Http\Request;
 use Illuminate\Facade\File;
 use DB;

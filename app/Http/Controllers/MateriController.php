@@ -36,7 +36,12 @@ class MateriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Materi();
+        $data->pertemuans_idpertemuan = $request->get('idpertemuan');
+        $data->file = $request->get('file');
+        $data->judul = $request->get('judul');
+        $data->save();
+        return back();
     }
 
     /**

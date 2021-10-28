@@ -13,4 +13,8 @@ class Dosen extends Model
     public function mengajars(){
         return $this->hasMany("App\Mengajar","dosens_nip","nip");
     }
+
+    public function jurnals(){
+        return $this->hasMany("App\Jurnal","dosens_nip","nip");
+    }
 }

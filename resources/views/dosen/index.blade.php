@@ -1,4 +1,56 @@
 @extends('layouts.argon')
+@section('sidenav')
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" href="examples/dashboard.html">
+      <i class="ni ni-tv-2 text-primary"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('prestasi')}}">
+      <i class="ni ni-planet text-orange"></i>
+      <span class="nav-link-text">Prestasi</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{url('dosen')}}">
+      <i class="ni ni-pin-3 text-primary"></i>
+      <span class="nav-link-text">Dosen</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('matakuliah')}}">
+      <i class="ni ni-single-02 text-yellow"></i>
+      <span class="nav-link-text">Matakuliah</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('mahasiswa')}}">
+      <i class="ni ni-bullet-list-67 text-default"></i>
+      <span class="nav-link-text">Mahasiswa</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('semester')}}">
+      <i class="ni ni-key-25 text-info"></i>
+      <span class="nav-link-text">Semester</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('mengajar')}}">
+      <i class="ni ni-circle-08 text-pink"></i>
+      <span class="nav-link-text">Jadwal</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('jurnal')}}">
+      <i class="ni ni-send text-dark"></i>
+      <span class="nav-link-text">Jurnal</span>
+    </a>
+  </li>
+</ul>
+@endsection
 @section('content')
 <h2>Daftar Dosen</h2><br>
 <div class="card">
@@ -48,14 +100,23 @@
           <td>{{$d->jabatan}}</td>
           <td>{{$d->bidangkeahlian}}</td>
           <td><img src="{{asset('images/'.$d->foto)}}" height='100px'/></td>
-          <td><a href="#modalEdit" data-toggle="modal" class="btn-sm btn-warning" onclick="getEditForm( {{ $d->nip }} )">edit</a>
-                <a href="{{url('dosens/'.$d->nip.'/edit')}}" class="btn-sm btn-warning">editt</a>
-                <form method="POST" action="{{url('dosens/'.$d->nip)}}">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
-                </form>
-            </td>
+          <td class="text-right">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <div class="dropdown-item">
+                    <a class="dropdown-item" href="{{url('dosens/'.$d->nip.'/edit')}}">Edit</a>
+                  </div> 
+                    <form class="dropdown-item" method="POST" action="{{url('dosens/'.$d->nip)}}">
+                      @csrf
+                      @method('DELETE')
+                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                    </form>
+                </div>
+            </div>
+          </td>
           </tr>
         @endforeach
       </tbody>
@@ -122,21 +183,4 @@
     </div>
   </div>
 </div>
-@endsection
-
-@section('javascript')
-<script>
-function getEditForm(nip){
-  $.ajax({
-    type:'POST',
-    url:'{{route("dosen.getEditForm")}}',
-    data:{'_token':'<?php echo csrf_token() ?>',
-          'nip': nip
-        },
-        success: function(data){
-          $('#modalEdit').html(data.msg)
-        }
-  });
-}
-</script>
 @endsection

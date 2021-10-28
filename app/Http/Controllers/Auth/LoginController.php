@@ -32,11 +32,11 @@ class LoginController extends Controller
         if ($user->sebagai == "admin") {
             return redirect('/dashboard');
         } else if ($user->sebagai == "mahasiswa") {
-            return redirect('/');
+            return redirect('/loginmahasiswa');
         } else if ($user->sebagai == "dosen"){
-            return redirect('/');
+            return redirect('/logindosen');
         } else{
-            return redirect('');
+            return redirect('/');
         }
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mengajar extends Model
 {
-    protected $primaryKey = 'idmengajar';
+    protected $primaryKey = 'idmengajars';
     public $timestamps=false;
 
     public function semesters(){

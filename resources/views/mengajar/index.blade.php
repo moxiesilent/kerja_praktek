@@ -26,7 +26,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="{{url('mahasiswa')}}">
+    <a class="nav-link" href="{{url('mahasiswa')}}">
       <i class="ni ni-bullet-list-67 text-default"></i>
       <span class="nav-link-text">Mahasiswa</span>
     </a>
@@ -38,7 +38,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('mengajar')}}">
+    <a class="nav-link active" href="{{url('mengajar')}}">
       <i class="ni ni-circle-08 text-pink"></i>
       <span class="nav-link-text">Jadwal</span>
     </a>
@@ -52,20 +52,22 @@
 </ul>
 @endsection
 @section('content')
-<h2>Daftar Mahasiswa</h2><br>
+<h2>Tabel Prestasi</h2><br>
+
 <div class="card">
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Daftar Mahasiswa</h3>
+        <h3 class="mb-0">Jadwal</h3>
       </div>
       <div class="col text-right">
       <a href="" role="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah">
-        Tambah Mahasiswa
+        Tambah Jadwal
       </a>
       </div>
     </div>
-    @if(session('status'))
+  </div>
+   @if(session('status'))
       <div class="alert alert-success" role="alert">
           {{session('status')}}
       </div>
@@ -75,27 +77,36 @@
           {{session('error')}}
       </div>
     @endif
-  </div>
   <div class="table-responsive">
     <table class="table align-items-center table-flush">
       <thead class="thead-light">
         <tr>
-          <th>NRP</th>
-          <th>Nama Mahasiswa</th>
-          <th>Email</th>
-          <th>Tanggal Lahir</th>
-          <th>Telepon</th>
+          <th scope="col">Nomor</th>
+          <th scope="col">Hari</th>
+          <th scope="col">Jam Mulai</th>
+          <th scope="col">Jam Selesai</th>
+          <th scope="col">Kode Matakuliah</th>
+          <th scope="col">Nama Matakuliah</th>
+          <th scope="col">SKS</th>
+          <th scope="col">Ruangan</th>
+          <th scope="col">Dosen</th>
+          <th scope="col">Semester</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         @foreach($data as $d)
           <tr>
-            <td>{{$d->idmahasiswa}}</td>
-            <td>{{$d->nama}}</td>
-            <td>{{$d->email}}</td>
-            <td>{{date('d-m-Y',strtotime($d->tanggallahir))}}</td>
-            <td>{{$d->telepon}}</td>
+            <td>{{$d->idmengajars}}</td>
+            <td>{{$d->hari}}</td>
+            <td>{{$d->jammulai}}</td>
+            <td>{{$d->jamberakhir}}</td>
+            <td>{{$d->kodemk}}</td>
+            <td>{{$d->namamk}}</td>
+            <td>{{$d->sks}}</td>
+            <td>{{$d->ruangan}}</td>
+            <td>{{$d->dosen}}</td>
+            <td>{{$d->semester}}</td>
             <td class="text-right">
             <div class="dropdown">
                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -103,9 +114,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                   <div class="dropdown-item">
-                    <a class="dropdown-item" href="{{url('mahasiswas/'.$d->idmahasiswa.'/edit')}}">Edit</a>
+                    <a class="dropdown-item" href="{{url('mengajars/'.$d->idmengajars.'/edit')}}">Edit</a>
                   </div> 
-                    <form class="dropdown-item" method="POST" action="{{url('mahasiswas/'.$d->idmahasiswa)}}">
+                    <form class="dropdown-item" method="POST" action="{{url('mengajars/'.$d->idmengajars)}}">
                       @csrf
                       @method('DELETE')
                       <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
@@ -120,47 +131,80 @@
   </div>
 </div>
 
+
 <!-- Modal -->
 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalTambahLabel">Tambah Mahasiswa</h5>
+        <h5 class="modal-title" id="modalTambahLabel">Tambah Pembelajaran Baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="{{url('mahasiswas')}}">
-      @csrf
+        <form method="POST" action="{{url('mengajars')}}">
+        @csrf
         <div class="form-group">
-          <label for="idmahasiswa">Nomor Mahasiswa</label>
-          <input type="text" class="form-control" id="idmahasiswa" placeholder="1234xxxx" name="idmahasiswa">
+          <label for="semester">Semester</label>
+          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Semester" name="semester">
+            @foreach($semester as $sm)
+                <option value="{{$sm->idsemester}}">{{$sm->nama_semester}}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form-group">
-          <label for="nama">Nama Lengkap</label>
-          <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap" name="nama">
+          <label for="dosen">Dosen Pengasuh</label>
+          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen">
+            @foreach($dosen as $dos)
+                <option value="{{$dos->nip}}">{{$dos->nama}}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="contoh@gmail.com" name="email">
+          <label for="matakuliah">Matakuliah</label>
+          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Matakuliah" name="matakuliah">
+            @foreach($matakuliah as $mk)
+                <option value="{{$mk->kodemk}}">{{$mk->namamk}}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form-group">
-          <label for="tanggallahir">Tanggal Lahir</label>
-          <input type="date" class="form-control" id="tanggallahir" placeholder="01/01/1990" name="tanggallahir">
+          <label for="hari">Hari</label>
+          <input type="text" class="form-control" id="hari" placeholder="hari" name="hari">
         </div>
         <div class="form-group">
-          <label for="telepon">Nomor Telepon</label>
-          <input type="text" class="form-control" id="telepon" placeholder="08123xxxxxx" name="telepon">
+          <label for="ruangan">Ruangan</label>
+          <input type="text" class="form-control" id="ruangan" placeholder="Lapangan Bola" name="ruangan">
+        </div>
+        <div class="form-group">
+          <label for="jammulai">Jam Mulai</label>
+          <input type="text" class="form-control" id="jammulai" placeholder="00:00" name="jammulai">
+        </div>
+        <div class="form-group">
+          <label for="jamberakhir">Jam Selesai</label>
+          <input type="text" class="form-control" id="jamberakhir" placeholder="00:00" name="jamberakhir">
+        </div>
+        <div class="form-group">
+          <label for="sks">SKS</label>
+          <input type="text" class="form-control" id="sks" placeholder="2 (angka)" name="sks">
         </div>
       </div>
-
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <a href="{{url('mengajars')}}" class="btn btn-default" role="button">Kembali</a>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+      </form>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
 @endsection
