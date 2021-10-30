@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Tugas;
+use App\Mengambil;
 use Illuminate\Http\Request;
 
-class TugasController extends Controller
+class MengambilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,20 +35,16 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Tugas();
-        $data->judul = $request->get('judul');
-        $data->pertemuans_idpertemuan = $request->get('idpertemuan');
-        $data->save();
-        return back();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tugas  $tugas
+     * @param  \App\Mengambil  $mengambil
      * @return \Illuminate\Http\Response
      */
-    public function show(Tugas $tugas)
+    public function show(Mengambil $mengambil)
     {
         //
     }
@@ -56,10 +52,10 @@ class TugasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tugas  $tugas
+     * @param  \App\Mengambil  $mengambil
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tugas $tugas)
+    public function edit(Mengambil $mengambil)
     {
         //
     }
@@ -68,10 +64,10 @@ class TugasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tugas  $tugas
+     * @param  \App\Mengambil  $mengambil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tugas $tugas)
+    public function update(Request $request, Mengambil $mengambil)
     {
         //
     }
@@ -79,18 +75,11 @@ class TugasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tugas  $tugas
+     * @param  \App\Mengambil  $mengambil
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tugas $tugas)
+    public function destroy(Mengambil $mengambil)
     {
-        try{
-            $tugas->delete();
-            return back()->with('status','tugas berhasil dihapus');       
-        }
-        catch(\PDOException $e){
-            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
-            return back()->with('error', $msg);
-        }
+        //
     }
 }

@@ -55,30 +55,30 @@
           <li><a href="/#hero">Home</a></li>
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tentang</a>
             <ul class="dropdown-menu">
-              <li><a href="/sambutan">Sambutan Kepala Program Studi</a></li>
-              <li><a href="/visimisi">Visi & Misi</a></li>
-              <li><a href="/tentangkami">Tentang Kami</a></li>
-              <li><a href="/struktur">Struktur Organisasi</a></li>
-              <li><a href="/profildosen">Profil Para Pengajar</a></li>
-              <li><a href="/artikels">Artikel</a></li>
+              <li><a href="{{url('/sambutan')}}">Sambutan Kepala Program Studi</a></li>
+              <li><a href="{{url('/visimisi')}}">Visi & Misi</a></li>
+              <li><a href="{{url('/tentangkami')}}">Tentang Kami</a></li>
+              <li><a href="{{url('/struktur')}}">Struktur Organisasi</a></li>
+              <li><a href="{{url('/profildosen')}}">Profil Para Pengajar</a></li>
+              <li><a href="{{url('/artikels')}}">Artikel</a></li>
             </ul>
           </li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Akademik</a>
             <ul class="dropdown-menu">
-              <li><a href="/kurikulum">Kurikulum</a></li>
-              <li><a href="/jurnal">Jurnal Penelitian Dosen</a></li>
-              <li><a href="/penelitian">Penelitian dan PKM</a></li>
+              <li><a href="{{url('/kurikulum')}}">Kurikulum</a></li>
+              <li><a href="{{url('/jurnal')}}">Jurnal Penelitian Dosen</a></li>
+              <li><a href="{{url('/penelitian')}}">Penelitian dan PKM</a></li>
               <li><a href="work-metro.html">Unit GKM dan Laboratorium</a></li>
             </ul>
           </li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kemahasiswaan</a>
             <ul class="dropdown-menu">
-              <li><a href="/prestasimahasiswa">Prestasi</a></li>
+              <li><a href="{{url('/prestasimahasiswa')}}">Prestasi</a></li>
               <li><a href="blog-details.html">Himpunan Mahasiswa</a></li>
             </ul>
           </li>
           <li> <a href="#contact">Hubungi Kami</a></li>
-          <li> <a href="#">E-Learning</a></li>
+          <li> <a href="{{url('/login')}}">E-Learning</a></li>
         </ul>
       </div>
       <!--=== /.navbar-collapse ===--> 

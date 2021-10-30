@@ -16,10 +16,11 @@
 </ul>
 @endsection
 @section('nama')
-<span class="mb-0 text-sm  font-weight-bold">Halo, {{ auth()->user()->name }}</span>
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
 <h2>Daftar Matakuliah</h2><br>
+
 <div class="card">
   <div class="card-header border-0">
     <div class="row align-items-center">
@@ -34,18 +35,53 @@
         </button>
       </a>
       </div>
-      <br>
     </div>
     @if(session('status'))
+    <br>
       <div class="alert alert-success" role="alert">
           {{session('status')}}
       </div>
     @endif
     @if(session('error'))
+    <br>
       <div class="alert alert-danger" role="alert">
           {{session('error')}}
       </div>
     @endif
+  </div>
+  <div class="card-body">
+    <div class="row">
+    @foreach($tugas as $t)
+      <div class="col-4">
+          {{$t->judul}}
+      </div>
+      <div class="col text-right">
+      <div class="dropdown">
+        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-ellipsis-v"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+            <form class="dropdown-item" method="POST" action="{{url('tugass/'.$t->idtugas)}}">
+              @csrf
+              @method('DELETE')
+              <button class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    @endforeach
+    </div>
+  </div>
+  
+</div>
+<div class="card">
+  <div class="card-header border-0">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="mb-0">Pengumpulan</h3>
+      </div>
+      <br>
+    </div>
   </div>
   <div class="table-responsive">
     <table class="table align-items-center table-flush">
@@ -86,18 +122,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalTambahLabel">Tambah Materi Baru</h5>
+        <h5 class="modal-title" id="modalTambahLabel">Tambah Tugas Baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="{{url('pertemuans')}}">
+      <form method="POST" action="{{url('tugass')}}">
       @csrf
         <div class="form-group">
-          <label for="tanggal">Tanggal</label>
-          <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="tanggal" id="tanggal">
+          <label for="judul">Judul Tugas</label>
+          <input class="form-control" placeholder="judul tugas" type="text" name="judul" id="judul">
         </div>
+        <input type="hidden" value="{{request()->id}}" name="idpertemuan">
       </div>
 
       <div class="modal-footer">

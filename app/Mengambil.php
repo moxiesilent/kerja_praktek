@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Materi extends Model
+class Mengambil extends Model
 {
-    protected $primaryKey = 'idmateri';
     public $timestamps=false;
 }
