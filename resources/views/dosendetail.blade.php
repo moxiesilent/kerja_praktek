@@ -20,20 +20,28 @@
 <section class="white-bg">
     <div class="container" style="max-width: 60%">
         <div class="col-md-4">
-        <div class="intro-img"><img class="img-responsive" src="undana/dosen/pak_michael.jpeg" alt="" style="height: 440px; width: 564px;"/></div>
+        <div class="intro-img"><img class="img-responsive" src="{{asset('images/'.$data[0]->foto)}}" alt="" style="height: 440px; width: 564px;"/></div>
         </div>
         <div class="col-md-8">
-        <h1>Michael J. H. Louk, S.Pd., M.Or</h1>
-        <p>19870520 201903 1 015</p>
+        <h3>Nama Beserta Gelar | <i>Full Name with Title</i></h3>
+        <h2>{{$data[0]->nama}}</h2>
         <br>
-        <h2>Riwayat Pendidikan</h2>
+        <h3>Jabatan | <i>Position</i></h3>
+        <p>{{$data[0]->jabatan}}</p>
+        <br>
+        <h3>Riwayat Pendidikan | <i>Educational Background</i></h3>
         <ul>
-            <li>Sarjana Pendidikan Olahraga Universitas Nusa Cendana Kupang</li>
-            <li>Magister Pendidikan Olahraga Unviersitas Nusa Cendana Kupang</li>
-            <li>Sorcerer Supreme Realm of Vishanti</li>
-            <li>Master of Time Stone</li>
+            @foreach(explode(',', $data[0]->riwayat_pendidikan) as $rows)
+            <li>{{$rows}}</li>
+            @endforeach
         </ul>
-        
+        <br>
+        <h3>Bidang Keahlian | <i>Fields of Expertise</i></h3>
+        <ul>
+            @foreach(explode(',', $data[0]->bidangkeahlian) as $rows)
+            <li>{{$rows}}</li>
+            @endforeach
+        </ul>
         </div>
     </div>
 </section>

@@ -20,20 +20,16 @@
 <section class="white-bg">
     <div class="container">
     @foreach($data as $d)
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="testimonial-content" style="margin-bottom: 10px; margin-top: 10px;"> 
-          <div class="team-member-container gallery-image-hover"> <img src="{{asset('images/'.$d->foto)}}" class="img-responsive">
+          <div class="team-member-container gallery-image-hover"> <img src="{{asset('images/'.$d->foto)}}" class="img-responsive" style="height: 440px; width: 390px;">
             <div class="member-caption">
               <div class="member-description">
                 <div class="member-description-wrap">
                   <h4 class="member-title">{{$d->nama}}</h4>
                   <p class="member-subtitle">{{$d->bidangkeahlian}}</p>
-                  <ul class="member-icons">
-                    <li class="social-icon"><a href="#"><i class="mdi mdi-facebook"></i></a></li>
-                    <li class="social-icon"><a href="#"><i class="mdi mdi-twitter"></i></a></li>
-                    <li class="social-icon"><a href="#"><i class="mdi mdi-google-plus"></i></a></li>
-                    <li class="social-icon"><a href="#"><i class="mdi mdi-linkedin"></i></a></li>
-                  </ul>
+                  <br><br>
+                  <li><a class="btn btn-gradient btn-md" href="/profildosen/{{$d->nip}}" style="width: 100%;">Lihat Detail</a></li>
                 </div>
               </div>
             </div>

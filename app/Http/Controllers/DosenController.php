@@ -72,7 +72,7 @@ class DosenController extends Controller
      */
     public function show(Dosen $dosen)
     {
-        //
+
     }
 
     /**
@@ -141,5 +141,11 @@ class DosenController extends Controller
             'status'=>'oke',
             'msg'=>view('dosen.getEditForm',compact('data'))->render()
         ),200);
+    }
+
+    public function getDosen($id){
+        $queryRaw = DB::select(DB::raw("SELECT * from dosens where nip = '$id'"));
+
+        return view("dosendetail",["data"=>$queryRaw]);
     }
 }
