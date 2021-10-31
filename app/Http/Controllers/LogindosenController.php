@@ -45,11 +45,14 @@ class LogindosenController extends Controller
         ON tugass.idtugas = pengumpulans.tugas_idtugas INNER JOIN mahasiswas ON mahasiswas.idmahasiswa = pengumpulans.mahasiswa_idmahasiswa 
         where pengumpulans.tugas_idtugas = '$id'"));
 
-        return view("logindosen.tugas",["data"=>$queryRaw]);
+        $queryRaw2 = DB::select(DB::raw("SELECT idtugas, judul from tugass INNER JOIN pertemuans ON pertemuans.idpertemuan = tugass.pertemuans_idpertemuan
+        where pertemuans.idpertemuan = '$id'"));
+
+        return view("logindosen.tugas",["data"=>$queryRaw],["tugas"=>$queryRaw2]);
     }
 
     public function getMateri($id){
-        $queryRaw = DB::select(DB::raw("SELECT idmateri, file, judul,topik from materis INNER JOIN 
+        $queryRaw = DB::select(DB::raw("SELECT idmateri, file, judul, topik from materis INNER JOIN 
         pertemuans ON pertemuans.idpertemuan = materis.pertemuans_idpertemuan where materis.pertemuans_idpertemuan = '$id'"));
 
         return view("logindosen.materi",["data"=>$queryRaw]);

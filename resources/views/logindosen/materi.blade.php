@@ -16,7 +16,7 @@
 </ul>
 @endsection
 @section('nama')
-<span class="mb-0 text-sm  font-weight-bold">Halo, {{ auth()->user()->name }}</span>
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
 <h2>Daftar Matakuliah</h2><br>
@@ -37,11 +37,13 @@
       <br>
     </div>
     @if(session('status'))
+    <br>
       <div class="alert alert-success" role="alert">
           {{session('status')}}
       </div>
     @endif
     @if(session('error'))
+    <br>
       <div class="alert alert-danger" role="alert">
           {{session('error')}}
       </div>
@@ -62,16 +64,19 @@
           <tr>
             <td>{{$d->judul}}</td>
             <td>{{$d->topik}}</td>
-            <td><a href="">Download Materi</a></td>
+            <td><a href="{{asset('materi/'.$d->file)}}">Download Materi</a></td>
+
             <td class="text-right">
             <div class="dropdown">
-                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-sm btn-icon-only text-light" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                  <div class="dropdown-item">
-                    <a class="dropdown-item" href="">Hapus</a>
-                  </div>
+                  <form class="dropdown-item" method="POST" action="{{url('materis/'.$d->idmateri)}}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</button>
+                  </form>
                 </div>
             </div>
           </td>
@@ -92,12 +97,17 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="{{url('pertemuans')}}">
+      <form enctype="multipart/form-data" method="POST" action="{{url('materis')}}">
       @csrf
         <div class="form-group">
-          <label for="tanggal">Tanggal</label>
-          <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="tanggal" id="tanggal">
+          <label for="judul">Judul Materi</label>
+          <input class="form-control" placeholder="judul materi" type="text" name="judul" id="judul">
         </div>
+        <div class="form-group">
+          <label for="file">File Materi</label>
+          <input type="file" class="form-control" id="file" name="file">
+        </div>
+        <input type="hidden" name="idpertemuan" value="{{request()->id}}">
       </div>
 
       <div class="modal-footer">

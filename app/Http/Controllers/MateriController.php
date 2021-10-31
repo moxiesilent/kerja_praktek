@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Materi;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
+
 class MateriController extends Controller
 {
     /**
@@ -14,8 +16,7 @@ class MateriController extends Controller
      */
     public function index()
     {
-        $data = Materi::all();
-        return view("materi.index",compact('data'));
+        
     }
 
     /**
@@ -37,11 +38,17 @@ class MateriController extends Controller
     public function store(Request $request)
     {
         $data = new Materi();
+        $now = Carbon::now();
+        $file=$request->file('file');
+        $fileFolder='materi';
+        $materiFile=time().'_'.$file->getClientOriginalName();
+        $file->move($fileFolder,$materiFile);
+        $data->file=$materiFile;
+
         $data->pertemuans_idpertemuan = $request->get('idpertemuan');
-        $data->file = $request->get('file');
         $data->judul = $request->get('judul');
         $data->save();
-        return back();
+        return back()->with('status','materi baru berhasil ditambahkan');
     }
 
     /**
@@ -86,6 +93,13 @@ class MateriController extends Controller
      */
     public function destroy(Materi $materi)
     {
-        //
+        try{
+            $materi->delete();
+            return back()->with('status','materi berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return back()->with('error', $msg);
+        }
     }
 }

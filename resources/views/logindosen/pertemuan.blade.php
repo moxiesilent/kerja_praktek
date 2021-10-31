@@ -16,7 +16,7 @@
 </ul>
 @endsection
 @section('nama')
-<span class="mb-0 text-sm  font-weight-bold">Halo, {{ auth()->user()->name }}</span>
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
 <h2>Daftar Matakuliah</h2><br>
