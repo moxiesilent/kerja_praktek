@@ -68,7 +68,7 @@
               <li><a href="{{url('/kurikulum')}}">Kurikulum</a></li>
               <li><a href="{{url('/jurnal')}}">Jurnal Penelitian Dosen</a></li>
               <li><a href="{{url('/penelitian')}}">Penelitian dan PKM</a></li>
-              <li><a href="work-metro.html">Unit GKM dan Laboratorium</a></li>
+              <!-- <li><a href="work-metro.html">Unit GKM dan Laboratorium</a></li> -->
             </ul>
           </li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kemahasiswaan</a>
@@ -111,11 +111,11 @@
             <div class="widget widget-links">
               <h5 class="widget-title">Tautan Cepat</h5>
               <ul>
-                <li><a href="/artikels">Artikel</a></li>
-                <li><a href="/visimisi">Visi & Misi</a></li>
-                <li><a href="/profildosen">Profil Para Pengajar</a></li>
-                <li><a href="/jurnal">Jurnal Penelitian Dosen</a></li>
-                <li><a href="/kurikulum">Kurikulum Pembelajaran</a></li>
+                <li><a href="{{url('/artikels')}}">Artikel</a></li>
+                <li><a href="{{url('/visimisi')}}">Visi & Misi</a></li>
+                <li><a href="{{url('/profildosen')}}">Profil Para Pengajar</a></li>
+                <li><a href="{{url('/jurnal')}}">Jurnal Penelitian Dosen</a></li>
+                <li><a href="{{url('/kurikulum')}}">Kurikulum Pembelajaran</a></li>
               </ul>
             </div>
           </div>
