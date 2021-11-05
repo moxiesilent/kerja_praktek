@@ -54,6 +54,7 @@
   </nav>
   <!-- Main content -->
   <div class="main-content">
+    @yield('topnav')
     @yield('content')
     <!-- Header -->
     

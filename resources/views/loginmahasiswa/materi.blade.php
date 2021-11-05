@@ -4,10 +4,8 @@
 <nav class="navbar navbar-top navbar-dark bg-primary border-bottom">
 <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
   <div class="text-right">
-    <a class="btn btn-default" href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-        {{ __('Logout') }}
+    <a class="btn btn-default" href="{{ url('loginmahasiswa') }}">
+        Kembali
     </a>
   </div>
 </ul>
@@ -33,16 +31,18 @@
 </div>
 <!-- Page content -->
 <div class="container mt--8 pb-5">
-  <div class="row justify-content-center">
+  <div class="col-12 justify-content-center">
     @foreach($data as $d)
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="https://demos.creative-tim.com/argon-dashboard/assets/img/theme/img-1-1000x600.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{$d->kodemk}}</h5>
-          <p class="card-text">{{$d->namamk}}</p>
-          <a href="{{url('loginmahasiswa/'.$d->idmengajar)}}" class="btn btn-primary">Pilih</a>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-3">{{$d->topik}} - {{$d->judul}}</h4>
+            <div class="row">
+                <div class="col-4">
+                    <a class="btn btn-dark" href="{{asset('materi/'.$d->file)}}">Download Materi</a>
+                </div>
+            </div>
         </div>
-      </div>&nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>&nbsp
     @endforeach
   </div>
 </div>

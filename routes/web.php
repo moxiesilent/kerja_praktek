@@ -33,6 +33,11 @@ Route::get('/matakuliahDosen/tugas/{id}', 'LogindosenController@getTugas');
 Route::resource('materis','MateriController');
 Route::resource('tugass','TugasController');
 
+Route::get('/loginmahasiswa/{id}','LoginmahasiswaController@getPertemuan');
+Route::get('/loginmahasiswa/materi/{id}','LoginmahasiswaController@getMateri');
+Route::get('/loginmahasiswa/tugas/{id}','LoginmahasiswaController@getTugas');
+Route::resource('pengumpulans','PengumpulanController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
