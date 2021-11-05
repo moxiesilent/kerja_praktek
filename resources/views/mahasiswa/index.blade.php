@@ -2,7 +2,7 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link " href="examples/dashboard.html">
+    <a class="nav-link " href="{{url('dashboard')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Dashboard</span>
     </a>
@@ -144,6 +144,10 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" class="form-control" id="email" placeholder="contoh@gmail.com" name="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
         </div>
         <div class="form-group">
           <label for="tanggallahir">Tanggal Lahir</label>

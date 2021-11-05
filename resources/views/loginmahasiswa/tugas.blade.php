@@ -32,6 +32,7 @@
 <!-- Page content -->
 <div class="container mt--8 pb-5">
   <div class="col-12 justify-content-center">
+  @if(count($data) > 0)
     @foreach($data as $d)
     <div class="card">
         <div class="card-header">
@@ -59,8 +60,24 @@
                 </div>
             </div>
         </div>
-    </div>&nbsp
+        @if(count($kumpul))
+        @foreach($kumpul as $k)
+        <div class="card-body">
+          <div class="">
+            <h4>Tanggal pengumpulan :</h4>
+            <h4>{{$k->tanggal}}</h4>
+            <a class="btn btn-dark" href="{{asset('tugas/'.$k->file)}}">Download Tugas</a>
+          </div>
+        </div>
+        @endforeach
+        @endif
+    </div>
     @endforeach
+  @else
+  <div class="text-center">
+    <h1 class="text-white">Tidak ada tugas yang diberikan.</h1>
+  </div>
+  @endif
   </div>
 </div>
 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel" aria-hidden="true">

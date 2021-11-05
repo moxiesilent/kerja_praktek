@@ -100,6 +100,6 @@ class PengumpulanController extends Controller
      */
     public function destroy(Pengumpulan $pengumpulan)
     {
-        //
+        
     }
 }

@@ -56,7 +56,8 @@
 
 <div class="card">
   <div class="card-header border-0">
-    <div class="row align-items-center">
+    <div class="align-items-center">
+        <h2>Edit Mahasiswa</h2><br>
     <form method="POST" action="{{url('mahasiswas/'.$data->idmahasiswa)}}">
       @csrf
       @method('PUT')

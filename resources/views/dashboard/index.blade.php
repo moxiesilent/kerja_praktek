@@ -53,13 +53,12 @@
 @endsection
 @section('content')
 <h2>Daftar Matakuliah</h2><br>
+
 <div class="card">
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Halaman dashboard</h3>
-      </div>
-      <div class="col text-right">
+        <h3 class="mb-0">Data Program Studi PENJASKESREK</h3>
       </div>
       <br>
     </div>
@@ -74,6 +73,90 @@
       </div>
     @endif
   </div>
+</div>
+<div class="row">
+  <div style="width: 18rem;">
+    <div class="card card-stats ml-3 mr-3">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0 pb-3">Jumlah Dosen</h5>
+                  @foreach($dosen as $d)
+                  <span class="h2 font-weight-bold mb-0">{{$d->jumdosen}}</span>
+                  @endforeach
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
+                    <i class="ni ni-chart-pie-35"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div style="width: 20rem;">
+    <div class="card card-stats ml-3 mr-3">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0 pb-3">Jumlah Mahasiswa</h5>
+                  @foreach($mahasiswa as $d)
+                  <span class="h2 font-weight-bold mb-0">{{$d->jummahasiswa}}</span>
+                  @endforeach
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
+                    <i class="ni ni-chart-pie-35"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div style="width: 20rem;">
+    <div class="card card-stats ml-3 mr-3">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0 pb-3">Jumlah Matakuliah</h5>
+                  @foreach($mk as $mk)
+                  <span class="h2 font-weight-bold mb-0">{{$mk->matakuliah}}</span>
+                  @endforeach
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
+                    <i class="ni ni-chart-pie-35"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div style="width: 18rem;">
+    <div class="card card-stats ml-3 mr-3">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0 pb-3">Jumlah Prestasi</h5>
+                  @foreach($prestasi as $d)
+                  <span class="h2 font-weight-bold mb-0">{{$d->prestasi}}</span>
+                  @endforeach
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
+                    <i class="ni ni-chart-pie-35"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
   
 @endsection
 

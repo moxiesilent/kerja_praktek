@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mahasiswa;
 use Illuminate\Http\Request;
 use DB;
+use App\User;
 
 class MahasiswaController extends Controller
 {
@@ -37,6 +38,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+        
         $data = new Mahasiswa();
         $data->idmahasiswa = $request->get('idmahasiswa');
         $data->email = $request->get('email');
@@ -44,6 +46,14 @@ class MahasiswaController extends Controller
         $data->tanggallahir = $request->get('tanggallahir');
         $data->telepon = $request->get('telepon');
         $data->save();
+
+        $user = new User();
+        $user->name = $request->get('nama');
+        $user->email = $request->get('email');
+        $user->password = Hash::make($request->get('password'));
+        $user->sebagai = 'mahasiswa';
+        $user->save();
+
         return redirect()->route('mahasiswas.index')->with('status','mahasiswa berhasil ditambahkan');
     }
 

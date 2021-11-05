@@ -2,7 +2,7 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="examples/dashboard.html">
+    <a class="nav-link" href="{{url('dashboard')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Dashboard</span>
     </a>
@@ -99,8 +99,25 @@
             <td>{{$d->lokasi}}</td>
             <td>{{$d->tahun}}</td>
             <td>{{$d->tingkat}}</td>
-            <td><a href="{{url('jurnals/'.$d->id.'/edit')}}" class="btn-sm btn-warning">editt</a>
-                <form method="POST" action="{{url('jurnals/'.$d->id)}}">
+            <td class="text-right">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <div class="dropdown-item">
+                    <a class="dropdown-item" href="{{url('jurnals/'.$d->id.'/edit')}}">Edit</a>
+                  </div> 
+                    <form class="dropdown-item" method="POST" action="{{url('jurnals/'.$d->id)}}">
+                      @csrf
+                      @method('DELETE')
+                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                    </form>
+                </div>
+            </div>
+          </td>
+            <td><a href="" class="btn-sm btn-warning">editt</a>
+                <form method="POST" action="">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>

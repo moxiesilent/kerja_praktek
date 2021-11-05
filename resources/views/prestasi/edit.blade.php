@@ -2,7 +2,7 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link " href="examples/dashboard.html">
+    <a class="nav-link " href="{{url('dashboard')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Dashboard</span>
     </a>
@@ -56,7 +56,7 @@
 
 <div class="card">
   <div class="card-header border-0">
-    <div class="row align-items-center">
+    <div class="align-items-center">
       <form method="POST" action="{{url('prestasis/'.$data->idprestasi)}}">
             @csrf
             @method('PUT')

@@ -30,8 +30,10 @@
   </div>
 </div>
 <!-- Page content -->
+
 <div class="container mt--8 pb-5">
   <div class="col-12 justify-content-center">
+  @if(count($data) > 0)
     @foreach($data as $d)
     <div class="card">
         <div class="card-header">
@@ -44,6 +46,11 @@
         </div>
     </div>&nbsp
     @endforeach
+  @else
+  <div class="text-center">
+    <h1 class="text-white">Tidak ada materi yang diberikan.</h1>
+  </div>
+  @endif
   </div>
 </div>
 
