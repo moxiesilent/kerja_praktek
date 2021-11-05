@@ -140,7 +140,7 @@
     <div class="container">
       <div class="row">
   			<div class="col-md-12 heading-style-two text-center">
-  				<h2 class="font-700"><span>Our Team</span></h2>
+  				<h2 class="font-700"><span>Para Pengajar</span></h2>
   			</div>
   		</div>
       <div class="row mt-50">

@@ -19,12 +19,14 @@ Route::view('/visimisi', 'visimisi');
 Route::view('/tentangkami', 'tentang');
 Route::view('/struktur', 'struktur');
 Route::get('/profildosen', 'DosenController@profilDosen');
+Route::get('/profildosen/{id}', 'DosenController@getDosen');
 Route::view('/kurikulum', 'kurikulum');
 Route::get('/jurnal', 'JurnalController@index');
 Route::resource('jurnals', 'JurnalController');
 Route::get('/penelitian', 'PenelitianController@index');
 Route::get('/prestasimahasiswa','PrestasiController@prestasikewebprofile');
 Route::resource('artikels','ArtikelController');
+
 
 Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen');
 Route::get('/matakuliahDosen/{id}', 'LogindosenController@getPertemuan');
