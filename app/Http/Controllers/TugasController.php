@@ -38,6 +38,7 @@ class TugasController extends Controller
         $data = new Tugas();
         $data->judul = $request->get('judul');
         $data->pertemuans_idpertemuan = $request->get('idpertemuan');
+        $data->status = 'buka';
         $data->save();
         return back();
     }
@@ -73,7 +74,16 @@ class TugasController extends Controller
      */
     public function update(Request $request, Tugas $tugas)
     {
-        //
+        $tugas->status=$request->get('status');
+        if($request->get('status') == 'buka'){
+            $tugas->save();
+            return back()->with('status','pengumpulan tugas sudah ditutup'); 
+        }
+        else{
+            $tugas->save();
+            return back()->with('status','pengumpulan tugas dibuka kembali'); 
+        }
+        
     }
 
     /**

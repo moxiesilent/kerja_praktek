@@ -49,6 +49,18 @@
       <span class="nav-link-text">Jurnal</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('artikelback')}}">
+      <i class="ni ni-spaceship text-dark"></i>
+      <span class="nav-link-text">Artikel</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('galeri')}}">
+      <i class="ni ni-image text-dark"></i>
+      <span class="nav-link-text">Galeri</span>
+    </a>
+  </li>
 </ul>
 @endsection
 @section('content')

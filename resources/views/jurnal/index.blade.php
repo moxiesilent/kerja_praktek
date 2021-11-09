@@ -49,6 +49,18 @@
       <span class="nav-link-text">Jurnal</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('artikelback')}}">
+      <i class="ni ni-spaceship text-dark"></i>
+      <span class="nav-link-text">Artikel</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('galeri')}}">
+      <i class="ni ni-image text-dark"></i>
+      <span class="nav-link-text">Galeri</span>
+    </a>
+  </li>
 </ul>
 @endsection
 @section('content')
@@ -61,9 +73,12 @@
         <h3 class="mb-0">Jurnal</h3>
       </div>
       <div class="col text-right">
-      <a href="" role="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah">
-        Tambah Jurnal
-      </a>
+        <a href="" data-toggle="modal" data-target="#modalTambah">
+          <button class="btn btn-icon btn-primary" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Tambah Jurnal</span>
+          </button>
+        </a>
       </div>
     </div>
   </div>
@@ -111,22 +126,20 @@
                     <form class="dropdown-item" method="POST" action="{{url('jurnals/'.$d->id)}}">
                       @csrf
                       @method('DELETE')
-                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                      <input class="dropdown-item" type="submit" value="Hapus" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
                     </form>
                 </div>
             </div>
           </td>
-            <td><a href="" class="btn-sm btn-warning">editt</a>
-                <form method="POST" action="">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value='hapus' class='btn-sm btn-danger' onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;"/>
-                </form>
-            </td>
           </tr>
         @endforeach
       </tbody>
     </table>
+    <ul class="pagination">
+      <li class="page-item">
+        {{$data->links()}}
+      </li>
+    </ul>
   </div>
 </div>
 

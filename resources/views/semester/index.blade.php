@@ -49,6 +49,18 @@
       <span class="nav-link-text">Jurnal</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('artikelback')}}">
+      <i class="ni ni-spaceship text-dark"></i>
+      <span class="nav-link-text">Artikel</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('galeri')}}">
+      <i class="ni ni-image text-dark"></i>
+      <span class="nav-link-text">Galeri</span>
+    </a>
+  </li>
 </ul>
 @endsection
 @section('content')
@@ -60,9 +72,12 @@
         <h3 class="mb-0">Daftar Semester</h3>
       </div>
       <div class="col text-right">
-      <a href="" role="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah">
-        Tambah Semester
-      </a>
+      <a href="" data-toggle="modal" data-target="#modalTambah">
+          <button class="btn btn-icon btn-primary" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Tambah Semester</span>
+          </button>
+        </a>
       </div>
       <br>
     </div>
@@ -103,7 +118,7 @@
                     <form class="dropdown-item" method="POST" action="{{url('semesters/'.$d->idsemester)}}">
                       @csrf
                       @method('DELETE')
-                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                      <input class="dropdown-item" type="submit" value="Hapus" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
                     </form>
                 </div>
             </div>
@@ -112,6 +127,11 @@
         @endforeach
       </tbody>
     </table>
+    <ul class="pagination">
+      <li class="page-item">
+        {{$data->links()}}
+      </li>
+    </ul>
   </div>
 </div>
 

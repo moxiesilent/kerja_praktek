@@ -43,7 +43,7 @@ class LoginmahasiswaController extends Controller
         $queryRaw2 = DB::select(DB::raw("SELECT idmahasiswa FROM mahasiswas where email = '$currentuserid'"));
 
         $queryRaw3 = DB::select(DB::raw("SELECT tugas_idtugas, mahasiswa_idmahasiswa, file, pengumpulans.tanggal as tanggal FROM pengumpulans INNER JOIN mahasiswas
-        where mahasiswas.email = '$currentuserid' and tugas_idtugas = $id"));
+        ON pengumpulans.mahasiswa_idmahasiswa = mahasiswas.idmahasiswa where mahasiswas.email = '$currentuserid' and tugas_idtugas = $id"));
 
         return view("loginmahasiswa.tugas",["data"=>$queryRaw,"user"=>$queryRaw2, "kumpul"=>$queryRaw3]);
     }

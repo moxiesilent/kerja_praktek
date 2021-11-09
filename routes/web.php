@@ -26,6 +26,7 @@ Route::resource('jurnals', 'JurnalController');
 Route::get('/penelitian', 'PenelitianController@index');
 Route::get('/prestasimahasiswa','PrestasiController@prestasikewebprofile');
 Route::resource('artikels','ArtikelController');
+Route::get('artikelback/hapus/{id}','ArtikelController@hapusArtikel');
 
 
 Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen');
@@ -56,6 +57,9 @@ Route::resource('mahasiswas','MahasiswaController');
 Route::get('/dosen','DosenController@index');
 Route::resource('dosens','DosenController');
 
+Route::get('/galeri','GaleriController@index');
+Route::resource('galeris','GaleriController');
+
 Route::get('/matakuliah','MatakuliahController@index');
 Route::resource('matakuliahs','MatakuliahController');
 
@@ -65,9 +69,14 @@ Route::resource('semesters','SemesterController');
 Route::get('/mengajar','MengajarController@index');
 Route::resource('mengajars','MengajarController');
 
+Route::get('/artikelback','ArtikelController@backEndIndex');
+
 Route::get('/dashboard','DashboardController@index');
 Route::get('/loginmahasiswa','LoginmahasiswaController@index');
 Route::get('/logindosen','LogindosenController@index');
+
+Route::get('/resetpassword/{id}','DosenController@resetPassword');
+Route::get('/dosen/detail/{id}','DosenController@detailDosen');
 
 Route::get('/ceklayout',function(){
     return view('layouts.argon');

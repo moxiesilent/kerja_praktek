@@ -49,6 +49,18 @@
       <span class="nav-link-text">Jurnal</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('artikelback')}}">
+      <i class="ni ni-spaceship text-dark"></i>
+      <span class="nav-link-text">Artikel</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('galeri')}}">
+      <i class="ni ni-image text-dark"></i>
+      <span class="nav-link-text">Galeri</span>
+    </a>
+  </li>
 </ul>
 @endsection
 @section('content')
@@ -75,7 +87,7 @@
   </div>
 </div>
 <div class="row">
-  <div style="width: 18rem;">
+  <div style="width: 19rem;">
     <div class="card card-stats ml-3 mr-3">
         <!-- Card body -->
         <div class="card-body">
@@ -88,7 +100,7 @@
               </div>
               <div class="col-auto">
                 <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
-                    <i class="ni ni-chart-pie-35"></i>
+                    <i class="ni ni-single-02"></i>
                 </div>
               </div>
           </div>
@@ -107,8 +119,8 @@
                   @endforeach
               </div>
               <div class="col-auto">
-                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
-                    <i class="ni ni-chart-pie-35"></i>
+                <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                    <i class="ni ni-single-02"></i>
                 </div>
               </div>
           </div>
@@ -127,15 +139,15 @@
                   @endforeach
               </div>
               <div class="col-auto">
-                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
-                    <i class="ni ni-chart-pie-35"></i>
+                <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                    <i class="ni ni-books"></i>
                 </div>
               </div>
           </div>
         </div>
     </div>
   </div>
-  <div style="width: 18rem;">
+  <div style="width: 19.5rem;">
     <div class="card card-stats ml-3 mr-3">
         <!-- Card body -->
         <div class="card-body">
@@ -147,8 +159,8 @@
                   @endforeach
               </div>
               <div class="col-auto">
-                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
-                    <i class="ni ni-chart-pie-35"></i>
+                <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                    <i class="ni ni-hat-3"></i>
                 </div>
               </div>
           </div>

@@ -15,7 +15,7 @@ class SemesterController extends Controller
      */
     public function index()
     {
-        $data = Semester::all();
+        $data = Semester::paginate(10);
         return view("semester.index",compact('data'));
     }
 

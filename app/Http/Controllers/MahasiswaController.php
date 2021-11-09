@@ -16,7 +16,7 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $data = Mahasiswa::all();
+        $data = Mahasiswa::paginate(10);
         return view("mahasiswa.index",compact('data'));
     }
 
@@ -45,6 +45,7 @@ class MahasiswaController extends Controller
         $data->nama = $request->get('nama');
         $data->tanggallahir = $request->get('tanggallahir');
         $data->telepon = $request->get('telepon');
+        $data->jenis_kelamin = $request->get('jeniskelamin');
         $data->save();
 
         $user = new User();
@@ -92,6 +93,7 @@ class MahasiswaController extends Controller
         $mahasiswa->nama=$request->get('nama');
         $mahasiswa->email=$request->get('email');
         $mahasiswa->tanggallahir=$request->get('tanggallahir');
+        $mahasiswa->jenis_kelamin=$request->get('jeniskelamin');
         $mahasiswa->telepon=$request->get('telepon');
         $mahasiswa->save();
         return redirect()->route('mahasiswas.index')->with('status','data mahasiswa berhasil diubah'); 

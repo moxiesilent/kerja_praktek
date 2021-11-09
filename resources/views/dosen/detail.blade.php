@@ -14,13 +14,13 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('dosen')}}">
+    <a class="nav-link active" href="{{url('dosen')}}">
       <i class="ni ni-pin-3 text-primary"></i>
       <span class="nav-link-text">Dosen</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="{{url('matakuliah')}}">
+    <a class="nav-link" href="{{url('matakuliah')}}">
       <i class="ni ni-single-02 text-yellow"></i>
       <span class="nav-link-text">Matakuliah</span>
     </a>
@@ -68,28 +68,30 @@
 
 <div class="card">
   <div class="card-header border-0">
-    <div class="align-items-center">
-      <form method="POST" action="{{url('matakuliahs/'.$data->kodemk)}}">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="kode">Kode Matakuliah</label>
-                <input type="text" class="form-control" id="kode" name="kode" value="{{$data->kodemk}}" disabled>
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 class="mb-0">Detail Dosen</h3>
+        </div>
+        <div class="col text-right">
+            <a href="{{url('dosens')}}" class="btn btn-primary">Kembali</a>
+        </div>
+    </div>
+    <div class="row p-3">
+        @foreach($data as $d)
+            <img src="{{asset('images/'.$d->foto)}}" height='200px'/>
+            <div class="col">
+            Nama Lengkap : {{$d->nama}}<br>
+            Email : {{$d->email}}<br>
+            Tanggal Lahir : {{date('d-m-Y',strtotime($d->tanggallahir))}}<br>
+            Jenis Kelamin : {{$d->jenis_kelamin}}<br>
+            Jabatan : {{$d->jabatan}}<br>
+            Alamat : {{$d->alamat}}<br>
+            Telepon : {{$d->telepon}}<br>
+            Bidang Keahlian : {{$d->bidangkeahlian}}<br>
+            Riwayat Pendidikan : {{$d->riwayat_pendidikan}}
             </div>
-            <div class="form-group">
-                <label for="nama">Nama Matakuliah</label>
-                <input type="text" class="form-control" id="nama" name="nama" value="{{$data->namamk}}">
-            </div>
-            <div class="form-group">
-                <label for="sks">Jumlah SKS</label>
-                <input type="text" class="form-control" id="sks" name="sks" value="{{$data->sks}}">
-            </div>
-            <div>
-                <a href="{{url('matakuliahs')}}" class="btn btn-default" role="button">Back</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>      
-      </div>
+            
+        @endforeach
     </div>
   </div>
 </div>

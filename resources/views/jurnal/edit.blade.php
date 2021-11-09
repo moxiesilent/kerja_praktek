@@ -2,13 +2,13 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link " href="{{url('dashboard')}}">
+    <a class="nav-link" href="{{url('dashboard')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Dashboard</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="{{url('prestasi')}}">
+    <a class="nav-link" href="{{url('prestasi')}}">
       <i class="ni ni-planet text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
     </a>
@@ -32,7 +32,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('semester')}}">
+    <a class="nav-link " href="{{url('semester')}}">
       <i class="ni ni-key-25 text-info"></i>
       <span class="nav-link-text">Semester</span>
     </a>
@@ -44,7 +44,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('jurnal')}}">
+    <a class="nav-link active" href="{{url('jurnal')}}">
       <i class="ni ni-send text-dark"></i>
       <span class="nav-link-text">Jurnal</span>
     </a>
@@ -64,21 +64,38 @@
 </ul>
 @endsection
 @section('content')
-<h2>Tabel Prestasi</h2><br>
+<h2>Tabel jurnal</h2><br>
 
 <div class="card">
   <div class="card-header border-0">
-    <div class="align-items-center">
-      <form enctype="multipart/form-data" method="POST" action="{{url('prestasis/'.$data->idprestasi)}}">
+    <div class="col align-items-center">
+        <h3 class="mb-0">Ubah Jurnal</h3><br>
+      <form method="POST" action="{{url('jurnals/'.$data->id)}}">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="kegiatan">Nama kegiatan</label>
-                <input type="text" class="form-control" id="kegiatan" name="kegiatan" value="{{$data->namakegiatan}}">
+                <label for="kegiatan">Judul</label>
+                <input type="text" class="form-control" id="kegiatan" value="{{$data->judul}}" name="judul">
             </div>
             <div class="form-group">
                 <label for="tahun">Tahun</label>
-                <input type="text" class="form-control" id="tahun" name="tahun" value="{{$data->tahun}}">
+                <input type="text" class="form-control" id="tahun" value="{{$data->tahun}}" name="tahun">
+            </div>
+            <div class="form-group">
+                <label for="penulis">Nama Dosen</label>
+                <select id="penulis" class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="penulis">
+                    @foreach($dosen as $dos)
+                        @if($dos->nip == $data->dosens_nip)
+                            <option value="{{$dos->nip}}" selected>{{$dos->nama}}</option>
+                        @else
+                            <option value="{{$dos->nip}}">{{$dos->nama}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="lokasi">Lokasi</label>
+                <input type="text" class="form-control" id="lokasi" value="{{$data->lokasi}}" name="lokasi">
             </div>
             <div class="radio">
                 <label>Tingkat</label><br>
@@ -88,33 +105,24 @@
                 <label><input type="radio" name="tingkat" value="nasional"> Nasional</label>&nbsp&nbsp
                 <label><input type="radio" name="tingkat" value="internasional"> Internasional</label>
                 @elseif($data->tingkat == 'regional')
-                <label><input type="radio" name="tingkat" value="lokal"> Lokal</label>&nbsp&nbsp
-                <label><input type="radio" name="tingkat" value="regional"checked> Regional</label>&nbsp&nbsp
+                <label><input type="radio" name="tingkat" value="lokal" > Lokal</label>&nbsp&nbsp
+                <label><input type="radio" name="tingkat" value="regional" checked> Regional</label>&nbsp&nbsp
                 <label><input type="radio" name="tingkat" value="nasional"> Nasional</label>&nbsp&nbsp
                 <label><input type="radio" name="tingkat" value="internasional"> Internasional</label>
                 @elseif($data->tingkat == 'nasional')
-                <label><input type="radio" name="tingkat" value="lokal"> Lokal</label>&nbsp&nbsp
-                <label><input type="radio" name="tingkat" value="regional"> Regional</label>&nbsp&nbsp
-                <label><input type="radio" name="tingkat" value="nasional"checked> Nasional</label>&nbsp&nbsp
+                <label><input type="radio" name="tingkat" value="lokal" > Lokal</label>&nbsp&nbsp
+                <label><input type="radio" name="tingkat" value="regional" > Regional</label>&nbsp&nbsp
+                <label><input type="radio" name="tingkat" value="nasional" checked> Nasional</label>&nbsp&nbsp
                 <label><input type="radio" name="tingkat" value="internasional"> Internasional</label>
-                @elseif($data->tingkat == 'internasional')
-                <label><input type="radio" name="tingkat" value="lokal"> Lokal</label>&nbsp&nbsp
-                <label><input type="radio" name="tingkat" value="regional"> Regional</label>&nbsp&nbsp
-                <label><input type="radio" name="tingkat" value="nasional"> Nasional</label>&nbsp&nbsp
-                <label><input type="radio" name="tingkat" value="internasional"checked> Internasional</label>
+                @else
+                <label><input type="radio" name="tingkat" value="lokal" > Lokal</label>&nbsp&nbsp
+                <label><input type="radio" name="tingkat" value="regional" > Regional</label>&nbsp&nbsp
+                <label><input type="radio" name="tingkat" value="nasional" > Nasional</label>&nbsp&nbsp
+                <label><input type="radio" name="tingkat" value="internasional" checked> Internasional</label>
                 @endif
-            </div><br>
-            <div class="form-group">
-                <label for="prestasi">Prestasi yang dicapai</label>
-                <input type="text" class="form-control" id="prestasi" placeholder="Juara x Kategori xxx" name="prestasi" value="{{$data->prestasi}}">
-            </div>
-            <div class="form-group">
-              <label for="foto">Foto</label>
-              <input type="file" class="form-control" id="foto" name="foto">
-              <img src="{{asset('assets/undana/prestasi/'.$data->foto)}}" height='100px'/>
             </div>
             <div>
-            <a href="{{url('prestasis')}}" class="btn btn-default" role="button">Back</a>
+            <a href="{{url('jurnals')}}" class="btn btn-default" role="button">Back</a>
             <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>      

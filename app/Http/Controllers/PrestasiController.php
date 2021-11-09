@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Prestasi;
 use Illuminate\Http\Request;
+use Illuminate\Facade\File;
 use DB;
 
 class PrestasiController extends Controller
@@ -15,7 +16,7 @@ class PrestasiController extends Controller
      */
     public function index()
     {
-        $data = Prestasi::all();
+        $data = Prestasi::paginate(10);
         return view("prestasi.index",compact('data'));
     }
 
@@ -48,6 +49,13 @@ class PrestasiController extends Controller
         $data->tingkat = $request->get('tingkat');
         $data->prestasi = $request->get('prestasi');
         $data->tahun = $request->get('tahun');
+
+        $file=$request->file('foto');
+        $imgFolder='assets/undana/prestasi/';
+        $imgFile=time().'_'.$file->getClientOriginalName();
+        $file->move($imgFolder,$imgFile);
+        $data->foto=$imgFile;
+
         $data->save();
         return redirect()->route('prestasis.index')->with('status','prestasi telah ditambahkan');
     }
@@ -88,6 +96,19 @@ class PrestasiController extends Controller
         $prestasi->tingkat=$request->get('tingkat');
         $prestasi->prestasi=$request->get('prestasi');
         $prestasi->tahun=$request->get('tahun');
+
+        if($request->hasFile('foto')){
+            $dest='assets/undana/prestasi/'.$prestasi->foto;
+            if(file_exists($dest)){
+                @unlink($dest); 
+            }
+            $file=$request->file('foto');
+            $imgFolder='assets/undana/prestasi/';
+            $imgFile=time().'_'.$file->getClientOriginalName();
+            $file->move($imgFolder,$imgFile);
+            $prestasi->foto=$imgFile;
+        }
+    
         $prestasi->save();
         return redirect()->route('prestasis.index')->with('status','prestasi berhasil diubah'); 
     }

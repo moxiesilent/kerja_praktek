@@ -49,6 +49,18 @@
       <span class="nav-link-text">Jurnal</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('artikelback')}}">
+      <i class="ni ni-spaceship text-dark"></i>
+      <span class="nav-link-text">Artikel</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('galeri')}}">
+      <i class="ni ni-image text-dark"></i>
+      <span class="nav-link-text">Galeri</span>
+    </a>
+  </li>
 </ul>
 @endsection
 @section('content')
@@ -76,6 +88,18 @@
         <div class="form-group">
           <label for="tanggallahir">Tanggal Lahir</label>
           <input type="date" class="form-control datepicker" id="tanggallahir" name="tanggallahir" value="{{$data->tanggallahir}}">
+        </div>
+        <div class="form-group">
+          <div class="radio">
+              <label>Jenis Kelamin</label><br>
+              @if($data->jenis_kelamin == 'laki-laki')
+              <label><input type="radio" name="jeniskelamin" value="laki-laki" checked> Laki-laki</label>&nbsp&nbsp
+              <label><input type="radio" name="jeniskelamin" value="perempuan"> Perempuan</label>&nbsp&nbsp
+              @else
+              <label><input type="radio" name="jeniskelamin" value="laki-laki" > Laki-laki</label>&nbsp&nbsp
+              <label><input type="radio" name="jeniskelamin" value="perempuan" checked> Perempuan</label>&nbsp&nbsp
+              @endif
+          </div>
         </div>
         <div class="form-group">
           <label for="telepon">Nomor Telepon</label>

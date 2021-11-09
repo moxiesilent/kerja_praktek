@@ -20,7 +20,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="{{url('matakuliah')}}">
+    <a class="nav-link" href="{{url('matakuliah')}}">
       <i class="ni ni-single-02 text-yellow"></i>
       <span class="nav-link-text">Matakuliah</span>
     </a>
@@ -56,7 +56,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('galeri')}}">
+    <a class="nav-link active" href="{{url('galeri')}}">
       <i class="ni ni-image text-dark"></i>
       <span class="nav-link-text">Galeri</span>
     </a>
@@ -69,19 +69,19 @@
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Daftar Matakuliah</h3>
+        <h3 class="mb-0">Galeri</h3>
       </div>
       <div class="col text-right">
         <a href="" data-toggle="modal" data-target="#modalTambah">
           <button class="btn btn-icon btn-primary" type="button">
             <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-            <span class="btn-inner--text">Tambah Matakuliah</span>
+            <span class="btn-inner--text">Tambah Foto Galeri</span>
           </button>
         </a>
       </div>
-      <br>
     </div>
-    @if(session('status'))
+  </div>
+   @if(session('status'))
       <div class="alert alert-success" role="alert">
           {{session('status')}}
       </div>
@@ -91,33 +91,30 @@
           {{session('error')}}
       </div>
     @endif
-  </div>
   <div class="table-responsive">
     <table class="table align-items-center table-flush">
       <thead class="thead-light">
         <tr>
-          <th>Kode MK</th>
-          <th>Nama Matakuliah</th>
-          <th>Jumlah SKS</th>
-          <th></th>
+          <th scope="col">Foto</th>
+          <th scope="col">jenis</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         @foreach($data as $d)
           <tr>
-          <td>{{$d->kodemk}}</td>
-          <td>{{$d->namamk}}</td>
-          <td>{{$d->sks}}</td>
-          <td class="text-right">
+            <td><img src="{{asset('assets/undana/galeri/'.$d->file)}}" height='100px'/></td>
+            <td>{{$d->jenis}}</td>
+            <td class="text-right">
             <div class="dropdown">
                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                   <div class="dropdown-item">
-                    <a class="dropdown-item" href="{{url('matakuliahs/'.$d->kodemk.'/edit')}}">Edit</a>
+                    <a class="dropdown-item" href="{{url('galeris/'.$d->idgaleri.'/edit')}}">Edit</a>
                   </div> 
-                    <form class="dropdown-item" method="POST" action="{{url('matakuliahs/'.$d->kodemk)}}">
+                    <form class="dropdown-item" method="POST" action="{{url('galeris/'.$d->idgaleri)}}">
                       @csrf
                       @method('DELETE')
                       <input class="dropdown-item" type="submit" value="Hapus" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
@@ -136,31 +133,30 @@
     </ul>
   </div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalTambahLabel">Tambah Matakuliah</h5>
+        <h5 class="modal-title" id="modalTambahLabel">Tambah Foto Galeri</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="{{url('matakuliahs')}}">
+      <form enctype="multipart/form-data" method="POST" action="{{url('galeris')}}">
       @csrf
-        <div class="form-group">
-          <label for="nama">Nama Matakuliah</label>
-          <input type="text" class="form-control" id="nama" placeholder="Bahasa Indonesia" name="nama">
+      <div class="form-group">
+          <div class="radio">
+              <label>Jenis Foto</label><br>
+              <label><input type="radio" name="jenis" value="kegiatan"> Kegiatan</label>&nbsp&nbsp
+              <label><input type="radio" name="jenis" value="fasilitas"> Fasilitas</label>&nbsp&nbsp
+              <label><input type="radio" name="jenis" value="ruangan"> Ruangan</label>&nbsp&nbsp
+          </div>
         </div>
         <div class="form-group">
-          <label for="kode">Kode Matakuliah</label>
-          <input type="text" class="form-control" id="kode" placeholder="KMP xxxx" name="kode">
-        </div>
-        <div class="form-group">
-          <label for="sks">Jumlah SKS</label>
-          <input type="text" class="form-control" id="sks" placeholder="xx (angka)" name="sks">
+          <label for="foto">Foto</label>
+          <input type="file" class="form-control" id="foto" name="foto">
         </div>
       </div>
       <div class="modal-footer">
@@ -171,5 +167,8 @@
     </div>
   </div>
 </div>
+
+
+                
 @endsection
 

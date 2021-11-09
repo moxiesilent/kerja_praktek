@@ -16,11 +16,15 @@ class JurnalController extends Controller
      */
     public function index()
     {
-        // $jurnal = Jurnal::all();
         $dosen = Dosen::all();
 
-        $data = DB::select(DB::raw("SELECT jurnals.id as id, judul, tahun, lokasi, tingkat, dosens.nama as dosen FROM jurnals 
-        INNER JOIN dosens ON jurnals.dosens_nip = dosens.nip"));
+        $data = DB::table('jurnals')
+        ->join('dosens', 'jurnals.dosens_nip','=','dosens.nip')
+        ->select('id','judul','tahun','lokasi','tingkat','dosens.nama as dosen')
+        ->paginate(5);
+        
+        // $data = DB::select(DB::raw("SELECT jurnals.id as id, judul, tahun, lokasi, tingkat, dosens.nama as dosen FROM jurnals 
+        // INNER JOIN dosens ON jurnals.dosens_nip = dosens.nip"));
 
         return view("jurnal.index",compact('data','dosen'));
     }
@@ -72,8 +76,9 @@ class JurnalController extends Controller
      */
     public function edit(Jurnal $jurnal)
     {
+        $dosen = Dosen::all();
         $data = $jurnal;
-        return view("jurnal.edit",compact('data'));
+        return view("jurnal.edit",compact('data','dosen'));
     }
 
     /**
@@ -87,7 +92,7 @@ class JurnalController extends Controller
     {
         $jurnal->judul = $request->get('judul');
         $jurnal->tingkat = $request->get('tingkat');
-        $jurnal->nama_penulis = $request->get('penulis');
+        $jurnal->dosens_nip = $request->get('penulis');
         $jurnal->tahun = $request->get('tahun');
         $jurnal->lokasi = $request->get('lokasi');
         $jurnal->save();

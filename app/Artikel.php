@@ -8,5 +8,5 @@ class Artikel extends Model
 {
     protected $table = 'artikels';
     protected $primaryKey = 'idartikels';
-    public $timestamps = true;
+    public $timestamps = false;
 }
