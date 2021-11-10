@@ -9,25 +9,25 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('prestasi')}}">
-      <i class="ni ni-planet text-orange"></i>
+      <i class="ni ni-trophy text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('dosen')}}">
-      <i class="ni ni-pin-3 text-primary"></i>
+      <i class="ni ni-single-02 text-primary"></i>
       <span class="nav-link-text">Dosen</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('matakuliah')}}">
-      <i class="ni ni-single-02 text-yellow"></i>
+      <i class="ni ni-books text-yellow"></i>
       <span class="nav-link-text">Matakuliah</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('mahasiswa')}}">
-      <i class="ni ni-bullet-list-67 text-default"></i>
+      <i class="ni ni-single-02 text-default"></i>
       <span class="nav-link-text">Mahasiswa</span>
     </a>
   </li>
@@ -39,7 +39,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('mengajar')}}">
-      <i class="ni ni-circle-08 text-pink"></i>
+      <i class="ni ni-calendar-grid-58 text-pink"></i>
       <span class="nav-link-text">Jadwal</span>
     </a>
   </li>
@@ -118,9 +118,10 @@
     <table class="table align-items-center table-flush">
       <thead class="thead-light">
         <tr>
-          <th scope="col-2">Judul Artikel</th>
-          <th scope="col-8">Isi</th>
-          <th scope="col-2">Gambar</th>
+          <th scope="">Judul Artikel</th>
+          <th scope="">Tanggal</th>
+          <th scope="">Isi</th>
+          <th scope="">Gambar</th>
           <th></th>
         </tr>
       </thead>
@@ -128,8 +129,9 @@
       @foreach($data as $d)
           <tr>
           <td>{{$d->judul}}</td>
+          <td>{{date('d-m-Y',strtotime($d->tanggal))}}</td>
           <td name="isi">{{$d->isi}}</td>
-          <td><img src="{{asset('images/'.$d->gambar)}}" height='100px'/></td>
+          <td><img src="{{asset('assets/undana/artikel/'.$d->gambar)}}" height='100px'/></td>
           <td class="text-right">
             <div class="dropdown">
                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -139,10 +141,10 @@
                   <div class="dropdown-item">
                     <a class="dropdown-item" href="{{url('artikels/'.$d->idartikels.'/edit')}}">Edit</a>
                   </div> 
-                    <form class="dropdown-item" method="POST" action="{{url('artikel/hapus/'.$d->idartikels)}}">
+                    <form class="dropdown-item" method="POST" action="{{url('artikels/'.$d->idartikels)}}">
                       @csrf
                       @method('DELETE')
-                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                      <input class="dropdown-item" type="submit" value="Hapus" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
                     </form>
                 </div>
             </div>

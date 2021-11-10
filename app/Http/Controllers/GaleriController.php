@@ -68,7 +68,8 @@ class GaleriController extends Controller
      */
     public function edit(Galeri $galeri)
     {
-        //
+        $data = $galeri;
+        return view("galeri.edit",compact('data'));
     }
 
     /**
@@ -80,7 +81,20 @@ class GaleriController extends Controller
      */
     public function update(Request $request, Galeri $galeri)
     {
-        //
+        $galeri->jenis=$request->get('jenis');
+        if($request->hasFile('foto')){
+            $dest='assets/undana/galeri/'.$galeri->file;
+            if(file_exists($dest)){
+                @unlink($dest); 
+            }
+            $file=$request->file('foto');
+            $imgFolder='assets/undana/galeri/';
+            $imgFile=time().'_'.$file->getClientOriginalName();
+            $file->move($imgFolder,$imgFile);
+            $galeri->file=$imgFile;
+        }
+        $galeri->save();
+        return redirect()->route('galeris.index')->with('status','foto berhasil diubah'); 
     }
 
     /**
@@ -91,6 +105,13 @@ class GaleriController extends Controller
      */
     public function destroy(Galeri $galeri)
     {
-        //
+        try{
+            $galeri->delete();
+            return redirect()->route('galeris.index')->with('status','foto galeri berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus foto. ";
+            return redirect()->route('galeris.index')->with('error', $msg);
+        }
     }
 }

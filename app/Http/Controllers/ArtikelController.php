@@ -49,15 +49,16 @@ class ArtikelController extends Controller
         $data->judul = $request->get('judul');
         $data->isi = $request->get('isi');
         $data->tanggal = Carbon::now();
-
-        $file=$request->file('gambar');
-        $imgFolder='assets/undana/artikel/';
-        $imgFile=time().'_'.$file->getClientOriginalName();
-        $file->move($imgFolder,$imgFile);
-        $data->gambar=$imgFile;
+        if($request->hasFile('gambar')){
+            $file=$request->file('gambar');
+            $imgFolder='assets/undana/artikel/';
+            $imgFile=time().'_'.$file->getClientOriginalName();
+            $file->move($imgFolder,$imgFile);
+            $data->gambar=$imgFile;
+        }
 
         $data->save();
-        return redirect()->view('artikel.index')->with('status','artikel baru telah ditambahkan');
+        return back()->with('status','artikel baru telah ditambahkan');
     }
 
     /**
@@ -109,7 +110,7 @@ class ArtikelController extends Controller
             $artikel->gambar=$imgFile;
         }
         $artikel->save();
-        return redirect()->view('artikel.index')->with('status','data artikel berhasil diubah'); 
+        return back()->with('status','data artikel berhasil diubah'); 
     }
 
     /**
@@ -122,22 +123,16 @@ class ArtikelController extends Controller
     {
         try{
             $artikel->delete();
-            return redirect()->view('artikel.index')->with('status','data artikel berhasil dihapus');       
+            return back()->with('status','data artikel berhasil dihapus');       
         }
         catch(\PDOException $e){
             $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
-            return redirect()->view('artikel.index')->with('error', $msg);
+            return back()->with('error', $msg);
         }
     }
 
     public function backEndIndex(){
         $data = Artikel::paginate(5);
         return view('artikel.index', compact("data"));
-    }
-
-    public function hapusArtikel($id){
-        $queryRaw = DB::delete(DB::raw("SELECT * FROM artikels WHERE idartikels = '$id'"));
-
-        return view('artikel.index')->with("status","artikel berhasil dihapus");
     }
 }
