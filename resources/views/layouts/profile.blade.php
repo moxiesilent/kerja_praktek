@@ -123,8 +123,8 @@
             <div class="widget widget-text">
               <h5 class="widget-title">Hubungi Kami</h5>
               <ul class="footer-contact">
-              	<li><i class="mdi mdi-map-marker"></i> <p>Schönhauser Allee 167c 10435 Berlin Germany</p></li>
-                <li><i class="mdi mdi-email"></i> <p><a href="#">chaos@gmail.com</a></p></li>
+              	<li><i class="mdi mdi-map-marker"></i> <p><a href="https://goo.gl/maps/tCZrSnYQ3pXq51E8A" target="_blank">Jl. Jend Soeharto, Lasiana, Klp. Lima, Kota Kupang, Nusa Tenggara Timur, Indonesia</a></p></li>
+                <li><i class="mdi mdi-email"></i> <p><a href="mailto:s160418075@student.ubaya.ac.id">chaos@gmail.com</a></p></li>
                 <li><i class="mdi mdi-phone"></i> <p>+49 30 47373795</p></li>
               </ul>
             </div>
