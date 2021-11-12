@@ -9,6 +9,7 @@ use App\Matakuliah;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use Illuminate\Pagination\Paginator;
 
 class MengajarController extends Controller
 {
@@ -24,10 +25,17 @@ class MengajarController extends Controller
         $semester = Semester::all();
         $matakuliah = Matakuliah::all();
 
-        $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
-        matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan, semesters.nama_semester as semester FROM `mengajars` inner join dosens on mengajars.dosens_nip = dosens.nip 
-        inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
-        semester_idsemester = semesters.idsemester"));
+        $data = DB::table('mengajars')
+        ->join('dosens', 'mengajars.dosens_nip','=','dosens.nip')
+        ->join('matakuliahs', 'mengajars.matakuliah_kodemk','=','matakuliahs.kodemk')
+        ->join('semesters', 'mengajars.semester_idsemester','=','semesters.idsemester')
+        ->select('idmengajars','matakuliahs.namamk as namamk','matakuliahs.kodemk as kodemk','matakuliahs.sks as sks','hari','jammulai','jamberakhir','ruangan','semesters.nama_semester as semester','dosens.nama as dosen')
+        ->paginate(10);
+
+        // $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
+        // matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan, semesters.nama_semester as semester FROM `mengajars` inner join dosens on mengajars.dosens_nip = dosens.nip 
+        // inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
+        // semester_idsemester = semesters.idsemester ORDER BY idmengajars"));
 
         return view("mengajar.index",compact('data', 'dosen', 'matakuliah', 'semester'));
     }

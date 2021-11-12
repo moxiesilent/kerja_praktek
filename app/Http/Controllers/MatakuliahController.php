@@ -15,7 +15,7 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
-        $data = Matakuliah::all();
+        $data = Matakuliah::paginate(10);
         return view("matakuliah.index",compact('data'));
     }
 

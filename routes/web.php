@@ -26,6 +26,7 @@ Route::resource('jurnals', 'JurnalController');
 Route::get('/penelitian', 'PenelitianController@index');
 Route::get('/prestasimahasiswa','PrestasiController@prestasikewebprofile');
 Route::resource('artikels','ArtikelController');
+Route::get('artikelback/hapus/{id}','ArtikelController@hapusArtikel');
 
 
 Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen');
@@ -34,6 +35,11 @@ Route::get('/matakuliahDosen/pertemuan/{id}', 'LogindosenController@getMateri');
 Route::get('/matakuliahDosen/tugas/{id}', 'LogindosenController@getTugas');
 Route::resource('materis','MateriController');
 Route::resource('tugass','TugasController');
+
+Route::get('/loginmahasiswa/{id}','LoginmahasiswaController@getPertemuan');
+Route::get('/loginmahasiswa/materi/{id}','LoginmahasiswaController@getMateri');
+Route::get('/loginmahasiswa/tugas/{id}','LoginmahasiswaController@getTugas');
+Route::resource('pengumpulans','PengumpulanController');
 
 Auth::routes();
 
@@ -51,6 +57,9 @@ Route::resource('mahasiswas','MahasiswaController');
 Route::get('/dosen','DosenController@index');
 Route::resource('dosens','DosenController');
 
+Route::get('/galeri','GaleriController@index');
+Route::resource('galeris','GaleriController');
+
 Route::get('/matakuliah','MatakuliahController@index');
 Route::resource('matakuliahs','MatakuliahController');
 
@@ -60,9 +69,14 @@ Route::resource('semesters','SemesterController');
 Route::get('/mengajar','MengajarController@index');
 Route::resource('mengajars','MengajarController');
 
+Route::get('/artikelback','ArtikelController@backEndIndex');
+
 Route::get('/dashboard','DashboardController@index');
 Route::get('/loginmahasiswa','LoginmahasiswaController@index');
 Route::get('/logindosen','LogindosenController@index');
+
+Route::get('/resetpassword/{id}','DosenController@resetPassword');
+Route::get('/dosen/detail/{id}','DosenController@detailDosen');
 
 Route::get('/ceklayout',function(){
     return view('layouts.argon');

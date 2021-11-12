@@ -1,4 +1,20 @@
 @extends('layouts.frontend')
+@section('topnav')
+
+<nav class="navbar navbar-top navbar-dark bg-primary border-bottom">
+<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+  <div class="text-right">
+    <a class="btn btn-default" href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+        {{ __('Logout') }}
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+  </div>
+</ul>
+</nav>
 @section('content')
 
 <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
@@ -27,7 +43,7 @@
         <div class="card-body">
           <h5 class="card-title">{{$d->kodemk}}</h5>
           <p class="card-text">{{$d->namamk}}</p>
-          <a href="" class="btn btn-primary">Pilih</a>
+          <a href="{{url('loginmahasiswa/'.$d->idmengajar)}}" class="btn btn-primary">Pilih</a>
         </div>
       </div>&nbsp&nbsp&nbsp&nbsp&nbsp
     @endforeach

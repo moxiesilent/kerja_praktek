@@ -2,32 +2,32 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="examples/dashboard.html">
+    <a class="nav-link" href="{{url('dashboard')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Dashboard</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('prestasi')}}">
-      <i class="ni ni-planet text-orange"></i>
+      <i class="ni ni-trophy text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" href="{{url('dosen')}}">
-      <i class="ni ni-pin-3 text-primary"></i>
+      <i class="ni ni-single-02 text-primary"></i>
       <span class="nav-link-text">Dosen</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('matakuliah')}}">
-      <i class="ni ni-single-02 text-yellow"></i>
+      <i class="ni ni-books text-yellow"></i>
       <span class="nav-link-text">Matakuliah</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('mahasiswa')}}">
-      <i class="ni ni-bullet-list-67 text-default"></i>
+      <i class="ni ni-single-02 text-default"></i>
       <span class="nav-link-text">Mahasiswa</span>
     </a>
   </li>
@@ -39,7 +39,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('mengajar')}}">
-      <i class="ni ni-circle-08 text-pink"></i>
+      <i class="ni ni-calendar-grid-58 text-pink"></i>
       <span class="nav-link-text">Jadwal</span>
     </a>
   </li>
@@ -47,6 +47,18 @@
     <a class="nav-link" href="{{url('jurnal')}}">
       <i class="ni ni-send text-dark"></i>
       <span class="nav-link-text">Jurnal</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('artikelback')}}">
+      <i class="ni ni-spaceship text-dark"></i>
+      <span class="nav-link-text">Artikel</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('galeri')}}">
+      <i class="ni ni-image text-dark"></i>
+      <span class="nav-link-text">Galeri</span>
     </a>
   </li>
 </ul>
@@ -60,9 +72,12 @@
         <h3 class="mb-0">Daftar Dosen</h3>
       </div>
       <div class="col text-right">
-      <a href="" role="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah">
-        Tambah Dosen
-      </a>
+        <a href="" data-toggle="modal" data-target="#modalTambah">
+          <button class="btn btn-icon btn-primary" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Tambah Dosen</span>
+          </button>
+        </a>
       </div>
     </div>
     @if(session('status'))
@@ -76,13 +91,12 @@
       </div>
     @endif
   </div>
-  <div class="table-responsive">
+  <div class="table-responsive" width="100%">
     <table class="table align-items-center table-flush">
       <thead class="thead-light">
         <tr>
           <th>NIP</th>
           <th>Nama</th>
-          <th>Tanggal Lahir</th>
           <th>Email</th>
           <th>Jabatan</th>
           <th>Bidang Keahlian</th>
@@ -95,7 +109,6 @@
           <tr>
           <td>{{$d->nip}}</td>
           <td>{{$d->nama}}</td>
-          <td>{{date('d-m-Y',strtotime($d->tanggallahir))}}</td>
           <td>{{$d->email}}</td>
           <td>{{$d->jabatan}}</td>
           <td>{{$d->bidangkeahlian}}</td>
@@ -107,12 +120,15 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                   <div class="dropdown-item">
+                    <a class="dropdown-item" href="{{url('dosen/detail/'.$d->nip)}}">Detail</a>
+                  </div> 
+                  <div class="dropdown-item">
                     <a class="dropdown-item" href="{{url('dosens/'.$d->nip.'/edit')}}">Edit</a>
                   </div> 
                     <form class="dropdown-item" method="POST" action="{{url('dosens/'.$d->nip)}}">
                       @csrf
                       @method('DELETE')
-                      <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                      <input class="dropdown-item" type="submit" value="Hapus" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
                     </form>
                 </div>
             </div>
@@ -120,7 +136,13 @@
           </tr>
         @endforeach
       </tbody>
+      
     </table>
+    <ul class="pagination">
+      <li class="page-item">
+        {{$data->links()}}
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -150,8 +172,27 @@
           <input type="email" class="form-control" id="email" placeholder="contoh@gmail.com" name="email">
         </div>
         <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="form-group">
           <label for="tanggallahir">Tanggal Lahir</label>
           <input type="date" class="form-control" id="tanggallahir" placeholder="01/01/1990" name="tanggallahir">
+        </div>
+        <div class="form-group">
+          <div class="radio">
+              <label>Jenis Kelamin</label><br>
+              <label><input type="radio" name="jeniskelamin" value="laki-laki"> Laki-laki</label>&nbsp&nbsp
+              <label><input type="radio" name="jeniskelamin" value="perempuan"> Perempuan</label>&nbsp&nbsp
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="alamat">Alamat</label>
+          <textarea class="form-control" id="alamat" name="alamat"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="riwayatpendidikan">Riwayat Pendidikan</label>
+          <textarea class="form-control" id="riwayatpendidikan" name="riwayatpendidikan"></textarea>
         </div>
         <div class="form-group">
           <label for="jabatan">Jabatan</label>

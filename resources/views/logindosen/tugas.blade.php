@@ -106,7 +106,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                   <div class="dropdown-item">
-                    <a class="dropdown-item" href="">Download File</a>
+                    <a class="dropdown-item" href="{{asset('tugas/'.$d->file)}}">Download File</a>
                   </div>
                 </div>
             </div>

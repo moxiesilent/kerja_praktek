@@ -28,7 +28,7 @@
 				<div class="post-info">
 				  <h3><a href="/artikels/{{$d->idartikels}}">{{$d->judul}}</a></h3>
 				  <p>{{$d->tanggal}}</p>
-				  <a class="readmore" href="/artikels/{{$d->idartikels}}"><span>Baca lebih lanjut <i class="eicon mdi mdi-arrow-right"></i></span></a> </div>
+				  <a class="readmore" href="{{url('/artikels/'.$d->idartikels)}}"><span>Baca lebih lanjut <i class="eicon mdi mdi-arrow-right"></i></span></a> </div>
 			  </div>
 			</div>
             @endforeach

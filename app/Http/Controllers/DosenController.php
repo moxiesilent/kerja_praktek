@@ -6,6 +6,8 @@ use App\Dosen;
 use Illuminate\Http\Request;
 use Illuminate\Facade\File;
 use DB;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class DosenController extends Controller
 {
@@ -16,9 +18,7 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $data = Dosen::all();
-        // $jbt = Jabatan::all();
-        // return view("dosen.index",compact('data','jbt'));
+        $data = Dosen::paginate(10);
         return view("dosen.index",compact('data'));
     }
 
@@ -60,7 +60,18 @@ class DosenController extends Controller
         $data->tanggallahir = $request->get('tanggallahir');
         $data->jabatan = $request->get('jabatan');
         $data->bidangkeahlian = $request->get('bidang');
+        $data->jenis_kelamin = $request->get('jeniskelamin');
+        $data->riwayat_pendidikan = $request->get('riwayatpendidikan');
+        $data->alamat = $request->get('alamat');
         $data->save();
+
+        $user = new User();
+        $user->name = $request->get('nama');
+        $user->email = $request->get('email');
+        $user->password = Hash::make($request->get('password'));
+        $user->sebagai = 'dosen';
+        $user->save();
+
         return redirect()->route('dosens.index')->with('status','dosen baru berhasil ditambahkan');
     }
 
@@ -101,6 +112,9 @@ class DosenController extends Controller
         $dosen->tanggallahir=$request->get('tanggallahir');
         $dosen->jabatan=$request->get('jabatan');
         $dosen->bidangkeahlian=$request->get('bidang');
+        $dosen->jenis_kelamin = $request->get('jeniskelamin');
+        $dosen->riwayat_pendidikan = $request->get('riwayatpendidikan');
+        $dosen->alamat = $request->get('alamat');
         if($request->hasFile('foto')){
             $dest='images/'.$dosen->foto;
             if(file_exists($dest)){
@@ -147,5 +161,19 @@ class DosenController extends Controller
         $queryRaw = DB::select(DB::raw("SELECT * from dosens where nip = '$id'"));
 
         return view("dosendetail",["data"=>$queryRaw]);
+    }
+
+    public function resetPassword($id){
+        $pass = Hash::make('12345678');
+        $queryRaw = DB::select(DB::raw("UPDATE users INNER JOIN dosens ON dosens.email = users.email SET 
+        users.password = '$pass' WHERE dosens.nip = '$id'"));
+
+        return view("dosen.index",["data"=>$queryRaw]);
+    }
+
+    public function detailDosen($id){
+        $queryRaw = DB::select(DB::raw("SELECT * from dosens where nip = '$id'"));
+
+        return view("dosen.detail",["data"=>$queryRaw]);
     }
 }

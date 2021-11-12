@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Artikel;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class ArtikelController extends Controller
 {
@@ -44,7 +45,20 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Artikel();
+        $data->judul = $request->get('judul');
+        $data->isi = $request->get('isi');
+        $data->tanggal = Carbon::now();
+        if($request->hasFile('gambar')){
+            $file=$request->file('gambar');
+            $imgFolder='assets/undana/artikel/';
+            $imgFile=time().'_'.$file->getClientOriginalName();
+            $file->move($imgFolder,$imgFile);
+            $data->gambar=$imgFile;
+        }
+
+        $data->save();
+        return back()->with('status','artikel baru telah ditambahkan');
     }
 
     /**
@@ -80,7 +94,23 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, Artikel $artikel)
     {
-        //
+        $artikel->judul=$request->get('judul');
+        $artikel->isi=$request->get('isi');
+        $artikel->tanggal=Carbon::now();
+
+        if($request->hasFile('gambar')){
+            $dest='assets/undana/artikel/'.$artikel->gambar;
+            if(file_exists($dest)){
+                @unlink($dest); 
+            }
+            $file=$request->file('gambar');
+            $imgFolder='assets/undana/artikel/';
+            $imgFile=time().'_'.$file->getClientOriginalName();
+            $file->move($imgFolder,$imgFile);
+            $artikel->gambar=$imgFile;
+        }
+        $artikel->save();
+        return back()->with('status','data artikel berhasil diubah'); 
     }
 
     /**
@@ -91,6 +121,18 @@ class ArtikelController extends Controller
      */
     public function destroy(Artikel $artikel)
     {
-        //
+        try{
+            $artikel->delete();
+            return back()->with('status','data artikel berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return back()->with('error', $msg);
+        }
+    }
+
+    public function backEndIndex(){
+        $data = Artikel::paginate(5);
+        return view('artikel.index', compact("data"));
     }
 }
