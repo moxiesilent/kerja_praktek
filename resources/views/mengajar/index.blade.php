@@ -8,6 +8,12 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('profil')}}">
+      <i class="ni ni-planet text-success"></i>
+      <span class="nav-link-text">Profil</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{url('prestasi')}}">
       <i class="ni ni-trophy text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
@@ -62,6 +68,9 @@
     </a>
   </li>
 </ul>
+@endsection
+@section('nama')
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
 <h2>Tabel Prestasi</h2><br>
@@ -128,6 +137,9 @@
                   <i class="fas fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <div class="dropdown-item">
+                    <a class="dropdown-item" href="{{url('mengajar/detail/'.$d->idmengajars)}}">Detail</a>
+                  </div> 
                   <div class="dropdown-item">
                     <a class="dropdown-item" href="{{url('mengajars/'.$d->idmengajars.'/edit')}}">Edit</a>
                   </div> 
@@ -219,10 +231,40 @@
   </div>
 </div>
 
-<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+<div class="modal fade" id="modalTambahMahasiswa" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalTambahLabel">Tambah Pembelajaran Baru</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{url('mengajars')}}">
+        @csrf
+        <div class="form-group">
+          <label for="semester">Semester</label>
+          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Semester" name="semester">
+            @foreach($semester as $sm)
+                <option value="{{$sm->idsemester}}">{{$sm->nama_semester}}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dosen">Dosen Pengasuh</label>
+          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen">
+            @foreach($dosen as $dos)
+                <option value="{{$dos->nip}}">{{$dos->nama}}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="{{url('mengajars')}}" class="btn btn-default" role="button">Kembali</a>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+      </form>
+      </div>
     </div>
   </div>
 </div>

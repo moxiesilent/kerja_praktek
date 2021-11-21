@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tugas;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TugasController extends Controller
 {
@@ -39,6 +40,7 @@ class TugasController extends Controller
         $data->judul = $request->get('judul');
         $data->pertemuans_idpertemuan = $request->get('idpertemuan');
         $data->status = 'buka';
+        $data->deadline = Carbon::parse($request->get('deadline'))->format('Y-m-d\TH:i');
         $data->save();
         return back();
     }
@@ -74,15 +76,7 @@ class TugasController extends Controller
      */
     public function update(Request $request, Tugas $tugas)
     {
-        $tugas->status=$request->get('status');
-        if($request->get('status') == 'buka'){
-            $tugas->save();
-            return back()->with('status','pengumpulan tugas sudah ditutup'); 
-        }
-        else{
-            $tugas->save();
-            return back()->with('status','pengumpulan tugas dibuka kembali'); 
-        }
+        
         
     }
 
@@ -96,7 +90,7 @@ class TugasController extends Controller
     {
         try{
             $tugas->delete();
-            return back()->with('status','tugas berhasil dihapus');       
+            return redirect()->back()->with('status','tugas berhasil dihapus');       
         }
         catch(\PDOException $e){
             $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";

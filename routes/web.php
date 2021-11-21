@@ -33,8 +33,11 @@ Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen');
 Route::get('/matakuliahDosen/{id}', 'LogindosenController@getPertemuan');
 Route::get('/matakuliahDosen/pertemuan/{id}', 'LogindosenController@getMateri');
 Route::get('/matakuliahDosen/tugas/{id}', 'LogindosenController@getTugas');
+Route::get('/matakuliahDosen/tugas/gantiStatus/{id}', 'LogindosenController@gantiStatus');
+
 Route::resource('materis','MateriController');
 Route::resource('tugass','TugasController');
+Route::resource('mengambils','MengambilController');
 
 Route::get('/loginmahasiswa/{id}','LoginmahasiswaController@getPertemuan');
 Route::get('/loginmahasiswa/materi/{id}','LoginmahasiswaController@getMateri');
@@ -47,6 +50,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/pertemuan','PertemuanController@index');
 Route::resource('pertemuans','PertemuanController');
+
+Route::get('/profil','ProfilController@index');
+Route::resource('profils','ProfilController');
 
 Route::get('/prestasi','PrestasiController@index')->name('prestasi');
 Route::resource('prestasis','PrestasiController');
@@ -67,13 +73,14 @@ Route::get('/semester','SemesterController@index')->name('semester');
 Route::resource('semesters','SemesterController');
 
 Route::get('/mengajar','MengajarController@index');
+Route::get('/mengajar/detail/{id}','MengajarController@detailMengajar');
 Route::resource('mengajars','MengajarController');
 
 Route::get('/artikelback','ArtikelController@backEndIndex');
 
 Route::get('/dashboard','DashboardController@index');
 Route::get('/loginmahasiswa','LoginmahasiswaController@index');
-Route::get('/logindosen','LogindosenController@index');
+// Route::get('/logindosen','LogindosenController@index');
 
 Route::get('/resetpassword/{id}','DosenController@resetPassword');
 Route::get('/dosen/detail/{id}','DosenController@detailDosen');

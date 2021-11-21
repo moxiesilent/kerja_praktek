@@ -2,7 +2,7 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="{{url('dashboard')}}">
+    <a class="nav-link " href="{{url('dashboard')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Dashboard</span>
     </a>
@@ -38,7 +38,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="{{url('semester')}}">
+    <a class="nav-link" href="{{url('semester')}}">
       <i class="ni ni-key-25 text-info"></i>
       <span class="nav-link-text">Semester</span>
     </a>
@@ -56,7 +56,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('artikelback')}}">
+    <a class="nav-link active" href="{{url('artikelback')}}">
       <i class="ni ni-spaceship text-dark"></i>
       <span class="nav-link-text">Artikel</span>
     </a>
@@ -73,27 +73,52 @@
 <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
-<h2>Tabel Prestasi</h2><br>
-
-<div class="card">
-  <div class="card-header border-0">
-    <div class="align-items-center">
-      <form method="POST" action="{{url('semesters/'.$data->idsemester)}}">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="kegiatan">Nama Semester</label>
-                <input type="text" class="form-control" id="kegiatan" name="kegiatan" value="{{$data->nama_semester}}">
+<h2>Daftar Matakuliah</h2><br>
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h3 class="mb-0">Tambah Artikel</h3>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              @if(session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{session('status')}}
+                </div>
+              @endif
+              @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{session('error')}}
+                </div>
+              @endif
+              <div class="m-4">
+                <form enctype="multipart/form-data" method="POST" action="{{url('artikels')}}">
+                    @csrf
+                      <div class="form-group">
+                        <label for="judul">Judul Artikel</label>
+                        <input type="text" class="form-control" id="judul" placeholder="judul artikel" name="judul">
+                      </div>
+                      <div class="form-group">
+                        <label for="isi">Isi Artikel</label>
+                        <textarea id="isi" name="isi"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="gambar">Gambar</label>
+                        <input type="file" class="form-control" id="gambar" name="gambar">
+                      </div>
+                      <div class="form-group text-right">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                  </form>
+              </div>
             </div>
-            <div>
-            <a href="{{url('semesters')}}" class="btn btn-default" role="button">Back</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>      
-      </div>
-    </div>
+        </div>
   </div>
 </div>
-
+@endsection
+@section('javascript')
+<script>
+    CKEDITOR.replace( 'isi' );
+</script>
 @endsection
 

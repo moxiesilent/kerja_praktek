@@ -8,6 +8,12 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('profil')}}">
+      <i class="ni ni-planet text-success"></i>
+      <span class="nav-link-text">Profil</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{url('prestasi')}}">
       <i class="ni ni-trophy text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
@@ -62,6 +68,9 @@
     </a>
   </li>
 </ul>
+@endsection
+@section('nama')
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
 <h2>Tabel jurnal</h2><br>

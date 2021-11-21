@@ -2,12 +2,6 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="{{url('logindosen')}}">
-      <i class="ni ni-tv-2 text-primary"></i>
-      <span class="nav-link-text">Dashboard</span>
-    </a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link active" href="{{url('matakuliahDosen')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Matakuliah</span>
@@ -53,7 +47,12 @@
     <div class="row">
     @foreach($tugas as $t)
       <div class="col-4">
-          {{$t->judul}}
+          <h4>{{$t->judul}}</h4>
+          @if($t->status == 'buka')
+            <h4 class="text-success">Status : {{$t->status}}</h4>
+          @elseif($t->status == 'tutup')
+            <h4 class="text-danger">Status : {{$t->status}}</h4>
+          @endif
       </div>
       <div class="col text-right">
       <div class="dropdown">
@@ -61,10 +60,19 @@
           <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+            @if($t->status == 'buka')
+              <div class="dropdown-item">
+                <a class="dropdown-item" href="{{url('matakuliahDosen/tugas/gantiStatus/'.$t->idtugas)}}">Tutup Pengumpulan Tugas</a>
+              </div> 
+            @else
+              <div class="dropdown-item">
+                <a class="dropdown-item" href="{{url('matakuliahDosen/tugas/gantiStatus/'.$t->idtugas)}}">Buka Pengumpulan Tugas</a>
+              </div>
+            @endif
             <form class="dropdown-item" method="POST" action="{{url('tugass/'.$t->idtugas)}}">
               @csrf
               @method('DELETE')
-              <button class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</button>
+              <input class="dropdown-item" value="Hapus" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
             </form>
           </div>
         </div>
@@ -134,9 +142,20 @@
           <label for="judul">Judul Tugas</label>
           <input class="form-control" placeholder="judul tugas" type="text" name="judul" id="judul">
         </div>
+        <div class="form-group">
+          <label for="deadline">Tanggal Pengumpulan Terakhir</label>
+          <input class="form-control" type="datetime-local" value="" name="ss" id="deadline">
+        </div>
+        <div class="form-group">
+          <div class='input-group date' id='datetimepicker1'>
+            <input type='datetime' class="form-control" name="deadline"/>
+            <span class="input-group-addon input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="button-addon2">  <span class="fa fa-calendar"></span></button>
+            </span>
+          </div>
+        </div>
         <input type="hidden" value="{{request()->id}}" name="idpertemuan">
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -146,4 +165,22 @@
   </div>
 </div>
 @endsection
-
+@section('javascript')
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+          icons: {
+            time: "fa fa-clock",
+            date: "fa fa-calendar-day",
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-remove'
+          }
+        });
+    });
+</script>
+@endsection

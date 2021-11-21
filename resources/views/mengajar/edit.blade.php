@@ -8,6 +8,12 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('profil')}}">
+      <i class="ni ni-planet text-success"></i>
+      <span class="nav-link-text">Profil</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{url('prestasi')}}">
       <i class="ni ni-trophy text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
@@ -63,6 +69,9 @@
   </li>
 </ul>
 @endsection
+@section('nama')
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
+@endsection
 @section('content')
 <h2>Jadwal</h2><br>
 
@@ -101,7 +110,7 @@
             <label for="matakuliah">Matakuliah</label>
             <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Matakuliah" name="matakuliah">
                 @foreach($matakuliah as $mk)
-                    @if($mk->kodemk == $data->kodemk)
+                    @if($mk->kodemk == $data->matakuliah_kodemk)
                         <option value="{{$mk->kodemk}}" selected>{{$mk->namamk}}</option>
                     @else 
                         <option value="{{$mk->kodemk}}">{{$mk->namamk}}</option>
@@ -110,28 +119,24 @@
             </select>
             </div>
             <div class="form-group">
-            <label for="hari">Hari</label>
-            <input type="text" class="form-control" id="hari" name="hari" value="{{$data->hari}}">
+              <label for="hari">Hari</label>
+              <input type="text" class="form-control" id="hari" name="hari" value="{{$data->hari}}">
             </div>
             <div class="form-group">
-            <label for="ruangan">Ruangan</label>
-            <input type="text" class="form-control" id="ruangan" name="ruangan" value="{{$data->ruangan}}">
+              <label for="ruangan">Ruangan</label>
+              <input type="text" class="form-control" id="ruangan" name="ruangan" value="{{$data->ruangan}}">
             </div>
             <div class="form-group">
-            <label for="jammulai">Jam Mulai</label>
-            <input type="text" class="form-control" id="jammulai" name="jammulai" value="{{$data->jammulai}}">
+              <label for="jammulai">Jam Mulai</label>
+              <input type="text" class="form-control" id="jammulai" name="jammulai" value="{{$data->jammulai}}">
             </div>
             <div class="form-group">
-            <label for="jamberakhir">Jam Selesai</label>
-            <input type="text" class="form-control" id="jamberakhir" name="jamberakhir" value="{{$data->jamberakhir}}">
-            </div>
-            <div class="form-group">
-            <label for="sks">SKS</label>
-            <input type="text" class="form-control" id="sks" name="sks" value="{{$data->sks}}">
+              <label for="jamberakhir">Jam Selesai</label>
+              <input type="text" class="form-control" id="jamberakhir" name="jamberakhir" value="{{$data->jamberakhir}}">
             </div>
             <div>
-            <a href="{{url('prestasis')}}" class="btn btn-default" role="button">Back</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+              <a href="{{url('mengajars')}}" class="btn btn-default" role="button">Back</a>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>      
       </div>

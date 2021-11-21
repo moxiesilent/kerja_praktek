@@ -4,7 +4,7 @@
 <nav class="navbar navbar-top navbar-dark bg-primary border-bottom">
 <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
   <div class="text-right">
-    <a class="btn btn-default" href="{{ url('loginmahasiswa') }}">
+    <a class="btn btn-default" href="{{ url()->previous() }}">
         Kembali
     </a>
   </div>
@@ -50,26 +50,34 @@
             @endif
             <h3 class="mb-3">{{$d->topik}} - {{$d->judul}}</h3>
             <div class="row-2">
-                <h4 class="mb-3">{{$d->tanggal}}</h4>
+                <h4 class="mb-3">Tanggal Pertemuan : {{date('d-m-Y',strtotime($d->tanggal))}}</h4>
+                <h4>Batas Waktu Pengumpulan : {{date('d-m-Y H:i:s',strtotime($d->deadline))}}</h4>
                 <div class="text-right">
-                <a href="" data-toggle="modal" data-target="#modalTambah">
-                    <button class="btn btn-icon btn-primary" type="button">
-                    <span class="btn-inner--text">Submit Tugas</span>
-                    </button>
-                </a>
+                  @if($d->status == 'buka')
+                    <a href="" data-toggle="modal" data-target="#modalTambah">
+                        <button class="btn btn-icon btn-primary" type="button">
+                        <span class="btn-inner--text">Submit Tugas</span>
+                        </button>
+                    </a>
+                  @else
+                    <h4>Pengumpulan tugas sudah ditutup</h4>
+                  @endif
                 </div>
             </div>
         </div>
         @if(count($kumpul))
-        @foreach($kumpul as $k)
-        <div class="card-body">
-          <div class="">
-            <h4>Tanggal pengumpulan :</h4>
-            <h4>{{$k->tanggal}}</h4>
-            <a class="btn btn-dark" href="{{asset('tugas/'.$k->file)}}">Download Tugas</a>
+          @foreach($kumpul as $k)
+          <div class="card-body">
+            <div class="">
+              <h4>Waktu pengumpulan :</h4>
+              <h4>{{$k->tanggal}}</h4>
+              <a class="btn btn-dark" href="{{asset('tugas/'.$k->file)}}">Download Tugas</a>
+              @if($d->status == 'buka')
+                <a class="btn btn-danger" href="">Hapus</a>
+              @endif
+            </div>
           </div>
-        </div>
-        @endforeach
+          @endforeach
         @endif
     </div>
     @endforeach
@@ -80,6 +88,7 @@
   @endif
   </div>
 </div>
+
 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -96,7 +105,9 @@
           <label for="file">File Tugas</label>
           <input type="file" class="form-control" id="file" name="file">
         </div>
-        <input type="hidden" name="idtugas" value="{{request()->id}}">
+        @foreach($data as $d)
+            <input type="hidden" name="idtugas" value="{{$d->idtugas}}">
+        @endforeach
         @foreach($user as $u)
         <input type="hidden" name="idmahasiswa" value="{{$u->idmahasiswa}}">
         @endforeach

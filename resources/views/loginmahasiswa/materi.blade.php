@@ -4,7 +4,7 @@
 <nav class="navbar navbar-top navbar-dark bg-primary border-bottom">
 <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
   <div class="text-right">
-    <a class="btn btn-default" href="{{ url('loginmahasiswa') }}">
+    <a class="btn btn-default" href="{{ url()->previous() }}">
         Kembali
     </a>
   </div>

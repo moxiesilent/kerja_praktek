@@ -2,12 +2,6 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="{{url('logindosen')}}">
-      <i class="ni ni-tv-2 text-primary"></i>
-      <span class="nav-link-text">Dashboard</span>
-    </a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link active" href="{{url('matakuliahDosen')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Matakuliah</span>
@@ -39,8 +33,8 @@
       </div>
     @endif
   </div>
-  <div class="table-responsive">
-    <table class="table align-items-center table-flush">
+  <div class="table-responsive py-4">
+    <table class="table table-flush" id="datatable-basic">
       <thead class="thead-light">
         <tr>
           <th>Kode Matakuliah</th>

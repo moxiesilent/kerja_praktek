@@ -6,6 +6,7 @@ use App\Pengumpulan;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use App\Tugas;
 
 class PengumpulanController extends Controller
 {
@@ -38,6 +39,16 @@ class PengumpulanController extends Controller
     public function store(Request $request)
     {
         try{
+            $cekDeadline = Tugas::find($request->get('idtugas'));
+            $tanggalKumpul = Carbon::now();
+            $status = '';
+
+            if($cekDeadline->deadline <= $tanggalKumpul){
+                $status = 'IN TIME';
+            }
+            else{
+                $status = 'LATE';
+            }
             $data = new Pengumpulan();
             $file=$request->file('file');
             $fileFolder='tugas';
@@ -47,7 +58,9 @@ class PengumpulanController extends Controller
 
             $data->tugas_idtugas = $request->get('idtugas');
             $data->mahasiswa_idmahasiswa = $request->get('idmahasiswa');
-            $data->tanggal = Carbon::now();
+            $data->tanggal = $tanggalKumpul;
+
+            $data->status = $status;
             $data->save();
             return back()->with('status','submit tugas baru berhasil dilakukan');      
         }

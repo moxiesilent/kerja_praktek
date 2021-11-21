@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mengajar;
 use App\Dosen;
+use App\Mahasiswa;
 use App\Semester;
 use App\Matakuliah;
 use Illuminate\Http\Request;
@@ -64,7 +65,6 @@ class MengajarController extends Controller
         $data->jammulai = $request->get('jammulai');
         $data->jamberakhir = $request->get('jamberakhir');
         $data->ruangan = $request->get('ruangan');
-        $data->sks = $request->get('sks');
         $data->hari = $request->get('hari');
         $data->semester_idsemester = $request->get('semester');
         $data->save();
@@ -111,7 +111,6 @@ class MengajarController extends Controller
         $mengajar->jammulai = $request->get('jammulai');
         $mengajar->jamberakhir = $request->get('jamberakhir');
         $mengajar->ruangan = $request->get('ruangan');
-        $mengajar->sks = $request->get('sks');
         $mengajar->hari = $request->get('hari');
         $mengajar->semester_idsemester = $request->get('semester');
         $mengajar->save();
@@ -148,5 +147,19 @@ class MengajarController extends Controller
             'status'=>'oke',
             'msg'=>view('mengajar.index',compact('data'))->render()
         ),200);
+    }
+
+    public function detailMengajar($id){
+        $mahasiswa = Mahasiswa::all();
+
+        $queryRaw = DB::select(DB::raw("SELECT idmengajars, jammulai, jamberakhir, ruangan, hari, dosens.nip as dosenNip, dosens.nama as namaDosen, matakuliahs.kodemk as kodemk,
+        matakuliahs.namamk as namamk, matakuliahs.sks as sks, semesters.nama_semester as semester FROM mengajars INNER JOIN dosens ON mengajars.dosens_nip =
+        dosens.nip INNER JOIN matakuliahs ON mengajars.matakuliah_kodemk = matakuliahs.kodemk INNER JOIN semesters ON mengajars.semester_idsemester = semesters.idsemester
+        WHERE mengajars.idmengajars = '$id'"));
+
+        $queryRaw2 = DB::select(DB::raw("SELECT idmahasiswa as nim, mahasiswas.nama as nama FROM mahasiswas INNER JOIN mengambils ON idmahasiswa = mahasiswas_idmahasiswa
+        WHERE mengajars_idmengajars = '$id'"));
+
+        return view("mengajar.ambil",["data"=>$queryRaw,"mahasiswa"=>$mahasiswa,"ambil"=>$queryRaw2]);
     }
 }

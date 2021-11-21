@@ -8,6 +8,12 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('profil')}}">
+      <i class="ni ni-planet text-success"></i>
+      <span class="nav-link-text">Profil</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{url('prestasi')}}">
       <i class="ni ni-trophy text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
@@ -63,47 +69,51 @@
   </li>
 </ul>
 @endsection
+@section('nama')
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
+@endsection
 @section('content')
 <h2>Daftar Matakuliah</h2><br>
-<div class="card">
-  <div class="card-header border-0">
-    <div class="row align-items-center">
-      <div class="col">
-        <h3 class="mb-0">Tambah Artikel</h3>
-      </div>
-      <br>
-    </div>
-    @if(session('status'))
-      <div class="alert alert-success" role="alert">
-          {{session('status')}}
-      </div>
-    @endif
-    @if(session('error'))
-      <div class="alert alert-danger" role="alert">
-          {{session('error')}}
-      </div>
-    @endif
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h3 class="mb-0">Tambah Artikel</h3>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              @if(session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{session('status')}}
+                </div>
+              @endif
+              @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{session('error')}}
+                </div>
+              @endif
+              <div class="m-4">
+                <form enctype="multipart/form-data" method="POST" action="{{url('artikels')}}">
+                    @csrf
+                      <div class="form-group">
+                        <label for="judul">Judul Artikel</label>
+                        <input type="text" class="form-control" id="judul" placeholder="judul artikel" name="judul">
+                      </div>
+                      <div class="form-group">
+                        <label for="isi">Isi Artikel</label>
+                        <textarea id="isi" name="isi"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="gambar">Gambar</label>
+                        <input type="file" class="form-control" id="gambar" name="gambar">
+                      </div>
+                      <div class="form-group text-right">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                  </form>
+              </div>
+            </div>
+        </div>
   </div>
-<div class="m-4">
-  <form enctype="multipart/form-data" method="POST" action="{{url('artikels')}}">
-      @csrf
-        <div class="form-group">
-          <label for="judul">Judul Artikel</label>
-          <input type="text" class="form-control" id="judul" placeholder="judul artikel" name="judul">
-        </div>
-        <div class="form-group">
-          <label for="isi">Isi Artikel</label>
-          <textarea id="isi" name="isi"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="gambar">Gambar</label>
-          <input type="file" class="form-control" id="gambar" name="gambar">
-        </div>
-        <div class="form-group text-right">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
-</div>
 </div>
 <div class="card">
     <div class="card-header border-0">

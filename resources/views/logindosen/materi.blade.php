@@ -2,12 +2,6 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="{{url('logindosen')}}">
-      <i class="ni ni-tv-2 text-primary"></i>
-      <span class="nav-link-text">Dashboard</span>
-    </a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link active" href="{{url('matakuliahDosen')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Matakuliah</span>

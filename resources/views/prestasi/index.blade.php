@@ -8,6 +8,12 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('profil')}}">
+      <i class="ni ni-planet text-success"></i>
+      <span class="nav-link-text">Profil</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link active" href="{{url('prestasi')}}">
       <i class="ni ni-trophy text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
@@ -63,6 +69,9 @@
   </li>
 </ul>
 @endsection
+@section('nama')
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
+@endsection
 @section('content')
 <h2>Tabel Prestasi</h2><br>
 
@@ -93,7 +102,7 @@
       </div>
     @endif
   <div class="table-responsive">
-    <table class="table align-items-center table-flush">
+    <table class="table align-items-center table-flush" id="datatable-basic">
       <thead class="thead-light">
         <tr>
           <th scope="col">Nama kegiatan</th>
