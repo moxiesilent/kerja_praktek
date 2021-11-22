@@ -34,14 +34,17 @@ Route::get('/matakuliahDosen/{id}', 'LogindosenController@getPertemuan');
 Route::get('/matakuliahDosen/pertemuan/{id}', 'LogindosenController@getMateri');
 Route::get('/matakuliahDosen/tugas/{id}', 'LogindosenController@getTugas');
 Route::get('/matakuliahDosen/tugas/gantiStatus/{id}', 'LogindosenController@gantiStatus');
+Route::post('/matakuliahDosen/tugas/hapus','TugasController@hapusTugas');
 
 Route::resource('materis','MateriController');
 Route::resource('tugass','TugasController');
 Route::resource('mengambils','MengambilController');
+Route::post('/mengambil/hapus','MengambilController@hapusMahasiswa');
 
 Route::get('/loginmahasiswa/{id}','LoginmahasiswaController@getPertemuan');
 Route::get('/loginmahasiswa/materi/{id}','LoginmahasiswaController@getMateri');
 Route::get('/loginmahasiswa/tugas/{id}','LoginmahasiswaController@getTugas');
+Route::post('/loginmahasiswa/tugas/hapus','PengumpulanController@hapusTugas');
 Route::resource('pengumpulans','PengumpulanController');
 
 Auth::routes();

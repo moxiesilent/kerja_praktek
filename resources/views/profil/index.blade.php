@@ -76,7 +76,14 @@
 <h2>Daftar Matakuliah</h2><br>
 <div class="card">
     <div class="card-body">
-        <h3>Pengaturan Profil Penjaskesrek</h3>
+        <div class="row-3">
+          <h3>Pengaturan Profil Penjaskesrek</h3>
+          <div class="text-right">
+            @foreach($data as $d)
+            <a class="btn btn-primary" href="">Ubah</a>
+            @endforeach
+          </div>
+        </div>
         <!-- <a href="" data-toggle="modal" data-target="#modalTambah">
           <button class="btn btn-icon btn-primary" type="button">
             <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
@@ -116,6 +123,12 @@
     <div class="card-body">
         <h4 class="card-title">Sambutan</h4>
         <p class="card-text">{!!html_entity_decode($d->sambutan)!!}</p>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Tentang</h4>
+        <p class="card-text">{!!html_entity_decode($d->tentang)!!}</p>
     </div>
 </div>
 

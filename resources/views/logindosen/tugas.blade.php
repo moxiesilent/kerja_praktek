@@ -45,13 +45,14 @@
   </div>
   <div class="card-body">
     <div class="row">
-    @foreach($tugas as $t)
+    @foreach($data as $d)
       <div class="col-4">
-          <h4>{{$t->judul}}</h4>
-          @if($t->status == 'buka')
-            <h4 class="text-success">Status : {{$t->status}}</h4>
-          @elseif($t->status == 'tutup')
-            <h4 class="text-danger">Status : {{$t->status}}</h4>
+          <h4>{{$d->judul}}</h4>
+          <h4>Batas pengumpulan : {{$d->deadline}}</h4>
+          @if($d->status == 'buka')
+            <h4 class="text-success">Status : {{$d->status}}</h4>
+          @elseif($d->status == 'tutup')
+            <h4 class="text-danger">Status : {{$d->status}}</h4>
           @endif
       </div>
       <div class="col text-right">
@@ -60,18 +61,18 @@
           <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-            @if($t->status == 'buka')
+            @if($d->status == 'buka')
               <div class="dropdown-item">
-                <a class="dropdown-item" href="{{url('matakuliahDosen/tugas/gantiStatus/'.$t->idtugas)}}">Tutup Pengumpulan Tugas</a>
+                <a class="dropdown-item" href="{{url('matakuliahDosen/tugas/gantiStatus/'.$d->idtugas)}}">Tutup Pengumpulan Tugas</a>
               </div> 
             @else
               <div class="dropdown-item">
-                <a class="dropdown-item" href="{{url('matakuliahDosen/tugas/gantiStatus/'.$t->idtugas)}}">Buka Pengumpulan Tugas</a>
+                <a class="dropdown-item" href="{{url('matakuliahDosen/tugas/gantiStatus/'.$d->idtugas)}}">Buka Pengumpulan Tugas</a>
               </div>
             @endif
-            <form class="dropdown-item" method="POST" action="{{url('tugass/'.$t->idtugas)}}">
+            <form class="dropdown-item" method="POST" action="{{url('matakuliahDosen/tugas/hapus')}}">
               @csrf
-              @method('DELETE')
+              <input type="hidden" name="idtugas" value ="{{$d->idtugas}}">
               <input class="dropdown-item" value="Hapus" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
             </form>
           </div>
@@ -98,15 +99,23 @@
           <th>NIM</th>
           <th>Nama Mahasiswa</th>
           <th>Tanggal Pengumpulan</th>
+          <th>Status</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        @foreach($data as $d)
+        @foreach($tugas as $t)
           <tr>
-            <td>{{$d->nim}}</td>
-            <td>{{$d->namamhs}}</td>
-            <td>{{$d->tanggal}}</td>
+            <td>{{$t->nim}}</td>
+            <td>{{$t->namamhs}}</td>
+            <td>{{date('d-m-Y H:i:s',strtotime($t->tanggal))}}</td>
+            <td>
+              @if($t->status == 'IN TIME')
+                <h5 class="text-success">IN TIME</h5>
+              @else
+                <h5 class="text-danger">LATE</h5>
+              @endif
+            </td>
             <td class="text-right">
             <div class="dropdown">
                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -114,7 +123,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                   <div class="dropdown-item">
-                    <a class="dropdown-item" href="{{asset('tugas/'.$d->file)}}">Download File</a>
+                    <a class="dropdown-item" href="{{asset('tugas/'.$t->file)}}">Download File</a>
                   </div>
                 </div>
             </div>

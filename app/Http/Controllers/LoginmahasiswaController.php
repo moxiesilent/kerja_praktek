@@ -46,11 +46,9 @@ class LoginmahasiswaController extends Controller
         if(count($queryRaw) == 1){
             $idtgs = $queryRaw[0]->idtugas;
 
-            $queryRaw3 = DB::select(DB::raw("SELECT tugas_idtugas, mahasiswa_idmahasiswa, file, pengumpulans.tanggal as tanggal FROM pengumpulans INNER JOIN mahasiswas
+            $queryRaw3 = DB::select(DB::raw("SELECT tugas_idtugas as idtugas, status, mahasiswa_idmahasiswa, file, pengumpulans.tanggal as tanggal FROM pengumpulans INNER JOIN mahasiswas
             ON pengumpulans.mahasiswa_idmahasiswa = mahasiswas.idmahasiswa where mahasiswas.email = '$currentuserid' and tugas_idtugas = $idtgs"));
         }
-
-        
         
         return view("loginmahasiswa.tugas",["data"=>$queryRaw,"user"=>$queryRaw2, "kumpul"=>$queryRaw3]);
     }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Tugas;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DB;
+use Auth;
 
 class TugasController extends Controller
 {
@@ -86,15 +88,34 @@ class TugasController extends Controller
      * @param  \App\Tugas  $tugas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tugas $tugas)
+    public function destroy(Request $request)
     {
-        try{
-            $tugas->delete();
-            return redirect()->back()->with('status','tugas berhasil dihapus');       
+        $idtugas = $request->get("idtugas");
+        $delete = DB::table('tugass')->where('idtugas',$idtugas)->delete();
+        if($delete){
+            return back()->with('status','Tugas berhasil dihapus');
         }
-        catch(\PDOException $e){
-            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
-            return back()->with('error', $msg);
+        else{
+            return back()->with('error','Gagal menghapus tugas');
+        }
+        // try{
+        //     $tugas->delete();
+        //     return redirect()->back()->with('status','tugas berhasil dihapus');       
+        // }
+        // catch(\PDOException $e){
+        //     $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+        //     return back()->with('error', $msg);
+        // }
+    }
+
+    public function hapusTugas(Request $request){
+        $idtugas = $request->get("idtugas");
+        $delete = DB::table('tugass')->where('idtugas',$idtugas)->delete();
+        if($delete){
+            return back()->with('status','Tugas berhasil dihapus');
+        }
+        else{
+            return back()->with('error','Gagal menghapus tugas');
         }
     }
 }

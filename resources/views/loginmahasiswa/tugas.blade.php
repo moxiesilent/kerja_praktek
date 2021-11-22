@@ -70,10 +70,19 @@
           <div class="card-body">
             <div class="">
               <h4>Waktu pengumpulan :</h4>
-              <h4>{{$k->tanggal}}</h4>
-              <a class="btn btn-dark" href="{{asset('tugas/'.$k->file)}}">Download Tugas</a>
+              <h4>{{date('d-m-Y H:i:s',strtotime($k->tanggal))}}</h4>
+              @if($k->status == 'IN TIME')
+                <h5 class="text-success">Status : IN TIME</h5>
+              @else
+                <h5 class="text-danger">Status : LATE</h5>
+              @endif
+              <a class="btn btn-dark" href="{{asset('tugas/'.$k->file)}}">Download Tugas</a><br><br>
               @if($d->status == 'buka')
-                <a class="btn btn-danger" href="">Hapus</a>
+              <form method="post" action="{{url('loginmahasiswa/tugas/hapus')}}">
+                @csrf
+                <input type="hidden" name="idtugas" value="{{$k->idtugas}}">
+                <input type="submit" value="Hapus" class="btn btn-danger" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
+              </form>
               @endif
             </div>
           </div>

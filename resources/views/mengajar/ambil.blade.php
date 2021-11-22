@@ -149,9 +149,12 @@
                   <i class="fas fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <form class="dropdown-item" method="POST" action="{{url('mengambils/hapus/'.$d->idmengajars)}}">
+                    <form class="dropdown-item" method="POST" action="{{url('mengambil/hapus')}}">
                       @csrf
-                      @method('DELETE')
+                      <input type="hidden" name="idmahasiswa" value="{{$a->nim}}">
+                      @foreach($data as $d)
+                        <input type="hidden" name="idmengajar" value="{{$d->idmengajars}}">
+                      @endforeach
                       <input class="dropdown-item" type="submit" value="Hapus" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
                     </form>
                 </div>
@@ -185,12 +188,15 @@
         @csrf
         <div class="form-group">
           <label for="mahasiswa">Pilih Mahasiswa</label>
-          <select multiple class="form-control" id="mahasiswa" name="mahasiswa">
+          <select multiple class="form-control" id="mahasiswa" name="mahasiswa[]">
             @foreach($mahasiswa as $m)
                 <option value="{{$m->idmahasiswa}}">{{$m->idmahasiswa}} - {{$m->nama}}</option>
             @endforeach
           </select>
         </div>
+        @foreach($data as $d)
+          <input type="hidden" name="idmengajar" value="{{$d->idmengajars}}">
+        @endforeach
       </div>
       <div class="modal-footer">
         <a href="" class="btn btn-default" role="button">Kembali</a>

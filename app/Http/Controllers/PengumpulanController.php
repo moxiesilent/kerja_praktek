@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 use App\Tugas;
+use Auth;
 
 class PengumpulanController extends Controller
 {
@@ -43,7 +44,7 @@ class PengumpulanController extends Controller
             $tanggalKumpul = Carbon::now();
             $status = '';
 
-            if($cekDeadline->deadline <= $tanggalKumpul){
+            if($cekDeadline->deadline >= $tanggalKumpul){
                 $status = 'IN TIME';
             }
             else{
@@ -114,5 +115,24 @@ class PengumpulanController extends Controller
     public function destroy(Pengumpulan $pengumpulan)
     {
         
+    }
+
+    public function hapusTugas(Request $request){
+        $currentuseremail = Auth::user()->email;
+        $queryRaw = DB::select(DB::raw("SELECT idmahasiswa FROM mahasiswas where email = '$currentuseremail'"));
+        $idmahasiswa = '';
+
+        if(count($queryRaw) > 0){
+            $idmahasiswa = $queryRaw[0]->idmahasiswa;
+        }
+
+        $idtugas = $request->get("idtugas");
+        $delete = DB::table('pengumpulans')->where('tugas_idtugas',$idtugas)->where('mahasiswa_idmahasiswa',$idmahasiswa)->delete();
+        if($delete){
+            return back()->with('status','Tugas berhasil dihapus');
+        }
+        else{
+            return back()->with('error','Gagal menghapus tugas');
+        }
     }
 }

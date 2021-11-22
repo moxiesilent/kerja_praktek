@@ -41,12 +41,17 @@ class LogindosenController extends Controller
     }
 
     public function getTugas($id){
-        $queryRaw = DB::select(DB::raw("SELECT idtugas,  file, mahasiswa_idmahasiswa, tanggal, mahasiswas.idmahasiswa as nim, mahasiswas.nama as namamhs from tugass INNER JOIN pengumpulans 
-        ON tugass.idtugas = pengumpulans.tugas_idtugas INNER JOIN mahasiswas ON mahasiswas.idmahasiswa = pengumpulans.mahasiswa_idmahasiswa 
-        where pengumpulans.tugas_idtugas = '$id'"));
-
-        $queryRaw2 = DB::select(DB::raw("SELECT idtugas, status, judul from tugass INNER JOIN pertemuans ON pertemuans.idpertemuan = tugass.pertemuans_idpertemuan
+        $queryRaw = DB::select(DB::raw("SELECT idtugas, status, judul, deadline from tugass INNER JOIN pertemuans ON pertemuans.idpertemuan = tugass.pertemuans_idpertemuan
         where pertemuans.idpertemuan = '$id'"));
+        $idtgs = '';
+
+        if(count($queryRaw) == 1){
+            $idtgs = $queryRaw[0]->idtugas;
+        }
+
+        $queryRaw2 = DB::select(DB::raw("SELECT idtugas, pengumpulans.status as status, file, mahasiswa_idmahasiswa, tanggal, mahasiswas.idmahasiswa as nim, mahasiswas.nama as namamhs from tugass INNER JOIN pengumpulans 
+        ON tugass.idtugas = pengumpulans.tugas_idtugas INNER JOIN mahasiswas ON mahasiswas.idmahasiswa = pengumpulans.mahasiswa_idmahasiswa 
+        where pengumpulans.tugas_idtugas = '$idtgs'"));
 
         return view("logindosen.tugas",["data"=>$queryRaw],["tugas"=>$queryRaw2]);
     }
