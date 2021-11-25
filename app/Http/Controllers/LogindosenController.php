@@ -9,6 +9,7 @@ use App\Tugas;
 class LogindosenController extends Controller
 {
     public function index(){
+        $this->authorize('dosen');
         $user = Auth::user()->email;
 
         // $currentuserid = Auth::user()->email;
@@ -23,6 +24,7 @@ class LogindosenController extends Controller
     }
 
     public function matakuliahDosen(){
+        $this->authorize('dosen');
         $currentuserid = Auth::user()->email;
         $queryRaw = DB::select(DB::raw("SELECT idmengajars, matakuliahs.kodemk as kodemk, matakuliahs.namamk as namamk, jammulai,
         jamberakhir,ruangan, semesters.nama_semester as semester, hari, sks FROM mengajars inner join dosens on mengajars.dosens_nip = dosens.nip 
@@ -33,6 +35,7 @@ class LogindosenController extends Controller
     }
 
     public function getPertemuan($id){
+        $this->authorize('dosen');
         $idmengajar = $id;
         $queryRaw = DB::select(DB::raw("SELECT idpertemuan, tanggal, topik FROM pertemuans inner join mengajars on mengajars.idmengajars = 
         pertemuans.mengajars_idmengajars where pertemuans.mengajars_idmengajars = '$idmengajar'"));
@@ -41,6 +44,7 @@ class LogindosenController extends Controller
     }
 
     public function getTugas($id){
+        $this->authorize('dosen');
         $queryRaw = DB::select(DB::raw("SELECT idtugas, status, judul, deadline from tugass INNER JOIN pertemuans ON pertemuans.idpertemuan = tugass.pertemuans_idpertemuan
         where pertemuans.idpertemuan = '$id'"));
         $idtgs = '';
@@ -57,6 +61,7 @@ class LogindosenController extends Controller
     }
 
     public function getMateri($id){
+        $this->authorize('dosen');
         $queryRaw = DB::select(DB::raw("SELECT idmateri, file, judul, topik from materis INNER JOIN 
         pertemuans ON pertemuans.idpertemuan = materis.pertemuans_idpertemuan where materis.pertemuans_idpertemuan = '$id'"));
 
@@ -64,6 +69,7 @@ class LogindosenController extends Controller
     }
 
     public function gantiStatus($id){
+        $this->authorize('dosen');
         $tugas = Tugas::find($id);
         $status = $tugas->status;
 
@@ -77,7 +83,5 @@ class LogindosenController extends Controller
             $tugas->save();
             return back()->with('status','pengumpulan tugas dibuka kembali'); 
         }
-
-        return back()->with('status','status pengumpulan tugas sudah dirubah'); 
     }
 }

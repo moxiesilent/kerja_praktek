@@ -20,7 +20,7 @@
 <section class="white-bg">
     <div class="container" style="max-width: 60%">
         <div class="col-md-4">
-        <div class="intro-img"><img class="img-responsive" src="{{asset('images/'.$data[0]->foto)}}" alt="" style="height: 440px; width: 564px;"/></div>
+        <div class="intro-img"><img class="img-responsive" src="{{asset('images/'.$data[0]->foto)}}" alt="" style="width: 564px;"/></div>
         </div>
         <div class="col-md-8">
         <h3>Nama Beserta Gelar | <i>Full Name with Title</i></h3>

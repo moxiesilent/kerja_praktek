@@ -50,9 +50,15 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('jurnal')}}">
+    <a class="nav-link" href="{{url('jurnalback')}}">
       <i class="ni ni-send text-dark"></i>
       <span class="nav-link-text">Jurnal</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('penelitianback')}}">
+      <i class="ni ni-ruler-pencil text-dark"></i>
+      <span class="nav-link-text">Penelitian</span>
     </a>
   </li>
   <li class="nav-item">
@@ -80,7 +86,7 @@
           <h3>Pengaturan Profil Penjaskesrek</h3>
           <div class="text-right">
             @foreach($data as $d)
-            <a class="btn btn-primary" href="">Ubah</a>
+            <a class="btn btn-primary" href="{{url('profils/'.$d->idprofils.'/edit')}}">Ubah</a>
             @endforeach
           </div>
         </div>
@@ -129,6 +135,12 @@
     <div class="card-body">
         <h4 class="card-title">Tentang</h4>
         <p class="card-text">{!!html_entity_decode($d->tentang)!!}</p>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Foto Kaprodi</h4>
+        <img src="{{asset('images/'.$d->foto_kaprodi)}}" height='150px'/>
     </div>
 </div>
 

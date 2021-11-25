@@ -14,6 +14,7 @@ class ProfilController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = Profil::all();
         return view("profil.index",compact('data'));
     }
@@ -36,6 +37,7 @@ class ProfilController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $data = new Profil();
         $data->sambutan = $request->get('sambutan');
         $data->visi = $request->get('visi');
@@ -77,7 +79,9 @@ class ProfilController extends Controller
      */
     public function edit(Profil $profil)
     {
-        //
+        $this->authorize('admin');
+        $data = $profil;
+        return view("profil.edit",compact('data'));
     }
 
     /**
@@ -89,6 +93,7 @@ class ProfilController extends Controller
      */
     public function update(Request $request, Profil $profil)
     {
+        $this->authorize('admin');
         $profil->sambutan=$request->get('sambutan');
         $profil->visi=$request->get('visi');
         $profil->misi=$request->get('misi');
@@ -108,8 +113,8 @@ class ProfilController extends Controller
             $file->move($imgFolder,$imgFile);
             $profil->foto_kaprodi=$imgFile;
         }
-        $dosen->save();
-        return redirect()->route('dosens.index')->with('status','data dosen berhasil diubah');
+        $profil->save();
+        return redirect()->route('profils.index')->with('status','data profil penjaskesrek berhasil diubah');
     }
 
     /**
@@ -121,5 +126,15 @@ class ProfilController extends Controller
     public function destroy(Profil $profil)
     {
         //
+    }
+
+    public function frontEndVisi(){
+        $data = Profil::all();
+        return view("visimisi",compact('data'));
+    }
+
+    public function frontEndSambutan(){
+        $data = Profil::all();
+        return view("sambutan",compact('data'));
     }
 }

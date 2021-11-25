@@ -30,12 +30,12 @@
             <th style="width: 15%;">Jumlah Dana (dalam juta rupiah)</th>
           </tr>
           @foreach($data as $d)
-            @if($d->tipe == "Penelitian")
+            @if($d->tipe == "penelitian")
             <tr>
                 <td>{{$d->tahun}}</td>
                 <td>{{$d->judul}}</td>
-                <td>{{$d->sumberdana}}</td>
-                <td>{{$d->jumlahdana}}</td>
+                <td>{{$d->sumber}}</td>
+                <td>{{$d->jumlah_dana}}</td>
             </tr> 
             @endif
           @endforeach
@@ -49,12 +49,12 @@
             <th style="width: 15%;">Jumlah Dana (dalam juta rupiah)</th>
           </tr>
           @foreach($data as $d)
-            @if($d->tipe == "Pengabdian")
+            @if($d->tipe == "pengabdian")
             <tr>
                 <td>{{$d->tahun}}</td>
                 <td>{{$d->judul}}</td>
-                <td>{{$d->sumberdana}}</td>
-                <td>{{$d->jumlahdana}}</td>
+                <td>{{$d->sumber}}</td>
+                <td>{{$d->jumlah_dana}}</td>
             </tr> 
             @endif
           @endforeach

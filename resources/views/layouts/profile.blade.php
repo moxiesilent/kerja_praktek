@@ -52,7 +52,7 @@
       <!--=== Collect the nav links, forms, and other content for toggling ===-->
       <div class="collapse navbar-collapse" id="navbar-menu">
         <ul class="nav navbar-nav navbar-right" data-in="fadeIn" data-out="fadeOut">
-          <li><a href="/#hero">Home</a></li>
+          <li><a href="{{url('/')}}">Home</a></li>
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tentang</a>
             <ul class="dropdown-menu">
               <li><a href="{{url('/sambutan')}}">Sambutan Kepala Program Studi</a></li>
@@ -60,7 +60,7 @@
               <li><a href="{{url('/tentangkami')}}">Tentang Kami</a></li>
               <li><a href="{{url('/struktur')}}">Struktur Organisasi</a></li>
               <li><a href="{{url('/profildosen')}}">Profil Para Pengajar</a></li>
-              <li><a href="{{url('/artikels')}}">Artikel</a></li>
+              <li><a href="{{url('/artikel')}}">Artikel</a></li>
             </ul>
           </li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Akademik</a>
@@ -111,7 +111,7 @@
             <div class="widget widget-links">
               <h5 class="widget-title">Tautan Cepat</h5>
               <ul>
-                <li><a href="{{url('/artikels')}}">Artikel</a></li>
+                <li><a href="{{url('/artikel')}}">Artikel</a></li>
                 <li><a href="{{url('/visimisi')}}">Visi & Misi</a></li>
                 <li><a href="{{url('/profildosen')}}">Profil Para Pengajar</a></li>
                 <li><a href="{{url('/jurnal')}}">Jurnal Penelitian Dosen</a></li>

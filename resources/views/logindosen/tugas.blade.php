@@ -152,10 +152,7 @@
           <input class="form-control" placeholder="judul tugas" type="text" name="judul" id="judul">
         </div>
         <div class="form-group">
-          <label for="deadline">Tanggal Pengumpulan Terakhir</label>
-          <input class="form-control" type="datetime-local" value="" name="ss" id="deadline">
-        </div>
-        <div class="form-group">
+          <label>Tanggal Pengumpulan Terakhir</label>
           <div class='input-group date' id='datetimepicker1'>
             <input type='datetime' class="form-control" name="deadline"/>
             <span class="input-group-addon input-group-append">

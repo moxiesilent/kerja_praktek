@@ -18,6 +18,7 @@ class DosenController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = Dosen::paginate(10);
         return view("dosen.index",compact('data'));
     }
@@ -35,7 +36,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('dosen.create');
+
     }
 
     /**
@@ -46,6 +47,7 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $data = new Dosen();
         
         $file=$request->file('foto');
@@ -94,6 +96,7 @@ class DosenController extends Controller
      */
     public function edit(Dosen $dosen)
     {
+        $this->authorize('admin');
         $data = $dosen;
         return view("Dosen.edit",compact('data'));
     }
@@ -107,6 +110,7 @@ class DosenController extends Controller
      */
     public function update(Request $request, Dosen $dosen)
     {
+        $this->authorize('admin');
         $dosen->nama=$request->get('nama');
         $dosen->email=$request->get('email');
         $dosen->tanggallahir=$request->get('tanggallahir');
@@ -138,6 +142,7 @@ class DosenController extends Controller
      */
     public function destroy(Dosen $dosen)
     {
+        $this->authorize('admin');
         try{
             $dosen->delete();
             return redirect()->route('dosens.index')->with('status','data dosen berhasil dihapus');       
@@ -148,30 +153,22 @@ class DosenController extends Controller
         }
     }
 
-    public function getEditForm(Request $request){
-        $nip = $request->get("nip");
-        $data = Dosen::find($nip);
-        return response()->json(array(
-            'status'=>'oke',
-            'msg'=>view('dosen.getEditForm',compact('data'))->render()
-        ),200);
-    }
-
     public function getDosen($id){
         $queryRaw = DB::select(DB::raw("SELECT * from dosens where nip = '$id'"));
 
         return view("dosendetail",["data"=>$queryRaw]);
     }
 
-    public function resetPassword($id){
-        $pass = Hash::make('12345678');
-        $queryRaw = DB::select(DB::raw("UPDATE users INNER JOIN dosens ON dosens.email = users.email SET 
-        users.password = '$pass' WHERE dosens.nip = '$id'"));
+    // public function resetPassword($id){
+    //     $pass = Hash::make('12345678');
+    //     $queryRaw = DB::select(DB::raw("UPDATE users INNER JOIN dosens ON dosens.email = users.email SET 
+    //     users.password = '$pass' WHERE dosens.nip = '$id'"));
 
-        return view("dosen.index",["data"=>$queryRaw]);
-    }
+    //     return view("dosen.index",["data"=>$queryRaw]);
+    // }
 
     public function detailDosen($id){
+        $this->authorize('admin');
         $queryRaw = DB::select(DB::raw("SELECT * from dosens where nip = '$id'"));
 
         return view("dosen.detail",["data"=>$queryRaw]);

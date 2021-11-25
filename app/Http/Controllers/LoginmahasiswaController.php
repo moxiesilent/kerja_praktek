@@ -9,6 +9,7 @@ use Auth;
 class LoginmahasiswaController extends Controller
 {
     public function index(){
+        $this->authorize('mahasiswa');
         $currentuserid = Auth::user()->email;
         $queryRaw = DB::select(DB::raw("SELECT namamk, kodemk, mengajars.idmengajars as idmengajar FROM matakuliahs INNER JOIN mengajars ON 
         matakuliahs.kodemk = mengajars.matakuliah_kodemk INNER JOIN mengambils ON mengajars.idmengajars = mengambils.mengajars_idmengajars 
@@ -18,6 +19,7 @@ class LoginmahasiswaController extends Controller
     }
 
     public function getPertemuan($id){
+        $this->authorize('mahasiswa');
         $currentuserid = Auth::user()->email;
         $queryRaw = DB::select(DB::raw("SELECT idpertemuan, kodemk, namamk, topik, tanggal FROM matakuliahs INNER JOIN mengajars ON 
         matakuliahs.kodemk = mengajars.matakuliah_kodemk INNER JOIN mengambils ON mengajars.idmengajars = mengambils.mengajars_idmengajars 
@@ -28,6 +30,7 @@ class LoginmahasiswaController extends Controller
     }
 
     public function getMateri($id){
+        $this->authorize('mahasiswa');
         $queryRaw = DB::select(DB::raw("SELECT idmateri, file, judul, topik from materis INNER JOIN 
         pertemuans ON pertemuans.idpertemuan = materis.pertemuans_idpertemuan where materis.pertemuans_idpertemuan = '$id'"));
 
@@ -35,6 +38,7 @@ class LoginmahasiswaController extends Controller
     }
 
     public function getTugas($id){
+        $this->authorize('mahasiswa');
         $currentuserid = Auth::user()->email;
         $queryRaw3 = '';
 

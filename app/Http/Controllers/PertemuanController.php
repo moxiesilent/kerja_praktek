@@ -35,12 +35,20 @@ class PertemuanController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Pertemuan();
-        $data->mengajars_idmengajars = $request->get('idmengajar');
-        $data->tanggal = $request->get('tanggal');
-        $data->topik = $request->get('topik');
-        $data->save();
-        return back();
+        $this->authorize('dosen');
+        try{
+            $data = new Pertemuan();
+            $data->mengajars_idmengajars = $request->get('idmengajar');
+            $data->tanggal = $request->get('tanggal');
+            $data->topik = $request->get('topik');
+            $data->save();
+            return back();
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menambah pertemuan. ";
+            return back()->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -85,6 +93,14 @@ class PertemuanController extends Controller
      */
     public function destroy(Pertemuan $pertemuan)
     {
-        //
+        $this->authorize('dosen');
+        try{
+            $pertemuan->delete();
+            return back()->with('status','data pertemuan berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data. ";
+            return back()->with('error', $msg);
+        }
     }
 }

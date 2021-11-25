@@ -38,6 +38,7 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('dosen');
         $data = new Tugas();
         $data->judul = $request->get('judul');
         $data->pertemuans_idpertemuan = $request->get('idpertemuan');
@@ -90,25 +91,11 @@ class TugasController extends Controller
      */
     public function destroy(Request $request)
     {
-        $idtugas = $request->get("idtugas");
-        $delete = DB::table('tugass')->where('idtugas',$idtugas)->delete();
-        if($delete){
-            return back()->with('status','Tugas berhasil dihapus');
-        }
-        else{
-            return back()->with('error','Gagal menghapus tugas');
-        }
-        // try{
-        //     $tugas->delete();
-        //     return redirect()->back()->with('status','tugas berhasil dihapus');       
-        // }
-        // catch(\PDOException $e){
-        //     $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
-        //     return back()->with('error', $msg);
-        // }
+        
     }
 
     public function hapusTugas(Request $request){
+        $this->authorize('dosen');
         $idtugas = $request->get("idtugas");
         $delete = DB::table('tugass')->where('idtugas',$idtugas)->delete();
         if($delete){

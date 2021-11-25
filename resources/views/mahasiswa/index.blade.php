@@ -50,9 +50,15 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('jurnal')}}">
+    <a class="nav-link" href="{{url('jurnalback')}}">
       <i class="ni ni-send text-dark"></i>
       <span class="nav-link-text">Jurnal</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('penelitianback')}}">
+      <i class="ni ni-ruler-pencil text-dark"></i>
+      <span class="nav-link-text">Penelitian</span>
     </a>
   </li>
   <li class="nav-item">
@@ -108,6 +114,7 @@
           <th>Nama Mahasiswa</th>
           <th>Email</th>
           <th>Tanggal Lahir</th>
+          <th>Jenis Kelamin</th>
           <th>Telepon</th>
           <th></th>
         </tr>
@@ -119,6 +126,7 @@
             <td>{{$d->nama}}</td>
             <td>{{$d->email}}</td>
             <td>{{date('d-m-Y',strtotime($d->tanggallahir))}}</td>
+            <td>{{$d->jenis_kelamin}}</td>
             <td>{{$d->telepon}}</td>
             <td class="text-right">
             <div class="dropdown">

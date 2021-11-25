@@ -66,10 +66,10 @@
               <div class="dropdown-item">
                 <a class="dropdown-item" href="">Edit</a>
               </div> 
-                <form class="dropdown-item" method="POST" action="">
+                <form class="dropdown-item" method="POST" action="{{url('pertemuans/'.$d->idpertemuan)}}">
                   @csrf
                   @method('DELETE')
-                  <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                  <input value="Hapus" class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
                 </form>
             </div>
           </div>

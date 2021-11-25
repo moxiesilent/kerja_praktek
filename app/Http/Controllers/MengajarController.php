@@ -21,6 +21,7 @@ class MengajarController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         // $data = Mengajar::all();
         $dosen = Dosen::all();
         $semester = Semester::all();
@@ -59,16 +60,24 @@ class MengajarController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Mengajar();
-        $data->dosens_nip = $request->get('dosen');
-        $data->matakuliah_kodemk = $request->get('matakuliah');
-        $data->jammulai = $request->get('jammulai');
-        $data->jamberakhir = $request->get('jamberakhir');
-        $data->ruangan = $request->get('ruangan');
-        $data->hari = $request->get('hari');
-        $data->semester_idsemester = $request->get('semester');
-        $data->save();
-        return redirect()->route('mengajars.index')->with('status','jadwal baru telah ditambahkan');
+        $this->authorize('admin');
+        try{
+            $data = new Mengajar();
+            $data->dosens_nip = $request->get('dosen');
+            $data->matakuliah_kodemk = $request->get('matakuliah');
+            $data->jammulai = $request->get('jammulai');
+            $data->jamberakhir = $request->get('jamberakhir');
+            $data->ruangan = $request->get('ruangan');
+            $data->hari = $request->get('hari');
+            $data->semester_idsemester = $request->get('semester');
+            $data->save();
+            return redirect()->route('mengajars.index')->with('status','jadwal baru telah ditambahkan'); 
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menambah data. ";
+            return redirect()->route('mengajars.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -90,6 +99,7 @@ class MengajarController extends Controller
      */
     public function edit(Mengajar $mengajar)
     {
+        $this->authorize('admin');
         $dosen = Dosen::all();
         $semester = Semester::all();
         $matakuliah = Matakuliah::all();
@@ -106,15 +116,23 @@ class MengajarController extends Controller
      */
     public function update(Request $request, Mengajar $mengajar)
     {
-        $mengajar->dosens_nip = $request->get('dosen');
-        $mengajar->matakuliah_kodemk = $request->get('matakuliah');
-        $mengajar->jammulai = $request->get('jammulai');
-        $mengajar->jamberakhir = $request->get('jamberakhir');
-        $mengajar->ruangan = $request->get('ruangan');
-        $mengajar->hari = $request->get('hari');
-        $mengajar->semester_idsemester = $request->get('semester');
-        $mengajar->save();
-        return redirect()->route('mengajars.index')->with('status','jadwal telah diubah');
+        $this->authorize('admin');
+        try{
+            $mengajar->dosens_nip = $request->get('dosen');
+            $mengajar->matakuliah_kodemk = $request->get('matakuliah');
+            $mengajar->jammulai = $request->get('jammulai');
+            $mengajar->jamberakhir = $request->get('jamberakhir');
+            $mengajar->ruangan = $request->get('ruangan');
+            $mengajar->hari = $request->get('hari');
+            $mengajar->semester_idsemester = $request->get('semester');
+            $mengajar->save();
+            return redirect()->route('mengajars.index')->with('status','jadwal telah diubah');     
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal mengubah data. ";
+            return redirect()->route('mengajars.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -125,6 +143,7 @@ class MengajarController extends Controller
      */
     public function destroy(Mengajar $mengajar)
     {
+        $this->authorize('admin');
         try{
             $mengajar->delete();
             return redirect()->route('mengajars.index')->with('status','data jadwal berhasil dihapus');       
@@ -136,6 +155,7 @@ class MengajarController extends Controller
     }
 
     public function getMengajars(Request $request){
+        $this->authorize('admin');
         $idsemester = $request->get("idsemester");
 
         $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
@@ -150,6 +170,7 @@ class MengajarController extends Controller
     }
 
     public function detailMengajar($id){
+        $this->authorize('admin');
         $mahasiswa = Mahasiswa::all();
 
         $queryRaw = DB::select(DB::raw("SELECT idmengajars, jammulai, jamberakhir, ruangan, hari, dosens.nip as dosenNip, dosens.nama as namaDosen, matakuliahs.kodemk as kodemk,

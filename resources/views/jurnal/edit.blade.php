@@ -50,9 +50,15 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="{{url('jurnal')}}">
+    <a class="nav-link active" href="{{url('jurnalback')}}">
       <i class="ni ni-send text-dark"></i>
       <span class="nav-link-text">Jurnal</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('penelitianback')}}">
+      <i class="ni ni-ruler-pencil text-dark"></i>
+      <span class="nav-link-text">Penelitian</span>
     </a>
   </li>
   <li class="nav-item">
@@ -131,7 +137,7 @@
                 @endif
             </div>
             <div>
-            <a href="{{url('jurnals')}}" class="btn btn-default" role="button">Back</a>
+            <a href="{{url('jurnalback')}}" class="btn btn-default" role="button">Back</a>
             <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>      

@@ -37,18 +37,25 @@ class MateriController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Materi();
-        $now = Carbon::now();
-        $file=$request->file('file');
-        $fileFolder='materi';
-        $materiFile=time().'_'.$file->getClientOriginalName();
-        $file->move($fileFolder,$materiFile);
-        $data->file=$materiFile;
+        try{
+            $data = new Materi();
+            $now = Carbon::now();
+            $file=$request->file('file');
+            $fileFolder='materi';
+            $materiFile=time().'_'.$file->getClientOriginalName();
+            $file->move($fileFolder,$materiFile);
+            $data->file=$materiFile;
 
-        $data->pertemuans_idpertemuan = $request->get('idpertemuan');
-        $data->judul = $request->get('judul');
-        $data->save();
-        return back()->with('status','materi baru berhasil ditambahkan');
+            $data->pertemuans_idpertemuan = $request->get('idpertemuan');
+            $data->judul = $request->get('judul');
+            $data->save();
+            return back()->with('status','materi baru berhasil ditambahkan');    
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menambah data. ";
+            return back()->with('error', $msg);
+        }
+        
     }
 
     /**

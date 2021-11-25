@@ -50,9 +50,15 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('jurnal')}}">
+    <a class="nav-link" href="{{url('jurnalback')}}">
       <i class="ni ni-send text-dark"></i>
       <span class="nav-link-text">Jurnal</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('penelitianback')}}">
+      <i class="ni ni-ruler-pencil text-dark"></i>
+      <span class="nav-link-text">Penelitian</span>
     </a>
   </li>
   <li class="nav-item">
@@ -79,7 +85,7 @@
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Tabel Prestasi</h3>
+        <h3 class="mb-0">Daftar Prestasi</h3>
       </div>
       <div class="col text-right">
       <a href="" data-toggle="modal" data-target="#modalTambah">
@@ -199,14 +205,6 @@
         <button type="submit" class="btn btn-primary">Tambah</button>
       </form>
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-
     </div>
   </div>
 </div>

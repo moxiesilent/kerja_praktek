@@ -2,7 +2,7 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link " href="{{url('dashboard')}}">
+    <a class="nav-link" href="{{url('dashboard')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Dashboard</span>
     </a>
@@ -26,7 +26,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="{{url('matakuliah')}}">
+    <a class="nav-link" href="{{url('matakuliah')}}">
       <i class="ni ni-books text-yellow"></i>
       <span class="nav-link-text">Matakuliah</span>
     </a>
@@ -38,7 +38,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('semester')}}">
+    <a class="nav-link " href="{{url('semester')}}">
       <i class="ni ni-key-25 text-info"></i>
       <span class="nav-link-text">Semester</span>
     </a>
@@ -56,7 +56,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('penelitianback')}}">
+    <a class="nav-link active" href="{{url('penelitianback')}}">
       <i class="ni ni-ruler-pencil text-dark"></i>
       <span class="nav-link-text">Penelitian</span>
     </a>
@@ -79,29 +79,46 @@
 <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
-<h2>Tabel Prestasi</h2><br>
+<h2>Tabel penelitian</h2><br>
 
 <div class="card">
   <div class="card-header border-0">
-    <div class="align-items-center">
-      <form method="POST" action="{{url('matakuliahs/'.$data->kodemk)}}">
+    <div class="col align-items-center">
+        <h3 class="mb-0">Ubah Jurnal</h3><br>
+      <form method="POST" action="{{url('penelitians/'.$data->idpenelitian)}}">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="kode">Kode Matakuliah</label>
-                <input type="text" class="form-control" id="kode" name="kode" value="{{$data->kodemk}}" disabled>
+                <label for="kegiatan">Judul</label>
+                <input type="text" class="form-control" id="kegiatan" value="{{$data->judul}}" name="judul">
             </div>
             <div class="form-group">
-                <label for="nama">Nama Matakuliah</label>
-                <input type="text" class="form-control" id="nama" name="nama" value="{{$data->namamk}}">
+                <label for="tahun">Tahun</label>
+                <input type="text" class="form-control" id="tahun" value="{{$data->tahun}}" name="tahun">
             </div>
             <div class="form-group">
-                <label for="sks">Jumlah SKS</label>
-                <input type="text" class="form-control" id="sks" name="sks" value="{{$data->sks}}">
+            <div class="radio">
+                <label>Jenis Kelamin</label><br>
+                @if($data->tipe == 'penelitian')
+                <label><input type="radio" name="tipe" value="penelitian" checked> Penelitian</label>&nbsp&nbsp
+                <label><input type="radio" name="tipe" value="pengabdian"> Pengabdian</label>&nbsp&nbsp
+                @else
+                <label><input type="radio" name="tipe" value="penelitian" > Penelitian</label>&nbsp&nbsp
+                <label><input type="radio" name="tipe" value="pengabdian" checked> Pengabdian</label>&nbsp&nbsp
+                @endif
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="sumber">Sumber dan Jenis Dana</label>
+                <input type="text" class="form-control" id="sumber" value="{{$data->sumber}}" name="sumber">
+            </div>
+            <div class="form-group">
+                <label for="dana">Jumlah Dana (dalam juta rupiah)</label>
+                <input type="text" class="form-control" id="dana" value="{{$data->jumlah_dana}}" name="dana">
             </div>
             <div>
-                <a href="{{url('matakuliahs')}}" class="btn btn-default" role="button">Back</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{{url('penelitianback')}}" class="btn btn-default" role="button">Back</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>      
       </div>

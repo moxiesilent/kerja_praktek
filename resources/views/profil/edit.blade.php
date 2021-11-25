@@ -82,7 +82,7 @@
 <h2>Daftar Artikel</h2><br>
     <div class="card">
         <div class="card-header">
-            <h3 class="mb-0">Tambah Artikel</h3>
+            <h3 class="mb-0">Ubah Profil Penjaskesrek</h3>
         </div>
             <div class="card-body">
               @if(session('status'))
@@ -96,24 +96,48 @@
                 </div>
               @endif
               <div class="m-4">
-                <form enctype="multipart/form-data" method="POST" action="{{url('artikels/'.$data->idartikels)}}">
+                <form enctype="multipart/form-data" method="POST" action="{{url('profils/'.$data->idprofils)}}">
                     @csrf
                     @method('PUT')
-                      <div class="form-group">
-                        <label for="judul">Judul Artikel</label>
-                        <input type="text" class="form-control" id="judul" value="{{$data->judul}}" name="judul">
-                      </div>
-                      <div class="form-group">
-                        <label for="isi">Isi Artikel</label>
-                        <textarea id="isi" name="isi">{{$data->isi}}</textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="gambar">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar">
-                        <img src="{{asset('assets/undana/artikel/'.$data->gambar)}}" height='100px'/>
-                      </div>
+                    <div class="form-group">
+                        <label>Kata Sambutan</label>
+                        <textarea id="isi" name="sambutan">{{$data->sambutan}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Visi</label>
+                        <textarea id="isi2" name="visi">{{$data->visi}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Misi</label>
+                        <textarea id="isi3" name="misi">{{$data->misi}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tujuan</label>
+                        <textarea id="isi4" name="tujuan">{{$data->tujuan}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tentang</label>
+                        <textarea id="isi5" name="tentang">{{$data->tentang}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" value="{{$data->alamat}}" name="alamat">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" value="{{$data->email}}" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="telepon">Telepon</label>
+                        <input type="text" class="form-control" id="telepon" value="{{$data->telepon}}" name="telepon">
+                    </div>
+                    <div class="form-group">
+                        <label for="foto">Foto</label>
+                        <input type="file" class="form-control" id="foto" name="foto">
+                        <img src="{{asset('images/'.$data->foto_kaprodi)}}" height='150px'/>
+                    </div>
                       <div class="form-group text-right">
-                          <a href="{{url('artikels')}}" class="btn btn-default" role="button">Back</a>
+                          <a href="{{url('profils')}}" class="btn btn-default" role="button">Back</a>
                           <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
                   </form>
@@ -124,6 +148,10 @@
 @section('javascript')
 <script>
     CKEDITOR.replace( 'isi' );
+    CKEDITOR.replace( 'isi2' );
+    CKEDITOR.replace( 'isi3' );
+    CKEDITOR.replace( 'isi4' );
+    CKEDITOR.replace( 'isi5' );
 </script>
 @endsection
 

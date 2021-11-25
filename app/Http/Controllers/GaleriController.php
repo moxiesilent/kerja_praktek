@@ -14,6 +14,7 @@ class GaleriController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = Galeri::paginate(10);
         return view("galeri.index",compact('data'));
     }
@@ -36,17 +37,25 @@ class GaleriController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Galeri();
-        $data->jenis = $request->get('jenis');
+        $this->authorize('admin');
+        try{
+            $data = new Galeri();
+            $data->jenis = $request->get('jenis');
+    
+            $file=$request->file('foto');
+            $imgFolder='assets/undana/galeri/';
+            $imgFile=time().'_'.$file->getClientOriginalName();
+            $file->move($imgFolder,$imgFile);
+            $data->file=$imgFile;
+    
+            $data->save();
+            return redirect()->route('galeris.index')->with('status','galeri baru telah ditambahkan');
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal mengubah foto. ";
+            return redirect()->route('galeris.index')->with('error', $msg);
+        }
 
-        $file=$request->file('foto');
-        $imgFolder='assets/undana/galeri/';
-        $imgFile=time().'_'.$file->getClientOriginalName();
-        $file->move($imgFolder,$imgFile);
-        $data->file=$imgFile;
-
-        $data->save();
-        return redirect()->route('galeris.index')->with('status','galeri baru telah ditambahkan');
     }
 
     /**
@@ -68,6 +77,7 @@ class GaleriController extends Controller
      */
     public function edit(Galeri $galeri)
     {
+        $this->authorize('admin');
         $data = $galeri;
         return view("galeri.edit",compact('data'));
     }
@@ -81,20 +91,28 @@ class GaleriController extends Controller
      */
     public function update(Request $request, Galeri $galeri)
     {
-        $galeri->jenis=$request->get('jenis');
-        if($request->hasFile('foto')){
-            $dest='assets/undana/galeri/'.$galeri->file;
-            if(file_exists($dest)){
-                @unlink($dest); 
+        $this->authorize('admin');
+        try{
+            $galeri->jenis=$request->get('jenis');
+            if($request->hasFile('foto')){
+                $dest='assets/undana/galeri/'.$galeri->file;
+                if(file_exists($dest)){
+                    @unlink($dest); 
+                }
+                $file=$request->file('foto');
+                $imgFolder='assets/undana/galeri/';
+                $imgFile=time().'_'.$file->getClientOriginalName();
+                $file->move($imgFolder,$imgFile);
+                $galeri->file=$imgFile;
             }
-            $file=$request->file('foto');
-            $imgFolder='assets/undana/galeri/';
-            $imgFile=time().'_'.$file->getClientOriginalName();
-            $file->move($imgFolder,$imgFile);
-            $galeri->file=$imgFile;
+            $galeri->save();
+            return redirect()->route('galeris.index')->with('status','foto berhasil diubah');      
         }
-        $galeri->save();
-        return redirect()->route('galeris.index')->with('status','foto berhasil diubah'); 
+        catch(\PDOException $e){
+            $msg ="Gagal mengubah foto. ";
+            return redirect()->route('galeris.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -105,6 +123,7 @@ class GaleriController extends Controller
      */
     public function destroy(Galeri $galeri)
     {
+        $this->authorize('admin');
         try{
             $galeri->delete();
             return redirect()->route('galeris.index')->with('status','foto galeri berhasil dihapus');       

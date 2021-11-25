@@ -16,6 +16,7 @@ class PrestasiController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = Prestasi::paginate(10);
         return view("prestasi.index",compact('data'));
     }
@@ -33,7 +34,7 @@ class PrestasiController extends Controller
      */
     public function create()
     {
-        return view('prestasi.create');
+        
     }
 
     /**
@@ -44,6 +45,7 @@ class PrestasiController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $data = new Prestasi();
         $data->namakegiatan = $request->get('kegiatan');
         $data->tingkat = $request->get('tingkat');
@@ -79,6 +81,7 @@ class PrestasiController extends Controller
      */
     public function edit(Prestasi $prestasi)
     {
+        $this->authorize('admin');
         $data = $prestasi;
         return view("Prestasi.edit",compact('data'));
     }
@@ -92,6 +95,7 @@ class PrestasiController extends Controller
      */
     public function update(Request $request, Prestasi $prestasi)
     {
+        $this->authorize('admin');
         $prestasi->namakegiatan=$request->get('kegiatan');
         $prestasi->tingkat=$request->get('tingkat');
         $prestasi->prestasi=$request->get('prestasi');
@@ -121,6 +125,7 @@ class PrestasiController extends Controller
      */
     public function destroy(Prestasi $prestasi)
     {
+        $this->authorize('admin');
         try{
             $prestasi->delete();
             return redirect()->route('prestasis.index')->with('status','data prestasi berhasil dihapus');       
@@ -129,14 +134,5 @@ class PrestasiController extends Controller
             $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
             return redirect()->route('prestasis.index')->with('error', $msg);
         }
-    }
-
-    public function getEditForm(Request $request){
-        $idprestasi = $request->get("idprestasi");
-        $data = Prestasi::find($idprestasi);
-        return response()->json(array(
-            'status'=>'oke',
-            'msg'=>view('prestasi.getEditForm',compact('data'))->render()
-        ),200);
     }
 }

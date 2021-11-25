@@ -15,6 +15,7 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = Matakuliah::paginate(10);
         return view("matakuliah.index",compact('data'));
     }
@@ -26,7 +27,7 @@ class MatakuliahController extends Controller
      */
     public function create()
     {
-        return view('matakuliah.create');
+        
     }
 
     /**
@@ -37,12 +38,20 @@ class MatakuliahController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Matakuliah();
-        $data->kodemk = $request->get('kode');
-        $data->namamk = $request->get('nama');
-        $data->sks = $request->get('sks');
-        $data->save();
-        return redirect()->route('matakuliahs.index')->with('status','matakuliah telah ditambahkan');
+        $this->authorize('admin');
+        try{
+            $data = new Matakuliah();
+            $data->kodemk = $request->get('kode');
+            $data->namamk = $request->get('nama');
+            $data->sks = $request->get('sks');
+            $data->save();
+            return redirect()->route('matakuliahs.index')->with('status','matakuliah telah ditambahkan');
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menambah data. ";
+            return redirect()->route('matakuliahs.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -64,6 +73,7 @@ class MatakuliahController extends Controller
      */
     public function edit(Matakuliah $matakuliah)
     {
+        $this->authorize('admin');
         $data = $matakuliah;
         return view("Matakuliah.edit",compact('data'));
     }
@@ -77,10 +87,18 @@ class MatakuliahController extends Controller
      */
     public function update(Request $request, Matakuliah $matakuliah)
     {
-        $matakuliah->namamk=$request->get('nama');
-        $matakuliah->sks=$request->get('sks');
-        $matakuliah->save();
-        return redirect()->route('matakuliahs.index')->with('status','data matakuliah berhasil diubah'); 
+        $this->authorize('admin');
+        try{
+            $matakuliah->namamk=$request->get('nama');
+            $matakuliah->sks=$request->get('sks');
+            $matakuliah->save();
+            return redirect()->route('matakuliahs.index')->with('status','data matakuliah berhasil diubah');    
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal mengubah data. ";
+            return redirect()->route('matakuliahs.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -91,6 +109,7 @@ class MatakuliahController extends Controller
      */
     public function destroy(Matakuliah $matakuliah)
     {
+        $this->authorize('admin');
         try{
             $matakuliah->delete();
             return redirect()->route('matakuliahs.index')->with('status','data matakuliah berhasil dihapus');       
