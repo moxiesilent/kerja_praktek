@@ -28,6 +28,7 @@
           <span class="btn-inner--text">Tugas Baru</span>
         </button>
       </a>
+      <a href="{{url('matakuliahDosen')}}" class="btn btn-secondary" role="button">Back</a>
       </div>
     </div>
     @if(session('status'))

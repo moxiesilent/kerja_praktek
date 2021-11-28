@@ -25,7 +25,8 @@ class ArtikelController extends Controller
     {
         $data = Artikel::orderBy('idartikels', 'desc')->take(3)->get();
         $dosen = DB::table('dosens')->get();
-        return view("index",compact('data', 'dosen'));
+        $profil = DB::table('profils')->get();
+        return view("index",compact('data', 'dosen','profil'));
     }
 
     /**

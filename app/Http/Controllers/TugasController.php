@@ -96,13 +96,20 @@ class TugasController extends Controller
 
     public function hapusTugas(Request $request){
         $this->authorize('dosen');
-        $idtugas = $request->get("idtugas");
-        $delete = DB::table('tugass')->where('idtugas',$idtugas)->delete();
-        if($delete){
-            return back()->with('status','Tugas berhasil dihapus');
+        try{
+            $idtugas = $request->get("idtugas");
+            $delete = DB::table('tugass')->where('idtugas',$idtugas)->delete();
+            if($delete){
+                return back()->with('status','Tugas berhasil dihapus');
+            }
+            else{
+                return back()->with('error','Gagal menghapus tugas');
+            }    
         }
-        else{
-            return back()->with('error','Gagal menghapus tugas');
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data. Sudah ada mahasiswa yang mengumpulkan tugas.";
+            return back()->with('error', $msg);
         }
+        
     }
 }

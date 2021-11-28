@@ -45,9 +45,11 @@
   <section id="welcomedrink">
   	<div class="container">
   		<div class="row">
+        @foreach($profil as $p)
   			<div class="col-md-4">
-  				<div class="intro-img"><img class="img-responsive" src="assets/undana/pak_lukas_start2.png" alt=""/></div>
+  				<div class="intro-img"><img class="img-responsive" src="images/{{$p->foto_kaprodi}}" alt=""/></div>
   			</div>
+        @endforeach
         <div class="col-md-6 heading-style-one">
   				<hr class="gradient-bg left-line">
   				<h2>Sambutan Kepala Prodi<br><span class="font-700">Pendidikan Jasmani<br>Kesehatan dan Rekreasi</span></h2>

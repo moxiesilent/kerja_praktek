@@ -21,12 +21,14 @@
         <h3 class="mb-0">Materi</h3>
       </div>
       <div class="col text-right">
+        
       <a href="" data-toggle="modal" data-target="#modalTambah">
         <button class="btn btn-icon btn-primary" type="button">
           <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
           <span class="btn-inner--text">Materi Baru</span>
         </button>
       </a>
+      <a href="{{url('matakuliahDosen')}}" class="btn btn-secondary" role="button">Back</a>
       </div>
       <br>
     </div>

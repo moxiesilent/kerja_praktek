@@ -183,7 +183,48 @@
     </div>
   </div>
 </div>
-
+<div class="row">
+  <div style="width: 39rem;">
+    <div class="card card-stats ml-3 mr-3">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0 pb-3">Jumlah Jurnal</h5>
+                  @foreach($jurnal as $j)
+                  <span class="h2 font-weight-bold mb-0">{{$j->jumjurnal}}</span>
+                  @endforeach
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
+                    <i class="ni ni-single-02"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div style="width: 39.5rem;">
+    <div class="card card-stats ml-3 mr-3">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0 pb-3">Jumlah Penelitian</h5>
+                  @foreach($penelitian as $p)
+                  <span class="h2 font-weight-bold mb-0">{{$p->jumpenelitian}}</span>
+                  @endforeach
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                    <i class="ni ni-single-02"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
   
 @endsection
 

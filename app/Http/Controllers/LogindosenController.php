@@ -45,7 +45,7 @@ class LogindosenController extends Controller
 
     public function getTugas($id){
         $this->authorize('dosen');
-        $queryRaw = DB::select(DB::raw("SELECT idtugas, status, judul, deadline from tugass INNER JOIN pertemuans ON pertemuans.idpertemuan = tugass.pertemuans_idpertemuan
+        $queryRaw = DB::select(DB::raw("SELECT idtugas, status, judul, deadline, pertemuans.idpertemuan as idpertemuan from tugass INNER JOIN pertemuans ON pertemuans.idpertemuan = tugass.pertemuans_idpertemuan
         where pertemuans.idpertemuan = '$id'"));
         $idtgs = '';
 
@@ -62,7 +62,7 @@ class LogindosenController extends Controller
 
     public function getMateri($id){
         $this->authorize('dosen');
-        $queryRaw = DB::select(DB::raw("SELECT idmateri, file, judul, topik from materis INNER JOIN 
+        $queryRaw = DB::select(DB::raw("SELECT idmateri, file, judul, topik, materis.pertemuans_idpertemuan as idpertemuan from materis INNER JOIN 
         pertemuans ON pertemuans.idpertemuan = materis.pertemuans_idpertemuan where materis.pertemuans_idpertemuan = '$id'"));
 
         return view("logindosen.materi",["data"=>$queryRaw]);

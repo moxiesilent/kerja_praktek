@@ -76,7 +76,7 @@ Route::resource('galeris','GaleriController')->middleware('auth');
 Route::get('/matakuliah','MatakuliahController@index')->middleware('auth');
 Route::resource('matakuliahs','MatakuliahController')->middleware('auth');
 
-Route::get('/semester','SemesterController@index')->name('semester')->middleware('auth');
+Route::get('/semester','SemesterController@index')->middleware('auth');
 Route::resource('semesters','SemesterController')->middleware('auth');
 
 Route::get('/mengajar','MengajarController@index')->middleware('auth');

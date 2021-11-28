@@ -7,8 +7,7 @@
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-          <h1 class="text-white">Welcome !!</h1>
-          <p class="text-lead text-white"></p>
+          <img width="400px"src="{{asset('assets/undana/navbarfix.png')}}"/>
         </div>
       </div>
     </div>
@@ -26,6 +25,7 @@
           <div class="card bg-secondary border-0 mb-0">
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
+                
                 <medium>Sign in</medium>
               </div>
 

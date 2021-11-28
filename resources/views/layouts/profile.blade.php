@@ -74,7 +74,7 @@
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kemahasiswaan</a>
             <ul class="dropdown-menu">
               <li><a href="{{url('/prestasimahasiswa')}}">Prestasi</a></li>
-              <li><a href="blog-details.html">Himpunan Mahasiswa</a></li>
+              <li><a href="#">Himpunan Mahasiswa</a></li>
             </ul>
           </li>
           <li> <a href="#contact">Hubungi Kami</a></li>

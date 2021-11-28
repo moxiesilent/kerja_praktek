@@ -27,6 +27,7 @@
             <span class="btn-inner--text">Pertemuan Baru</span>
           </button>
         </a>
+        <a href="{{url('matakuliahDosen')}}" class="btn btn-secondary" role="button">Back</a>
       </div>
       <br>
     </div>

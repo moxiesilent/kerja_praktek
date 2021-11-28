@@ -48,7 +48,7 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
-        <a class="navbar-brand" href="{{url('dashboard')}}">
+        <a class="navbar-brand" href="#">
           <img src="{{asset('assets/undana/navbarfix.png')}}" class="navbar-brand-img" alt="...">
         </a>
       </div>
@@ -89,7 +89,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{{asset('assets/img/theme/team-4.jpg')}}">
+                    <img alt="Image placeholder" src="{{asset('assets/img/avatar.png')}}">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     @yield('nama')

@@ -42,7 +42,7 @@ class SemesterController extends Controller
         $data = new Semester();
         $data->nama_semester = $request->get('nama');
         $data->save();
-        return redirect()->route('semester.index')->with('status','semester telah ditambahkan');
+        return redirect()->route('semesters.index')->with('status','semester telah ditambahkan');
     }
 
     /**

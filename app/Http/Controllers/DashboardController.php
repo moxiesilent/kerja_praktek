@@ -13,7 +13,9 @@ class DashboardController extends Controller
         $queryRaw2 = DB::select(DB::raw("SELECT count('idmahasiswa') as jummahasiswa from mahasiswas"));
         $queryRaw3 = DB::select(DB::raw("SELECT count('kodemk') as matakuliah from matakuliahs"));
         $queryRaw4 = DB::select(DB::raw("SELECT count('idprestasi') as prestasi from prestasis"));
+        $queryRaw5 = DB::select(DB::raw("SELECT count('id') as jumjurnal from jurnals"));
+        $queryRaw6 = DB::select(DB::raw("SELECT count('idpenelitian') as jumpenelitian from penelitians"));
 
-        return view("dashboard.index",["dosen"=>$queryRaw, "mahasiswa"=>$queryRaw2,"mk"=>$queryRaw3,"prestasi"=>$queryRaw4]);
+        return view("dashboard.index",["dosen"=>$queryRaw, "mahasiswa"=>$queryRaw2,"mk"=>$queryRaw3,"prestasi"=>$queryRaw4, "jurnal"=>$queryRaw5, "penelitian"=>$queryRaw6]);
     }
 }
