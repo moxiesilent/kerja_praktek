@@ -100,7 +100,7 @@
           <div class="cbp-item web col-md-6 col-sm-6">
             <div class="portfolio gallery-image-hover text-left">
               <div class="folio-overlay"></div>
-              <img src="assets/images/portfolio/grid/1.jpg" alt="">
+              <img src="{{ asset('images/gallerykegiatan.jpg') }}" alt="Yiyiyi">
               <div class="portfolio-wrap">
                 <div class="portfolio-description">
                   <h3 class="portfolio-title">Kegiatan</h3>
@@ -111,7 +111,7 @@
           <div class="cbp-item graphic col-md-6 col-sm-6">
             <div class="portfolio gallery-image-hover text-left">
               <div class="folio-overlay"></div>
-              <img src="assets/images/portfolio/grid/4.jpg" alt="">
+              <img src="{{ asset('images/galleryroom.jpg') }}" alt="Yeyeye">
               <div class="portfolio-wrap">
                 <div class="portfolio-description">
                   <h3 class="portfolio-title">Ruangan</h3>
@@ -122,7 +122,7 @@
           <div class="cbp-item graphic col-md-6 col-sm-6">
             <div class="portfolio gallery-image-hover text-left">
               <div class="folio-overlay"></div>
-              <img src="assets/images/portfolio/grid/4.jpg" alt="">
+              <img src="{{ asset('images/galleryfac.jpg') }}" alt="Yayaya">
               <div class="portfolio-wrap">
                 <div class="portfolio-description">
                   <h3 class="portfolio-title">Fasilitas</h3>

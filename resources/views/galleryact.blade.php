@@ -8,7 +8,6 @@
 <style type="text/css">
   div.gallery {
     margin: 5px;
-    border: 1px solid #ccc;
     float: left;
 
   }
@@ -45,42 +44,15 @@
   <!--=== Blogs Start ===-->
   <section class="white-bg">
     <div class="container">
+      @foreach ($data as $d)
       <div class="col-md-4">
-      <div class="gallery">
-        <a target="_blank" href="img_5terre.jpg">
-          <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="Cinque Terre" width="600" height="400">
-        </a>
-
+        <div class="gallery">
+          <a target="_blank" href="{{ asset('assets/undana/galeri/'.$d->file )}}">
+            <img src="{{ asset('assets/undana/galeri/'.$d->file )}}" alt="">
+          </a>
+        </div>
       </div>
-      </div>
-
-      <div class="col-md-4">
-      <div class="gallery">
-        <a target="_blank" href="img_forest.jpg">
-          <img src="https://www.w3schools.com/css/img_forest.jpg" alt="Forest" width="600" height="400">
-        </a>
-
-      </div>
-      </div>
-
-      <div class="col-md-4">
-      <div class="gallery">
-        <a target="_blank" href="img_lights.jpg">
-          <img src="https://www.w3schools.com/css/img_lights.jpg" alt="Northern Lights" width="600" height="400">
-        </a>
-
-      </div>
-      </div>
-
-      <div class="col-md-4">
-      <div class="gallery">
-        <a target="_blank" href="img_mountains.jpg">
-          <img src="https://www.w3schools.com/css/img_mountains.jpg" alt="Mountains" width="600" height="400">
-        </a>
-
-      </div>
-      </div>
-
+      @endforeach
     </div>
   </section>
   <!--=== Blogs End ===-->

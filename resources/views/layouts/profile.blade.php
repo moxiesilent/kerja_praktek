@@ -47,7 +47,7 @@
       <!--=== Start Header Navigation ===-->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"> <i class="mdi mdi-menu"></i> </button>
-        <div class="logo"> <a href="index.html"> <img class="logo logo-display" src="{{asset('assets/undana/navbarfix.png')}}" alt=""> <img class="logo logo-scrolled" src="{{asset('assets/undana/navbarfix.png')}}" alt=""> </a> </div>
+        <div class="logo"> <a href="{{url('/')}}"> <img class="logo logo-display" src="{{asset('assets/undana/navbarfix.png')}}" alt=""> <img class="logo logo-scrolled" src="{{asset('assets/undana/navbarfix.png')}}" alt=""> </a> </div>
       </div>
       <!--=== End Header Navigation ===--> 
       

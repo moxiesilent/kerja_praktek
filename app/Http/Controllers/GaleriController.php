@@ -21,17 +21,20 @@ class GaleriController extends Controller
 
     public function indexRoom()
     {
-        return view("galleryroom");
+        $data = Galeri::where('jenis', '=', 'ruangan')->get();
+        return view("galleryroom", compact('data'));
     }
 
     public function indexAct()
     {
-        return view("galleryact");
+        $data = Galeri::where('jenis', '=', 'kegiatan')->get();
+        return view("galleryact", compact('data'));
     }
 
     public function indexFac()
     {
-        return view("galleryfacility");
+        $data = Galeri::where('jenis', '=', 'fasilitas')->get();
+        return view("galleryfacility", compact('data'));
     }
     /**
      * Show the form for creating a new resource.
