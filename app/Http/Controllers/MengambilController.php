@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mengambil;
 use Illuminate\Http\Request;
-
+use DB;
 class MengambilController extends Controller
 {
     /**
@@ -35,7 +35,21 @@ class MengambilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('admin');
+        try{
+            for($i=0; $i<sizeof($request->mahasiswa); $i++){
+                $data = new Mengambil();
+                $data->mahasiswas_idmahasiswa = $request->mahasiswa[$i];
+                $data->mengajars_idmengajars = $request->get('idmengajar');
+                $data->save();
+            }
+            return back()->with('status','data mahasiswa telah ditambahkan');   
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menambah data karena data sudah ada. ";
+            return back()->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -81,5 +95,18 @@ class MengambilController extends Controller
     public function destroy(Mengambil $mengambil)
     {
         //
+    }
+
+    public function hapusMahasiswa(Request $request){
+        $this->authorize('admin');
+        $idmahasiswa = $request->get('idmahasiswa');
+        $idmengajar = $request->get("idmengajar");
+        $delete = DB::table('mengambils')->where('mahasiswas_idmahasiswa',$idmahasiswa)->where('mengajars_idmengajars',$idmengajar)->delete();
+        if($delete){
+            return back()->with('status','Data berhasil dihapus');
+        }
+        else{
+            return back()->with('error','Gagal menghapus data');
+        }
     }
 }

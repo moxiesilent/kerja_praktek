@@ -45,14 +45,16 @@
   <section id="welcomedrink">
   	<div class="container">
   		<div class="row">
+        @foreach($profil as $p)
   			<div class="col-md-4">
-  				<div class="intro-img"><img class="img-responsive" src="assets/undana/pak_lukas_start2.png" alt=""/></div>
+  				<div class="intro-img"><img class="img-responsive" src="images/{{$p->foto_kaprodi}}" alt=""/></div>
   			</div>
+        @endforeach
         <div class="col-md-6 heading-style-one">
   				<hr class="gradient-bg left-line">
   				<h2>Sambutan Kepala Prodi<br><span class="font-700">Pendidikan Jasmani<br>Kesehatan dan Rekreasi</span></h2>
   				<p class="mt-30 font-600">Sambutan <span class="font-700">Kepala Program Studi</span></p>
-  				<p>Atas nama seluruh staf pengajar, staf administrasi dan mahasiswa, saya mengucapkan selamat datang di Program Studi Penjaskesrek, Fakultas Keguruan dan Ilmu Pendidikan, Universitas Nusa Cendana.</p>
+  				<!-- <p>Atas nama seluruh staf pengajar, staf administrasi dan mahasiswa, saya mengucapkan selamat datang di Program Studi Penjaskesrek, Fakultas Keguruan dan Ilmu Pendidikan, Universitas Nusa Cendana.</p> -->
           <p class="text-left mt-30"><a class="btn btn-gradient btn-md" href="/sambutan">Baca selengkapnya</a></p>
         </div>
   		</div>

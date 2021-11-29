@@ -15,8 +15,12 @@ class PenelitianController extends Controller
      */
     public function index()
     {
-        $data = Penelitian::all();
-        return view("penelitian",compact('data'));
+        $this->authorize('admin');
+        $data = DB::table('penelitians')
+        ->select('idpenelitian','judul','tahun','sumber','jumlah_dana','tipe')
+        ->paginate(5);
+
+        return view("penelitian.index",compact('data'));
     }
 
     /**
@@ -37,7 +41,21 @@ class PenelitianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('admin');
+        try{
+            $data = new Penelitian();
+            $data->judul = $request->get('judul');
+            $data->sumber = $request->get('sumber');
+            $data->jumlah_dana = $request->get('dana');
+            $data->tahun = $request->get('tahun');
+            $data->tipe = $request->get('tipe');
+            $data->save();
+            return back()->with('status','penelitian baru telah ditambahkan');
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menambah data. ";
+            return back()->with('error', $msg);
+        }
     }
 
     /**
@@ -59,7 +77,9 @@ class PenelitianController extends Controller
      */
     public function edit(Penelitian $penelitian)
     {
-        //
+        $this->authorize('admin');
+        $data = $penelitian;
+        return view("penelitian.edit",compact('data'));
     }
 
     /**
@@ -71,7 +91,21 @@ class PenelitianController extends Controller
      */
     public function update(Request $request, Penelitian $penelitian)
     {
-        //
+        $this->authorize('admin');
+        try{
+            $penelitian->judul = $request->get('judul');
+            $penelitian->sumber = $request->get('sumber');
+            $penelitian->jumlah_dana = $request->get('dana');
+            $penelitian->tahun = $request->get('tahun');
+            $penelitian->tipe = $request->get('tipe');
+            $penelitian->save();
+            return redirect()->route('penelitians.index')->with('status','data penelitian berhasil diubah');     
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal mengubah data.";
+            return redirect()->route('penelitians.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -82,6 +116,20 @@ class PenelitianController extends Controller
      */
     public function destroy(Penelitian $penelitian)
     {
-        //
+        $this->authorize('admin');
+        try{
+            $penelitian->delete();
+            return redirect()->route('penelitians.index')->with('status','data penelitian berhasil dihapus');       
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return redirect()->route('penelitians.index')->with('error', $msg);
+        }
+    }
+
+    public function frontEndIndex()
+    {
+        $data = Penelitian::all();
+        return view("penelitian",compact('data'));
     }
 }

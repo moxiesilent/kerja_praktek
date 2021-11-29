@@ -16,15 +16,17 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        $data = Artikel::paginate(15);
-        return view("artikel",compact('data'));
+        $this->authorize('admin');
+        $data = Artikel::paginate(5);
+        return view('artikel.index', compact("data"));
     }
 
     public function artikelkeindex()
     {
         $data = Artikel::orderBy('idartikels', 'desc')->take(3)->get();
         $dosen = DB::table('dosens')->get();
-        return view("index",compact('data', 'dosen'));
+        $profil = DB::table('profils')->get();
+        return view("index",compact('data', 'dosen','profil'));
     }
 
     /**
@@ -45,6 +47,7 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $data = new Artikel();
         $data->judul = $request->get('judul');
         $data->isi = $request->get('isi');
@@ -82,7 +85,9 @@ class ArtikelController extends Controller
      */
     public function edit(Artikel $artikel)
     {
-        //
+        $this->authorize('admin');
+        $data = $artikel;
+        return view("artikel.edit",compact('data'));
     }
 
     /**
@@ -94,6 +99,7 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, Artikel $artikel)
     {
+        $this->authorize('admin');
         $artikel->judul=$request->get('judul');
         $artikel->isi=$request->get('isi');
         $artikel->tanggal=Carbon::now();
@@ -110,7 +116,7 @@ class ArtikelController extends Controller
             $artikel->gambar=$imgFile;
         }
         $artikel->save();
-        return back()->with('status','data artikel berhasil diubah'); 
+        return redirect()->route('artikels.index')->with('status','data artikel berhasil diubah'); 
     }
 
     /**
@@ -121,6 +127,7 @@ class ArtikelController extends Controller
      */
     public function destroy(Artikel $artikel)
     {
+        $this->authorize('admin');
         try{
             $artikel->delete();
             return back()->with('status','data artikel berhasil dihapus');       
@@ -131,8 +138,19 @@ class ArtikelController extends Controller
         }
     }
 
-    public function backEndIndex(){
-        $data = Artikel::paginate(5);
-        return view('artikel.index', compact("data"));
+    // public function backEndIndex(){
+    //     $data = Artikel::paginate(5);
+    //     return view('artikel.index', compact("data"));
+    // }
+
+    public function frontEndIndex()
+    {
+        $data = Artikel::paginate(15);
+        return view("artikel",compact('data'));
+    }
+
+    public function frontEndShow(Artikel $artikel)
+    {
+        return view("artikeldetail",compact('artikel'));
     }
 }

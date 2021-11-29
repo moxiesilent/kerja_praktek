@@ -15,6 +15,7 @@ class SemesterController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = Semester::paginate(10);
         return view("semester.index",compact('data'));
     }
@@ -26,7 +27,7 @@ class SemesterController extends Controller
      */
     public function create()
     {
-        return view('semester.create');
+        
     }
 
     /**
@@ -37,10 +38,11 @@ class SemesterController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $data = new Semester();
         $data->nama_semester = $request->get('nama');
         $data->save();
-        return redirect()->route('semester.index')->with('status','semester telah ditambahkan');
+        return redirect()->route('semesters.index')->with('status','semester telah ditambahkan');
     }
 
     /**
@@ -62,6 +64,7 @@ class SemesterController extends Controller
      */
     public function edit(Semester $semester)
     {
+        $this->authorize('admin');
         $data = $semester;
         return view("semester.edit",compact('data'));
     }
@@ -75,6 +78,7 @@ class SemesterController extends Controller
      */
     public function update(Request $request, Semester $semester)
     {
+        $this->authorize('admin');
         $semester->nama_semester=$request->get('nama');
         $semester->save();
         return redirect()->route('semesters.index')->with('status','semester berhasil diubah'); 
@@ -88,6 +92,7 @@ class SemesterController extends Controller
      */
     public function destroy(Semester $semester)
     {
+        $this->authorize('admin');
         try{
             $semester->delete();
             return redirect()->route('semesters.index')->with('status','data semester berhasil dihapus');       

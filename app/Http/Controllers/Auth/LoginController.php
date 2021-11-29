@@ -34,7 +34,7 @@ class LoginController extends Controller
         } else if ($user->sebagai == "mahasiswa") {
             return redirect('/loginmahasiswa');
         } else if ($user->sebagai == "dosen"){
-            return redirect('/logindosen');
+            return redirect('/matakuliahDosen');
         } else{
             return redirect('/');
         }

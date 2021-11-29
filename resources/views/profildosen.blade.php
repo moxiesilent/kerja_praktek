@@ -29,7 +29,7 @@
                   <h4 class="member-title">{{$d->nama}}</h4>
                   <p class="member-subtitle">{{$d->bidangkeahlian}}</p>
                   <br><br>
-                  <li><a class="btn btn-gradient btn-md" href="/profildosen/{{$d->nip}}" style="width: 100%;">Lihat Detail</a></li>
+                  <li><a class="btn btn-gradient btn-md" href="{{url('/profildosen/'.$d->nip)}}" style="height: 100%;">Lihat Detail</a></li>
                 </div>
               </div>
             </div>

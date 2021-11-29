@@ -54,7 +54,7 @@
       <!--=== Collect the nav links, forms, and other content for toggling ===-->
       <div class="collapse navbar-collapse" id="navbar-menu">
         <ul class="nav navbar-nav navbar-right" data-in="fadeIn" data-out="fadeOut">
-          <li><a href="/#hero">Home</a></li>
+          <li><a href="{{url('/')}}">Home</a></li>
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tentang</a>
             <ul class="dropdown-menu">
               <li><a href="{{url('/sambutan')}}">Sambutan Kepala Program Studi</a></li>
@@ -62,7 +62,7 @@
               <li><a href="{{url('/tentangkami')}}">Tentang Kami</a></li>
               <li><a href="{{url('/struktur')}}">Struktur Organisasi</a></li>
               <li><a href="{{url('/profildosen')}}">Profil Para Pengajar</a></li>
-              <li><a href="{{url('/artikels')}}">Artikel</a></li>
+              <li><a href="{{url('/artikel')}}">Artikel</a></li>
             </ul>
           </li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Akademik</a>
@@ -76,7 +76,7 @@
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kemahasiswaan</a>
             <ul class="dropdown-menu">
               <li><a href="{{url('/prestasimahasiswa')}}">Prestasi</a></li>
-              <li><a href="blog-details.html">Himpunan Mahasiswa</a></li>
+              <li><a href="#">Himpunan Mahasiswa</a></li>
             </ul>
           </li>
           <li> <a href="#contact">Hubungi Kami</a></li>
@@ -99,7 +99,10 @@
             <div class="widget widget-links">
               <h5 class="widget-title">Tentang Kami</h5>
               <div class="footer-about">
-              	<p>Universitas Nusa Cendana, disingkat UNDANA, adalah universitas negeri pertama di Provinsi Nusa Tenggara Timur yang berdiri pada tanggal 1 September 1962.</p>
+                @php
+                $tentang = App\Profil::all();
+                @endphp
+              	<p><?= $tentang[0]->tentang ?></p>
               	<ul class="social-media">
 				  <li><a href="#" class="mdi mdi-facebook"></a></li>
 				  <li><a href="#" class="mdi mdi-twitter"></a></li>
@@ -113,7 +116,7 @@
             <div class="widget widget-links">
               <h5 class="widget-title">Tautan Cepat</h5>
               <ul>
-                <li><a href="{{url('/artikels')}}">Artikel</a></li>
+                <li><a href="{{url('/artikel')}}">Artikel</a></li>
                 <li><a href="{{url('/visimisi')}}">Visi & Misi</a></li>
                 <li><a href="{{url('/profildosen')}}">Profil Para Pengajar</a></li>
                 <li><a href="{{url('/jurnal')}}">Jurnal Penelitian Dosen</a></li>
@@ -125,9 +128,13 @@
             <div class="widget widget-text">
               <h5 class="widget-title">Hubungi Kami</h5>
               <ul class="footer-contact">
-              	<li><i class="mdi mdi-map-marker"></i> <p><a href="https://goo.gl/maps/tCZrSnYQ3pXq51E8A" target="_blank">Jl. Jend Soeharto, Lasiana, Klp. Lima, Kota Kupang, Nusa Tenggara Timur, Indonesia</a></p></li>
-                <li><i class="mdi mdi-email"></i> <p><a href="mailto:s160418075@student.ubaya.ac.id">chaos@gmail.com</a></p></li>
-                <li><i class="mdi mdi-phone"></i> <p>+49 30 47373795</p></li>
+                @php
+                $profil = App\Profil::all();
+                @endphp
+              	<li><i class="mdi mdi-map-marker"></i> <p><a href="https://goo.gl/maps/tCZrSnYQ3pXq51E8A" target="_blank"><?= $profil[0]->alamat ?></a></p></li>
+                <li><i class="mdi mdi-email"></i> <p><a href="mailto:s160418075@student.ubaya.ac.id"><?= $profil[0]->email ?></a></p></li>
+                <li><i class="mdi mdi-phone"></i> <p><?= $profil[0]->telepon ?></p></li>
+                
               </ul>
             </div>
           </div>

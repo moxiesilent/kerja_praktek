@@ -8,6 +8,12 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('profil')}}">
+      <i class="ni ni-planet text-success"></i>
+      <span class="nav-link-text">Profil</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{url('prestasi')}}">
       <i class="ni ni-trophy text-orange"></i>
       <span class="nav-link-text">Prestasi</span>
@@ -44,9 +50,15 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('jurnal')}}">
+    <a class="nav-link" href="{{url('jurnalback')}}">
       <i class="ni ni-send text-dark"></i>
       <span class="nav-link-text">Jurnal</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('penelitianback')}}">
+      <i class="ni ni-ruler-pencil text-dark"></i>
+      <span class="nav-link-text">Penelitian</span>
     </a>
   </li>
   <li class="nav-item">
@@ -62,6 +74,9 @@
     </a>
   </li>
 </ul>
+@endsection
+@section('nama')
+<span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
 <h2>Daftar Matakuliah</h2><br>
@@ -168,7 +183,48 @@
     </div>
   </div>
 </div>
-
+<div class="row">
+  <div style="width: 39rem;">
+    <div class="card card-stats ml-3 mr-3">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0 pb-3">Jumlah Jurnal</h5>
+                  @foreach($jurnal as $j)
+                  <span class="h2 font-weight-bold mb-0">{{$j->jumjurnal}}</span>
+                  @endforeach
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
+                    <i class="ni ni-single-02"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div style="width: 39.5rem;">
+    <div class="card card-stats ml-3 mr-3">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0 pb-3">Jumlah Penelitian</h5>
+                  @foreach($penelitian as $p)
+                  <span class="h2 font-weight-bold mb-0">{{$p->jumpenelitian}}</span>
+                  @endforeach
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                    <i class="ni ni-single-02"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
   
 @endsection
 

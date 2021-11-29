@@ -16,15 +16,13 @@ class JurnalController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $dosen = Dosen::all();
 
         $data = DB::table('jurnals')
         ->join('dosens', 'jurnals.dosens_nip','=','dosens.nip')
         ->select('id','judul','tahun','lokasi','tingkat','dosens.nama as dosen')
         ->paginate(5);
-        
-        // $data = DB::select(DB::raw("SELECT jurnals.id as id, judul, tahun, lokasi, tingkat, dosens.nama as dosen FROM jurnals 
-        // INNER JOIN dosens ON jurnals.dosens_nip = dosens.nip"));
 
         return view("jurnal.index",compact('data','dosen'));
     }
@@ -47,14 +45,22 @@ class JurnalController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Jurnal();
-        $data->judul = $request->get('judul');
-        $data->tingkat = $request->get('tingkat');
-        $data->dosens_nip = $request->get('dosen');
-        $data->tahun = $request->get('tahun');
-        $data->lokasi = $request->get('lokasi');
-        $data->save();
-        return redirect()->route('jurnals.index')->with('status','jurnal baru telah ditambahkan');
+        $this->authorize('admin');
+        try{
+            $data = new Jurnal();
+            $data->judul = $request->get('judul');
+            $data->tingkat = $request->get('tingkat');
+            $data->dosens_nip = $request->get('dosen');
+            $data->tahun = $request->get('tahun');
+            $data->lokasi = $request->get('lokasi');
+            $data->save();
+            return redirect()->route('jurnals.index')->with('status','jurnal baru telah ditambahkan');
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menambah data. ";
+            return redirect()->route('jurnals.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -76,6 +82,7 @@ class JurnalController extends Controller
      */
     public function edit(Jurnal $jurnal)
     {
+        $this->authorize('admin');
         $dosen = Dosen::all();
         $data = $jurnal;
         return view("jurnal.edit",compact('data','dosen'));
@@ -90,13 +97,21 @@ class JurnalController extends Controller
      */
     public function update(Request $request, Jurnal $jurnal)
     {
-        $jurnal->judul = $request->get('judul');
-        $jurnal->tingkat = $request->get('tingkat');
-        $jurnal->dosens_nip = $request->get('penulis');
-        $jurnal->tahun = $request->get('tahun');
-        $jurnal->lokasi = $request->get('lokasi');
-        $jurnal->save();
-        return redirect()->route('jurnals.index')->with('status','jurnal berhasil diubah');
+        $this->authorize('admin');
+        try{
+            $jurnal->judul = $request->get('judul');
+            $jurnal->tingkat = $request->get('tingkat');
+            $jurnal->dosens_nip = $request->get('penulis');
+            $jurnal->tahun = $request->get('tahun');
+            $jurnal->lokasi = $request->get('lokasi');
+            $jurnal->save();
+            return redirect()->route('jurnals.index')->with('status','jurnal berhasil diubah');   
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal mengubah data. ";
+            return redirect()->route('jurnals.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -107,6 +122,7 @@ class JurnalController extends Controller
      */
     public function destroy(Jurnal $jurnal)
     {
+        $this->authorize('admin');
         try{
             $jurnal->delete();
             return redirect()->route('jurnals.index')->with('status','data jurnal berhasil dihapus');       
@@ -115,5 +131,13 @@ class JurnalController extends Controller
             $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
             return redirect()->route('jurnals.index')->with('error', $msg);
         }
+    }
+
+    public function frontEndIndex()
+    {
+        $data = DB::select(DB::raw("SELECT jurnals.id as id, judul, tahun, lokasi, tingkat, dosens.nama as namadosen FROM jurnals 
+        INNER JOIN dosens ON jurnals.dosens_nip = dosens.nip"));
+
+        return view("jurnal",compact('data'));
     }
 }

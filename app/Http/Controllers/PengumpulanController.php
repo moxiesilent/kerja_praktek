@@ -6,6 +6,8 @@ use App\Pengumpulan;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use App\Tugas;
+use Auth;
 
 class PengumpulanController extends Controller
 {
@@ -37,7 +39,18 @@ class PengumpulanController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('mahasiswa');
         try{
+            $cekDeadline = Tugas::find($request->get('idtugas'));
+            $tanggalKumpul = Carbon::now();
+            $status = '';
+
+            if($cekDeadline->deadline >= $tanggalKumpul){
+                $status = 'IN TIME';
+            }
+            else{
+                $status = 'LATE';
+            }
             $data = new Pengumpulan();
             $file=$request->file('file');
             $fileFolder='tugas';
@@ -47,7 +60,9 @@ class PengumpulanController extends Controller
 
             $data->tugas_idtugas = $request->get('idtugas');
             $data->mahasiswa_idmahasiswa = $request->get('idmahasiswa');
-            $data->tanggal = Carbon::now();
+            $data->tanggal = $tanggalKumpul;
+
+            $data->status = $status;
             $data->save();
             return back()->with('status','submit tugas baru berhasil dilakukan');      
         }
@@ -100,6 +115,33 @@ class PengumpulanController extends Controller
      */
     public function destroy(Pengumpulan $pengumpulan)
     {
+        
+    }
+
+    public function hapusTugas(Request $request){
+        $this->authorize('mahasiswa');
+        try{
+            $currentuseremail = Auth::user()->email;
+            $queryRaw = DB::select(DB::raw("SELECT idmahasiswa FROM mahasiswas where email = '$currentuseremail'"));
+            $idmahasiswa = '';
+
+            if(count($queryRaw) > 0){
+                $idmahasiswa = $queryRaw[0]->idmahasiswa;
+            }
+
+            $idtugas = $request->get("idtugas");
+            $delete = DB::table('pengumpulans')->where('tugas_idtugas',$idtugas)->where('mahasiswa_idmahasiswa',$idmahasiswa)->delete();
+            if($delete){
+                return back()->with('status','Tugas berhasil dihapus');
+            }
+            else{
+                return back()->with('error','Gagal menghapus tugas');
+            }  
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus tugas. ";
+            return back()->with('error', $msg);
+        }
         
     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Tugas;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DB;
+use Auth;
 
 class TugasController extends Controller
 {
@@ -35,10 +38,12 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('dosen');
         $data = new Tugas();
         $data->judul = $request->get('judul');
         $data->pertemuans_idpertemuan = $request->get('idpertemuan');
         $data->status = 'buka';
+        $data->deadline = Carbon::parse($request->get('deadline'))->format('Y-m-d\TH:i');
         $data->save();
         return back();
     }
@@ -74,15 +79,7 @@ class TugasController extends Controller
      */
     public function update(Request $request, Tugas $tugas)
     {
-        $tugas->status=$request->get('status');
-        if($request->get('status') == 'buka'){
-            $tugas->save();
-            return back()->with('status','pengumpulan tugas sudah ditutup'); 
-        }
-        else{
-            $tugas->save();
-            return back()->with('status','pengumpulan tugas dibuka kembali'); 
-        }
+        
         
     }
 
@@ -92,15 +89,27 @@ class TugasController extends Controller
      * @param  \App\Tugas  $tugas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tugas $tugas)
+    public function destroy(Request $request)
     {
+        
+    }
+
+    public function hapusTugas(Request $request){
+        $this->authorize('dosen');
         try{
-            $tugas->delete();
-            return back()->with('status','tugas berhasil dihapus');       
+            $idtugas = $request->get("idtugas");
+            $delete = DB::table('tugass')->where('idtugas',$idtugas)->delete();
+            if($delete){
+                return back()->with('status','Tugas berhasil dihapus');
+            }
+            else{
+                return back()->with('error','Gagal menghapus tugas');
+            }    
         }
         catch(\PDOException $e){
-            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            $msg ="Gagal menghapus data. Sudah ada mahasiswa yang mengumpulkan tugas.";
             return back()->with('error', $msg);
         }
+        
     }
 }

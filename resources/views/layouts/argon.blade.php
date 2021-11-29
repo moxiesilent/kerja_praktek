@@ -31,6 +31,10 @@
   <link rel="stylesheet" href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
   <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">
   <!-- Page plugins -->
+  <!-- datatable -->
+  <link rel="stylesheet" href="{{asset('assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" type="text/css">
+  <link rel="stylesheet" href="{{asset('assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" type="text/css">
+  <link rel="stylesheet" href="{{asset('assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{asset('assets/css/argon.css?v=1.2.0')}}" type="text/css">
   <link rel="stylesheet" href="{{asset('assets/vendor/select2/dist/css/select2.min.css')}}" type="text/css">
@@ -38,6 +42,7 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
   <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
+  <link rel="stylesheet" href="{{asset('assets/vendor/sweetalert2/dist/sweetalert2.min.css')}}" type="text/css">
   <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
@@ -47,7 +52,7 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
-        <a class="navbar-brand" href="{{url('dashboard')}}">
+        <a class="navbar-brand" href="#">
           <img src="{{asset('assets/undana/navbarfix.png')}}" class="navbar-brand-img" alt="...">
         </a>
       </div>
@@ -88,7 +93,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{{asset('assets/img/theme/team-4.jpg')}}">
+                    <img alt="Image placeholder" src="{{asset('assets/img/avatar.png')}}">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     @yield('nama')
@@ -135,9 +140,22 @@
   <script src="{{asset('assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
   <script src="{{asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
   <script src="{{asset('assets/vendor/select2/dist/js/select2.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/moment.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/bootstrap-datetimepicker.js')}}"></script>
+  <script src="{{asset('assets/js/argon.js?v=1.2.0')}}"></script>
+  <script src="{{asset('assets/vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
+  <!-- datatable -->
+  <script src="{{asset('assets/vendor/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/datatables.net-select/js/dataTables.select.min.js')}}"></script>
   @yield("javascript")
   <!-- Argon JS -->
-  <script src="{{asset('assets/js/argon.js?v=1.2.0')}}"></script>
+  
 
   
 </body>

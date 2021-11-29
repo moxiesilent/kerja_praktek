@@ -2,12 +2,6 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="{{url('logindosen')}}">
-      <i class="ni ni-tv-2 text-primary"></i>
-      <span class="nav-link-text">Dashboard</span>
-    </a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link active" href="{{url('matakuliahDosen')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Matakuliah</span>
@@ -33,6 +27,7 @@
             <span class="btn-inner--text">Pertemuan Baru</span>
           </button>
         </a>
+        <a href="{{url('matakuliahDosen')}}" class="btn btn-secondary" role="button">Back</a>
       </div>
       <br>
     </div>
@@ -72,10 +67,10 @@
               <div class="dropdown-item">
                 <a class="dropdown-item" href="">Edit</a>
               </div> 
-                <form class="dropdown-item" method="POST" action="">
+                <form class="dropdown-item" method="POST" action="{{url('pertemuans/'.$d->idpertemuan)}}">
                   @csrf
                   @method('DELETE')
-                  <a class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">Hapus</a>
+                  <input value="Hapus" class="dropdown-item" type="submit" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
                 </form>
             </div>
           </div>

@@ -14,6 +14,7 @@ class JabatanController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = Jabatan::all();
         return view("jabatan.index",compact('data'));
     }
@@ -25,7 +26,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        return view('jabatan.create');
+        
     }
 
     /**
@@ -36,10 +37,18 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Jabatan();
-        $data->nama_jabatan = $request->get('nama');
-        $data->save();
-        return redirect()->route('jabatan.index')->with('status','jabatan telah ditambahkan');
+        $this->authorize('admin');
+        try{
+            $data = new Jabatan();
+            $data->nama_jabatan = $request->get('nama');
+            $data->save();
+            return redirect()->route('jabatan.index')->with('status','jabatan telah ditambahkan');     
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
+            return redirect()->route('jabatans.index')->with('error', $msg);
+        }
+        
     }
 
     /**

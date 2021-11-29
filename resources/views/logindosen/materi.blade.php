@@ -2,12 +2,6 @@
 @section('sidenav')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="{{url('logindosen')}}">
-      <i class="ni ni-tv-2 text-primary"></i>
-      <span class="nav-link-text">Dashboard</span>
-    </a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link active" href="{{url('matakuliahDosen')}}">
       <i class="ni ni-tv-2 text-primary"></i>
       <span class="nav-link-text">Matakuliah</span>
@@ -27,12 +21,14 @@
         <h3 class="mb-0">Materi</h3>
       </div>
       <div class="col text-right">
+        
       <a href="" data-toggle="modal" data-target="#modalTambah">
         <button class="btn btn-icon btn-primary" type="button">
           <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
           <span class="btn-inner--text">Materi Baru</span>
         </button>
       </a>
+      <a href="{{url('matakuliahDosen')}}" class="btn btn-secondary" role="button">Back</a>
       </div>
       <br>
     </div>

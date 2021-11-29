@@ -6,6 +6,7 @@ use App\Mahasiswa;
 use Illuminate\Http\Request;
 use DB;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class MahasiswaController extends Controller
 {
@@ -16,6 +17,7 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = Mahasiswa::paginate(10);
         return view("mahasiswa.index",compact('data'));
     }
@@ -27,7 +29,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create');
+        
     }
 
     /**
@@ -38,24 +40,31 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
+        try{
+            $data = new Mahasiswa();
+            $data->idmahasiswa = $request->get('idmahasiswa');
+            $data->email = $request->get('email');
+            $data->nama = $request->get('nama');
+            $data->tanggallahir = $request->get('tanggallahir');
+            $data->telepon = $request->get('telepon');
+            $data->jenis_kelamin = $request->get('jeniskelamin');
+            $data->save();
+
+            $user = new User();
+            $user->name = $request->get('nama');
+            $user->email = $request->get('email');
+            $user->password = Hash::make($request->get('password'));
+            $user->sebagai = 'mahasiswa';
+            $user->save();
+
+            return redirect()->route('mahasiswas.index')->with('status','mahasiswa berhasil ditambahkan');     
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal menambah data. ";
+            return redirect()->route('mahasiswas.index')->with('error', $msg);
+        }
         
-        $data = new Mahasiswa();
-        $data->idmahasiswa = $request->get('idmahasiswa');
-        $data->email = $request->get('email');
-        $data->nama = $request->get('nama');
-        $data->tanggallahir = $request->get('tanggallahir');
-        $data->telepon = $request->get('telepon');
-        $data->jenis_kelamin = $request->get('jeniskelamin');
-        $data->save();
-
-        $user = new User();
-        $user->name = $request->get('nama');
-        $user->email = $request->get('email');
-        $user->password = Hash::make($request->get('password'));
-        $user->sebagai = 'mahasiswa';
-        $user->save();
-
-        return redirect()->route('mahasiswas.index')->with('status','mahasiswa berhasil ditambahkan');
     }
 
     /**
@@ -77,6 +86,7 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
+        $this->authorize('admin');
         $data = $mahasiswa;
         return view("Mahasiswa.edit",compact('data'));
     }
@@ -90,13 +100,21 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        $mahasiswa->nama=$request->get('nama');
-        $mahasiswa->email=$request->get('email');
-        $mahasiswa->tanggallahir=$request->get('tanggallahir');
-        $mahasiswa->jenis_kelamin=$request->get('jeniskelamin');
-        $mahasiswa->telepon=$request->get('telepon');
-        $mahasiswa->save();
-        return redirect()->route('mahasiswas.index')->with('status','data mahasiswa berhasil diubah'); 
+        $this->authorize('admin');
+        try{
+            $mahasiswa->nama=$request->get('nama');
+            $mahasiswa->email=$request->get('email');
+            $mahasiswa->tanggallahir=$request->get('tanggallahir');
+            $mahasiswa->jenis_kelamin=$request->get('jeniskelamin');
+            $mahasiswa->telepon=$request->get('telepon');
+            $mahasiswa->save();
+            return redirect()->route('mahasiswas.index')->with('status','data mahasiswa berhasil diubah');        
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal mengubah data. ";
+            return redirect()->route('mahasiswas.index')->with('error', $msg);
+        }
+        
     }
 
     /**
@@ -107,6 +125,7 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
+        $this->authorize('admin');
         try{
             $mahasiswa->delete();
             return redirect()->route('mahasiswas.index')->with('status','data mahasiswa berhasil dihapus');       
