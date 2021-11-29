@@ -97,7 +97,10 @@
             <div class="widget widget-links">
               <h5 class="widget-title">Tentang Kami</h5>
               <div class="footer-about">
-              	<p>Universitas Nusa Cendana, disingkat UNDANA, adalah universitas negeri pertama di Provinsi Nusa Tenggara Timur yang berdiri pada tanggal 1 September 1962.</p>
+                @php
+                $tentang = App\Profil::all();
+                @endphp
+              	<p><?= $tentang[0]->tentang ?></p>
               	<ul class="social-media">
 				  <li><a href="#" class="mdi mdi-facebook"></a></li>
 				  <li><a href="#" class="mdi mdi-twitter"></a></li>
@@ -123,9 +126,13 @@
             <div class="widget widget-text">
               <h5 class="widget-title">Hubungi Kami</h5>
               <ul class="footer-contact">
-              	<li><i class="mdi mdi-map-marker"></i> <p><a href="https://goo.gl/maps/tCZrSnYQ3pXq51E8A" target="_blank">Jl. Jend Soeharto, Lasiana, Klp. Lima, Kota Kupang, Nusa Tenggara Timur, Indonesia</a></p></li>
-                <li><i class="mdi mdi-email"></i> <p><a href="mailto:s160418075@student.ubaya.ac.id">chaos@gmail.com</a></p></li>
-                <li><i class="mdi mdi-phone"></i> <p>+49 30 47373795</p></li>
+                @php
+                $profil = App\Profil::all();
+                @endphp
+              	<li><i class="mdi mdi-map-marker"></i> <p><a href="https://goo.gl/maps/tCZrSnYQ3pXq51E8A" target="_blank"><?= $profil[0]->alamat ?></a></p></li>
+                <li><i class="mdi mdi-email"></i> <p><a href="mailto:s160418075@student.ubaya.ac.id"><?= $profil[0]->email ?></a></p></li>
+                <li><i class="mdi mdi-phone"></i> <p><?= $profil[0]->telepon ?></p></li>
+                
               </ul>
             </div>
           </div>
