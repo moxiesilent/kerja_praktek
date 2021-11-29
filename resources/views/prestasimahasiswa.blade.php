@@ -24,9 +24,9 @@
           <div class="testimonial-content" style="margin-bottom: 10px; margin-top: 10px;"> 
             <div class="team-member-container gallery-image-hover">
             @if($d->foto)
-            <img src="{{asset('assets/undana/prestasi/'.$d->foto)}}" class="img-responsive"style="height: 334px; width: 604px;">
+            <img src="{{asset('assets/undana/prestasi/'.$d->foto)}}" class="img-responsive" style="max-height: 350px;">
             @else
-            <img src="{{asset('assets/undana/prestasi/pres.jpg')}}" class="img-responsive">
+            <img src="{{asset('assets/undana/prestasi/pres.jpg')}}" class="img-responsive" style="max-height: 350px;">
             @endif
               <div class="member-caption">
                 <div class="member-description">
