@@ -125,7 +125,7 @@
               <img src="assets/images/portfolio/grid/4.jpg" alt="">
               <div class="portfolio-wrap">
                 <div class="portfolio-description">
-                  <h3 class="portfolio-title">Faslilitas</h3>
+                  <h3 class="portfolio-title">Fasilitas</h3>
                   <a href="/galerifasilitas" class="links">Kunjungi</a> </div>
               </div>
             </div>
