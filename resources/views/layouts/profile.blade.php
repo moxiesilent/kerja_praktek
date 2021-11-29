@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="{{asset('assets/css/master.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
 
+@yield('styling-css')
+
 <style>
   html{
     scroll-behavior: smooth;

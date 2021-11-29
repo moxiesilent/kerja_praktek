@@ -22,15 +22,15 @@
     <div class="container">
     	<div class="row">
             @foreach($data as $d)
-			<div class="col-md-4 col-sm-6">
-			  <div class="post mb-20">
-				<div class="post-img"> <img class="img-responsive" src="{{asset('assets/undana/artikel/'.$d->gambar)}}" alt="" style="width: 1620px; heigh: 1020px;"/> </div>
-				<div class="post-info">
-				  <h3><a href="/artikels/{{$d->idartikels}}">{{$d->judul}}</a></h3>
-				  <p>{{$d->tanggal}}</p>
-				  <a class="readmore" href="{{url('/artikels/'.$d->idartikels)}}"><span>Baca lebih lanjut <i class="eicon mdi mdi-arrow-right"></i></span></a> </div>
-			  </div>
-			</div>
+            <div class="col-md-4 col-sm-6">
+              <div class="post mb-20">
+              <div class="post-img"> <img class="img-responsive" src="{{asset('assets/undana/artikel/'.$d->gambar)}}" alt="" style="width: 1620px; heigh: 1020px;"/> </div>
+              <div class="post-info">
+                <h3><a href="/artikels/{{$d->idartikels}}">{{$d->judul}}</a></h3>
+                <p>{{$d->tanggal}}</p>
+                <a class="readmore" href="{{url('/artikels/'.$d->idartikels)}}"><span>Baca lebih lanjut <i class="eicon mdi mdi-arrow-right"></i></span></a> </div>
+              </div>
+            </div>
             @endforeach
 			<!--=== Post End ===-->
         </div>

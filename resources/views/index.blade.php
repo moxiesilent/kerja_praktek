@@ -102,7 +102,7 @@
               <div class="portfolio-wrap">
                 <div class="portfolio-description">
                   <h3 class="portfolio-title">Kegiatan</h3>
-                  <a href="galleryEvents.html" class="links">Kunjungi</a> </div>
+                  <a href="/galerikegiatan" class="links">Kunjungi</a> </div>
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@
               <div class="portfolio-wrap">
                 <div class="portfolio-description">
                   <h3 class="portfolio-title">Ruangan</h3>
-                  <a href="galleryRoom.html" class="links">Kunjungi</a> </div>
+                  <a href="/galeriruangan" class="links">Kunjungi</a> </div>
               </div>
             </div>
           </div>  
@@ -124,7 +124,7 @@
               <div class="portfolio-wrap">
                 <div class="portfolio-description">
                   <h3 class="portfolio-title">Faslilitas</h3>
-                  <a href="galleryFacility.html" class="links">Kunjungi</a> </div>
+                  <a href="/galerifasilitas" class="links">Kunjungi</a> </div>
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@
    
   
  <!--=== Testimonails Start ===-->
- <section class="parallax-bg fixed-bg" data-stellar-background-ratio="0.2" style="background-image: url(assets/images/background/pattern-parallax.jpg);">
+ <section class="parallax-bg fixed-bg" data-stellar-background-ratio="0.2" style="background-image: url(assets/images/background/pattern-parallax.jpg); display:none;">
     <div class="container">
       <div class="row">
   			<div class="col-md-12 heading-style-two text-center">

@@ -18,6 +18,20 @@ class GaleriController extends Controller
         return view("galeri.index",compact('data'));
     }
 
+    public function indexRoom()
+    {
+        return view("galleryroom");
+    }
+
+    public function indexAct()
+    {
+        return view("galleryact");
+    }
+
+    public function indexFac()
+    {
+        return view("galleryfacility");
+    }
     /**
      * Show the form for creating a new resource.
      *

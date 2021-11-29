@@ -27,6 +27,9 @@ Route::get('/penelitian', 'PenelitianController@index');
 Route::get('/prestasimahasiswa','PrestasiController@prestasikewebprofile');
 Route::resource('artikels','ArtikelController');
 Route::get('artikelback/hapus/{id}','ArtikelController@hapusArtikel');
+Route::get('/galeriruangan','GaleriController@indexRoom');
+Route::get('/galerikegiatan','GaleriController@indexAct');
+Route::get('/galerifasilitas','GaleriController@indexFac');
 
 
 Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen');
