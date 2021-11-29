@@ -281,7 +281,7 @@
           @endforeach
         <!--=== Post End ===--> 
         <div class="col-md-4"></div>
-        <div class="col-md-4"><a class="btn btn-gradient btn-md" href="artikels" style="width: 100%;">Lihat Lebih Banyak</a></div>
+        <div class="col-md-4"><a class="btn btn-gradient btn-md" href="/artikel" style="width: 100%;">Lihat Lebih Banyak</a></div>
         <div class="col-md-4"></div>
         
       </div>

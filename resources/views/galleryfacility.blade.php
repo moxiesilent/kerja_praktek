@@ -35,7 +35,7 @@
   <div class="parallax-overlay"></div>
     <div class="container">
       <div class="page-title text-center white-color">
-        <h1>Galeri Ruangan</h1>
+        <h1>Galeri Fasilitas</h1>
         <h4 class="text-uppercase mt-30">Pendidikan Jasmani Kesehatan dan Rekreasi</h4>
       </div>
     </div>

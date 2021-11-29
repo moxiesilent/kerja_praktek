@@ -24,7 +24,7 @@
             @foreach($data as $d)
             <div class="col-md-4 col-sm-6">
               <div class="post mb-20">
-              <div class="post-img"> <img class="img-responsive" src="{{asset('assets/undana/artikel/'.$d->gambar)}}" alt="" style="width: 1620px; heigh: 1020px;"/> </div>
+              <div class="post-img"> <img class="img-responsive" src="{{asset('assets/undana/artikel/'.$d->gambar)}}" alt="" style="max-height: 350px;"/> </div>
               <div class="post-info">
                 <h3><a href="/artikels/{{$d->idartikels}}">{{$d->judul}}</a></h3>
                 <p>{{$d->tanggal}}</p>
