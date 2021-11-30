@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Imports\MahasiswaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MahasiswaController extends Controller
 {
@@ -134,5 +136,11 @@ class MahasiswaController extends Controller
             $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
             return redirect()->route('mahasiswas.index')->with('error', $msg);
         }
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new MahasiswaImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }

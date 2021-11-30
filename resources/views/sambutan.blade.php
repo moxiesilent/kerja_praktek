@@ -24,7 +24,7 @@
       <br><br>
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <div class="intro-img"><img class="img-responsive" src="{{asset('assets/undana/pak_lukas_start2.png')}}" alt=""/></div>
+        <div class="intro-img"><img class="img-responsive" src="{{asset('images/'.$data[0]->foto_kaprodi)}}" alt=""/></div>
       </div>
       <div class="col-md-4"></div>
       <div class="col-md-12">
