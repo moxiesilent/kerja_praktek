@@ -108,7 +108,7 @@
       </div>
     @endif
   <div class="table-responsive">
-    <table class="table align-items-center table-flush" id="datatable-basic">
+    <table class="table align-items-center table-flush datatable-basic" id="tableprestasi">
       <thead class="thead-light">
         <tr>
           <th scope="col">Nama kegiatan</th>
@@ -154,11 +154,6 @@
         @endforeach
       </tbody>
     </table>
-    <ul class="pagination">
-      <li class="page-item">
-        {{$data->links()}}
-      </li>
-    </ul>
   </div>
 </div>
 
@@ -209,4 +204,35 @@
   </div>
 </div>
 
+@endsection
+@section('javascript')
+<script type="text/javascript">
+    // START SCRIPT TABEL
+    $.extend($.fn.dataTable.defaults, {
+    	autoWidth: false,
+    	columnDefs: [{
+    		orderable: false,
+    		width: '100px'
+    	}],
+    	dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+    	language: {
+    		search: '<span>Filter:</span> _INPUT_',
+            // searchPlaceholder: 'Type to filter...',
+            lengthMenu: '<span>Menampilkan :</span> _MENU_',
+            paginate: {'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;'}
+        },
+        drawCallback: function () {
+        	$(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+        },
+        preDrawCallback: function () {
+        	$(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+        }
+    });
+    $('.datatable-basic').DataTable();
+    // END SCRIPT TABEL
+
+    $(document).ready( function () {
+        $('#tableprestasi').DataTable();
+    });
+</script> 
 @endsection

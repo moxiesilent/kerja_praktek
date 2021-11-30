@@ -18,11 +18,7 @@ class JurnalController extends Controller
     {
         $this->authorize('admin');
         $dosen = Dosen::all();
-
-        $data = DB::table('jurnals')
-        ->join('dosens', 'jurnals.dosens_nip','=','dosens.nip')
-        ->select('id','judul','tahun','lokasi','tingkat','dosens.nama as dosen')
-        ->paginate(5);
+        $data = Jurnal::all();
 
         return view("jurnal.index",compact('data','dosen'));
     }

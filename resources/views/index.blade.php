@@ -125,7 +125,7 @@
               <img src="{{ asset('images/galleryfac.jpg') }}" alt="Yayaya">
               <div class="portfolio-wrap">
                 <div class="portfolio-description">
-                  <h3 class="portfolio-title">Faslilitas</h3>
+                  <h3 class="portfolio-title">Fasilitas</h3>
                   <a href="/galerifasilitas" class="links">Kunjungi</a> </div>
               </div>
             </div>

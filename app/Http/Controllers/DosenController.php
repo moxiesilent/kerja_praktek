@@ -19,7 +19,7 @@ class DosenController extends Controller
     public function index()
     {
         $this->authorize('admin');
-        $data = Dosen::paginate(10);
+        $data = Dosen::all();
         return view("dosen.index",compact('data'));
     }
 

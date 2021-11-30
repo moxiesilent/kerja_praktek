@@ -16,7 +16,7 @@ class SemesterController extends Controller
     public function index()
     {
         $this->authorize('admin');
-        $data = Semester::paginate(10);
+        $data = Semester::all();
         return view("semester.index",compact('data'));
     }
 

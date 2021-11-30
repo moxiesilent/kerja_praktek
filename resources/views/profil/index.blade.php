@@ -139,7 +139,7 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Foto Kaprodi</h4>
+        <h4 class="card-title">Foto Kaepala Program Studi Penjaskesrek</h4>
         <img src="{{asset('images/'.$d->foto_kaprodi)}}" height='150px'/>
     </div>
 </div>
@@ -191,7 +191,7 @@
             <input type="text" class="form-control" id="telepon" placeholder="08xxxxxxxx" name="telepon">
         </div>
         <div class="form-group">
-          <label for="foto">Foto</label>
+          <label for="foto">Foto Kepala Program Studi Penjaskesrek</label>
           <input type="file" class="form-control" id="foto" name="foto">
         </div>
       </div>

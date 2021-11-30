@@ -15,7 +15,7 @@ class GaleriController extends Controller
     public function index()
     {
         $this->authorize('admin');
-        $data = Galeri::paginate(10);
+        $data = Galeri::all();
         return view("galeri.index",compact('data'));
     }
 

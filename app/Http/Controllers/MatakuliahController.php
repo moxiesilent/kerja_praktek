@@ -16,7 +16,7 @@ class MatakuliahController extends Controller
     public function index()
     {
         $this->authorize('admin');
-        $data = Matakuliah::paginate(10);
+        $data = Matakuliah::all();
         return view("matakuliah.index",compact('data'));
     }
 

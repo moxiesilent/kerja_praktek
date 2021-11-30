@@ -16,9 +16,7 @@ class PenelitianController extends Controller
     public function index()
     {
         $this->authorize('admin');
-        $data = DB::table('penelitians')
-        ->select('idpenelitian','judul','tahun','sumber','jumlah_dana','tipe')
-        ->paginate(5);
+        $data = Penelitian::all();
 
         return view("penelitian.index",compact('data'));
     }

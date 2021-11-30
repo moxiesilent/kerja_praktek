@@ -17,7 +17,7 @@ class ArtikelController extends Controller
     public function index()
     {
         $this->authorize('admin');
-        $data = Artikel::paginate(5);
+        $data = Artikel::all();
         return view('artikel.index', compact("data"));
     }
 

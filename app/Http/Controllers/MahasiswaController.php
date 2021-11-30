@@ -20,7 +20,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $this->authorize('admin');
-        $data = Mahasiswa::paginate(10);
+        $data = Mahasiswa::all();
         return view("mahasiswa.index",compact('data'));
     }
 
