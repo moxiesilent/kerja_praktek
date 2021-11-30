@@ -149,11 +149,6 @@
         @endforeach
       </tbody>
     </table>
-    <ul class="pagination">
-      <li class="page-item">
-        {{$data->links()}}
-      </li>
-    </ul>
   </div>
 </div>
 

@@ -108,7 +108,7 @@
       </div>
     @endif
   <div class="table-responsive">
-    <table class="table align-items-center table-flush">
+    <table class="table align-items-center table-flush datatable-basic" id="tablemengajar">
       <thead class="thead-light">
         <tr>
           <th scope="col">Nomor</th>
@@ -161,11 +161,6 @@
         @endforeach
       </tbody>
     </table>
-    <ul class="pagination">
-      <li class="page-item">
-        {{$data->links()}}
-      </li>
-    </ul>
   </div>
 </div>
 
@@ -236,43 +231,36 @@
     </div>
   </div>
 </div>
+@endsection
 
-<div class="modal fade" id="modalTambahMahasiswa" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="modalTambahLabel">Tambah Pembelajaran Baru</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="{{url('mengajars')}}">
-        @csrf
-        <div class="form-group">
-          <label for="semester">Semester</label>
-          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Semester" name="semester">
-            @foreach($semester as $sm)
-                <option value="{{$sm->idsemester}}">{{$sm->nama_semester}}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="dosen">Dosen Pengasuh</label>
-          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen">
-            @foreach($dosen as $dos)
-                <option value="{{$dos->nip}}">{{$dos->nama}}</option>
-            @endforeach
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="{{url('mengajars')}}" class="btn btn-default" role="button">Kembali</a>
-        <button type="submit" class="btn btn-primary">Tambah</button>
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
+@section('javascript')
+<script type="text/javascript">
+    // START SCRIPT TABEL
+    $.extend($.fn.dataTable.defaults, {
+    	autoWidth: false,
+    	columnDefs: [{
+    		orderable: false,
+    		width: '100px'
+    	}],
+    	dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+    	language: {
+    		search: '<span>Filter:</span> _INPUT_',
+            // searchPlaceholder: 'Type to filter...',
+            lengthMenu: '<span>Menampilkan :</span> _MENU_',
+            paginate: {'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;'}
+        },
+        drawCallback: function () {
+        	$(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+        },
+        preDrawCallback: function () {
+        	$(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+        }
+    });
+    $('.datatable-basic').DataTable();
+    // END SCRIPT TABEL
 
+    $(document).ready( function () {
+        $('#tablemengajar').DataTable();
+    });
+</script> 
 @endsection

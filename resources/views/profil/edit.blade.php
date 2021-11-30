@@ -132,7 +132,7 @@
                         <input type="text" class="form-control" id="telepon" value="{{$data->telepon}}" name="telepon">
                     </div>
                     <div class="form-group">
-                        <label for="foto">Foto</label>
+                        <label for="foto">Foto Kepala Program Studi Penjaskesrek</label>
                         <input type="file" class="form-control" id="foto" name="foto">
                         <img src="{{asset('images/'.$data->foto_kaprodi)}}" height='150px'/>
                     </div>

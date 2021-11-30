@@ -17,7 +17,7 @@ class PrestasiController extends Controller
     public function index()
     {
         $this->authorize('admin');
-        $data = Prestasi::paginate(10);
+        $data = Prestasi::all();
         return view("prestasi.index",compact('data'));
     }
 
