@@ -8,6 +8,8 @@ use Illuminate\Facade\File;
 use DB;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Imports\DosenImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DosenController extends Controller
 {
@@ -172,5 +174,11 @@ class DosenController extends Controller
         $queryRaw = DB::select(DB::raw("SELECT * from dosens where nip = '$id'"));
 
         return view("dosen.detail",["data"=>$queryRaw]);
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new DosenImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }

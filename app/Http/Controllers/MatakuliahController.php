@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Matakuliah;
 use Illuminate\Http\Request;
 use DB;
+use App\Imports\MatakuliahImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MatakuliahController extends Controller
 {
@@ -118,5 +120,11 @@ class MatakuliahController extends Controller
             $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
             return redirect()->route('matakuliahs.index')->with('error', $msg);
         }
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new MatakuliahImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }

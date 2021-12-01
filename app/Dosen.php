@@ -9,6 +9,7 @@ class Dosen extends Model
     public $timestamps=false;
     protected $primaryKey = 'nip';
     protected $keyType = 'string';
+    protected $fillable = ['nip', 'email', 'nama', 'tanggallahir', 'bidangkeahlian', 'foto', 'jabatan', 'telepon', 'riwayat_pendidikan', 'jenis_kelamin', 'alamat'];
 
     public function mengajars(){
         return $this->hasMany("App\Mengajar","dosens_nip","nip");

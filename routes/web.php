@@ -76,12 +76,14 @@ Route::post('/mahasiswa/import', 'MahasiswaController@import')->middleware('auth
 Route::resource('mahasiswas','MahasiswaController')->middleware('auth');
 
 Route::get('/dosen','DosenController@index')->middleware('auth');
+Route::post('/dosen/import', 'DosenController@import')->middleware('auth');
 Route::resource('dosens','DosenController')->middleware('auth');
 
 Route::get('/galeri','GaleriController@index')->middleware('auth');
 Route::resource('galeris','GaleriController')->middleware('auth');
 
 Route::get('/matakuliah','MatakuliahController@index')->middleware('auth');
+Route::post('/matakuliah/import', 'MatakuliahController@import')->middleware('auth');
 Route::resource('matakuliahs','MatakuliahController')->middleware('auth');
 
 Route::get('/semester','SemesterController@index')->middleware('auth');
