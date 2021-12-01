@@ -24,11 +24,11 @@
       <br><br>
       <div class="col-md-4"></div>
       <div class="col-md-4">
-      @foreach($data as $d)
-        <div class="intro-img"><img class="img-responsive" src="{{asset('images/'.$d->foto_kaprodi)}}" alt=""/></div>
+        <div class="intro-img"><img class="img-responsive" src="{{asset('images/'.$data[0]->foto_kaprodi)}}" alt=""/></div>
       </div>
       <div class="col-md-4"></div>
       <div class="col-md-12">
+        @foreach($data as $d)
         {!!html_entity_decode($d->sambutan)!!}
         @endforeach
       </div>
