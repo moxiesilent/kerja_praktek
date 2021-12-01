@@ -73,6 +73,12 @@
       <span class="nav-link-text">Galeri</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('user')}}">
+      <i class="ni ni-single-02 text-dark"></i>
+      <span class="nav-link-text">User</span>
+    </a>
+  </li>
 </ul>
 @endsection
 @section('nama')
