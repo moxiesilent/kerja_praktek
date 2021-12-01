@@ -98,6 +98,7 @@ Route::get('/artikelback','ArtikelController@index')->middleware('auth');
 // Route::get('/penelitianback','PenelitianController@backEndIndex')->middleware('auth');
 Route::resource('penelitians','PenelitianController')->middleware('auth');
 Route::get('/dashboard','DashboardController@index')->middleware('auth');
+Route::post('/user/import', 'DashboardController@import')->middleware('auth');
 Route::get('/loginmahasiswa','LoginmahasiswaController@index')->middleware('auth');
 Route::get('/dosen/detail/{id}','DosenController@detailDosen')->middleware('auth');
 

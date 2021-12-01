@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DashboardController extends Controller
 {
@@ -25,5 +27,11 @@ class DashboardController extends Controller
         $this->authorize('admin');
         $data = User::all();
         return view("user.index",compact('data'));
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new UsersImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }
