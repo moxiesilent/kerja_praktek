@@ -50,7 +50,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="{{url('jurnalback')}}">
+    <a class="nav-link" href="{{url('jurnalback')}}">
       <i class="ni ni-send text-dark"></i>
       <span class="nav-link-text">Jurnal</span>
     </a>
@@ -74,7 +74,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('user')}}">
+    <a class="nav-link active" href="{{url('user')}}">
       <i class="ni ni-single-02 text-dark"></i>
       <span class="nav-link-text">User</span>
     </a>
@@ -85,25 +85,24 @@
 <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
 @endsection
 @section('content')
-<h2>Tabel Prestasi</h2><br>
-
+<h2>Daftar User</h2><br>
 <div class="card">
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Jurnal</h3>
+        <h3 class="mb-0">Daftar User</h3>
       </div>
       <div class="col text-right">
-        <a href="" data-toggle="modal" data-target="#modalTambah">
+      <a href="" data-toggle="modal" data-target="#modalTambah">
           <button class="btn btn-icon btn-primary" type="button">
             <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-            <span class="btn-inner--text">Tambah Jurnal</span>
+            <span class="btn-inner--text">Tambah User</span>
           </button>
         </a>
       </div>
+      <br>
     </div>
-  </div>
-   @if(session('status'))
+    @if(session('status'))
       <div class="alert alert-success" role="alert">
           {{session('status')}}
       </div>
@@ -113,111 +112,48 @@
           {{session('error')}}
       </div>
     @endif
+  </div>
   <div class="table-responsive">
-    <table class="table align-items-center table-flush datatable-basic" id="tablejurnal">
+    <table class="table align-items-center table-flush datatable-basic" id="tablesemester">
       <thead class="thead-light">
         <tr>
-          <th scope="col">Nomor</th>
-          <th scope="col">Judul</th>
-          <th scope="col">Nama Dosen</th>
-          <th scope="col">Dihasilkan/dipublikasikan pada</th>
-          <th scope="col">Tahun</th>
-          <th scope="col">Tingkat</th>
-          <th scope="col">Action</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        @foreach($data as $d)
-          <tr>
-            <td>{{$d->id}}</td>
-            <td>{{$d->judul}}</td>
-            <td>{{$d->dosen}}</td>
-            <td>{{$d->lokasi}}</td>
-            <td>{{$d->tahun}}</td>
-            <td>{{$d->tingkat}}</td>
-            <td class="text-right">
-            <div class="dropdown">
-                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-ellipsis-v"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                  <div class="dropdown-item">
-                    <a class="dropdown-item" href="{{url('jurnals/'.$d->id.'/edit')}}">Edit</a>
-                  </div> 
-                    <form class="dropdown-item" method="POST" action="{{url('jurnals/'.$d->id)}}">
-                      @csrf
-                      @method('DELETE')
-                      <input class="dropdown-item" type="submit" value="Hapus" onclick="if(!confirm('apakah anda yakin menghapus data ini?')) return false;">
-                    </form>
-                </div>
-            </div>
-          </td>
-          </tr>
-        @endforeach
+        
       </tbody>
     </table>
+    </ul>
   </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalTambahLabel">Tambah Jurnal Baru</h5>
+        <h5 class="modal-title" id="modalTambahLabel">Tambah Semester</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{url('jurnals')}}">
-        @csrf
+      <form method="POST" action="{{url('semesters')}}">
+      @csrf
         <div class="form-group">
-          <label for="kegiatan">Judul</label>
-          <input type="text" class="form-control" id="kegiatan" placeholder="tuliskan judul jurnal" name="judul">
-        </div>
-        <div class="form-group">
-          <label for="tahun">Tahun</label>
-          <input type="text" class="form-control" id="tahun" placeholder="20xx" name="tahun">
-        </div>
-        <div class="form-group">
-          <label for="dosen">Nama Dosen</label>
-          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen">
-            @foreach($dosen as $dos)
-                <option value="{{$dos->nip}}">{{$dos->nama}}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="lokasi">Lokasi</label>
-          <input type="text" class="form-control" id="lokasi" placeholder="lokasi" name="lokasi">
-        </div>
-        <div class="radio">
-            <label>Tingkat</label><br>
-            <label><input type="radio" name="tingkat" value="lokal"> Lokal</label>&nbsp&nbsp
-            <label><input type="radio" name="tingkat" value="regional"> Regional</label>&nbsp&nbsp
-            <label><input type="radio" name="tingkat" value="nasional"> Nasional</label>&nbsp&nbsp
-            <label><input type="radio" name="tingkat" value="internasional"> Internasional</label>
+          <label for="nama">Nama Semester</label>
+          <input type="text" class="form-control" id="nama" placeholder="Gasal 2020/2021" name="nama">
         </div>
       </div>
       <div class="modal-footer">
-        <a href="{{url('jurnals')}}" class="btn btn-default" role="button">Kembali</a>
-        <button type="submit" class="btn btn-primary">Tambah</button>
-      </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
-
-<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-
-    </div>
-  </div>
-</div>
-
 @endsection
 @section('javascript')
 <script type="text/javascript">
@@ -246,7 +182,7 @@
     // END SCRIPT TABEL
 
     $(document).ready( function () {
-        $('#tablejurnal').DataTable();
+        $('#tablesemester').DataTable();
     });
 </script> 
 @endsection

@@ -38,7 +38,7 @@ Route::get('/galerifasilitas','GaleriController@indexFac');
 
 Route::get('artikelback/hapus/{id}','ArtikelController@hapusArtikel')->middleware('auth');
 
-
+Route::get('/user','DashboardController@daftarUser')->middleware('auth');
 
 Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen')->middleware('auth');
 Route::get('/matakuliahDosen/{id}', 'LogindosenController@getPertemuan');

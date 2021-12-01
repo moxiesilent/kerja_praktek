@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -17,5 +19,11 @@ class DashboardController extends Controller
         $queryRaw6 = DB::select(DB::raw("SELECT count('idpenelitian') as jumpenelitian from penelitians"));
 
         return view("dashboard.index",["dosen"=>$queryRaw, "mahasiswa"=>$queryRaw2,"mk"=>$queryRaw3,"prestasi"=>$queryRaw4, "jurnal"=>$queryRaw5, "penelitian"=>$queryRaw6]);
+    }
+
+    public function daftarUser(){
+        $this->authorize('admin');
+        $data = User::all();
+        return view("user.index",compact('data'));
     }
 }
