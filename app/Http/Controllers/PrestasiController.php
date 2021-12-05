@@ -6,6 +6,8 @@ use App\Prestasi;
 use Illuminate\Http\Request;
 use Illuminate\Facade\File;
 use DB;
+use App\Imports\PrestasiImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PrestasiController extends Controller
 {
@@ -134,5 +136,11 @@ class PrestasiController extends Controller
             $msg ="Gagal menghapus data karena data masih terpakai di tempat lain. ";
             return redirect()->route('prestasis.index')->with('error', $msg);
         }
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new PrestasiImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }

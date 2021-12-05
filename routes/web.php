@@ -69,6 +69,7 @@ Route::get('/profil','ProfilController@index')->middleware('auth');
 Route::resource('profils','ProfilController')->middleware('auth');
 
 Route::get('/prestasi','PrestasiController@index')->name('prestasi')->middleware('auth');
+Route::post('/prestasi/import', 'PrestasiController@import')->middleware('auth');
 Route::resource('prestasis','PrestasiController')->middleware('auth');
 
 Route::get('/mahasiswa','MahasiswaController@index')->middleware('auth');

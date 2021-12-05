@@ -7,7 +7,7 @@
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-          <img width="400px"src="{{asset('assets/undana/navbarfix.png')}}"/>
+          <img width="400px"src="{{asset('assets/undana/navbar.png')}}"/>
         </div>
       </div>
     </div>

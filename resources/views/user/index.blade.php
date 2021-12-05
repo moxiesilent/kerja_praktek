@@ -99,12 +99,14 @@
             <span class="btn-inner--text">Tambah User</span>
           </button>
         </a>
-        <a href="" data-toggle="modal" data-target="#modalImport">
-          <button class="btn btn-icon btn-warning" type="button">
-            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-            <span class="btn-inner--text">Import User</span>
-          </button>
-        </a>
+        <div style="display:none;">
+          <a href="" data-toggle="modal" data-target="#modalImport">
+            <button class="btn btn-icon btn-warning" type="button">
+              <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+              <span class="btn-inner--text">Import User</span>
+            </button>
+          </a>
+        </div>
       </div>
       <br>
     </div>
