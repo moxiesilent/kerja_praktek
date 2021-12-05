@@ -100,6 +100,13 @@
             <span class="btn-inner--text">Tambah Jurnal</span>
           </button>
         </a>
+
+        <a href="" data-toggle="modal" data-target="#modalImport">
+          <button class="btn btn-icon btn-warning" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Import Jurnal</span>
+          </button>
+        </a>
       </div>
     </div>
   </div>
@@ -131,7 +138,11 @@
           <tr>
             <td>{{$d->id}}</td>
             <td>{{$d->judul}}</td>
-            <td>{{$d->dosen}}</td>
+            @foreach($dosen as $a)
+              @if($d->dosens_nip == $a->nip)
+              <td>{{$a->nama}}</td>
+              @endif
+            @endforeach
             <td>{{$d->lokasi}}</td>
             <td>{{$d->tahun}}</td>
             <td>{{$d->tingkat}}</td>
@@ -185,7 +196,13 @@
           <label for="dosen">Nama Dosen</label>
           <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen">
             @foreach($dosen as $dos)
+              @foreach($data as $d)
+                @if($dos->nip == $d->dosens_nip)
+                <option value="{{$dos->nip}}" selected="selected">{{$dos->nama}}</option>
+                @else
                 <option value="{{$dos->nip}}">{{$dos->nama}}</option>
+                @endif
+              @endforeach
             @endforeach
           </select>
         </div>
@@ -218,6 +235,39 @@
   </div>
 </div>
 
+<div class="modal fade" id="modalImport" tabindex="-1" role="dialog" aria-labelledby="modalImportLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalImportLabel">Import Jurnal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" enctype="multipart/form-data" action="{{url('/jurnalback/import')}}">
+      @csrf
+        <div class="form-group">
+          <label for="file">Pilih File</label>
+          <input type="file" class="form-control" id="file" name="file" accept=".xlsx">
+          <span style="color:red;">
+            *Format File: xlsx
+            <br>
+            *File yang diimport hanya membaca halaman pertama saja
+            <br>
+            *Contoh format, klik <a href="{{ asset('Format_Jurnal.xlsx') }}">disini!</a>
+          </span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 @section('javascript')
 <script type="text/javascript">

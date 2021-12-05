@@ -23,9 +23,11 @@ Route::get('/profildosen/{id}', 'DosenController@getDosen');
 Route::view('/kurikulum', 'kurikulum');
 Route::get('/jurnal','JurnalController@frontEndIndex');
 Route::get('/jurnalback', 'JurnalController@index')->middleware('auth');
+Route::post('/jurnalback/import', 'JurnalController@import')->middleware('auth');
 Route::resource('jurnals', 'JurnalController');
 Route::get('/penelitian', 'PenelitianController@frontEndIndex');
 Route::get('/penelitianback', 'PenelitianController@index')->middleware('auth');
+Route::post('/penelitianback/import', 'PenelitianController@import')->middleware('auth');
 Route::get('/prestasimahasiswa','PrestasiController@prestasikewebprofile');
 
 Route::get('/artikel','ArtikelController@frontEndIndex');

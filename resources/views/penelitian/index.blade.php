@@ -94,10 +94,16 @@
         <h3 class="mb-0">Data Penelitian</h3>
       </div>
       <div class="col text-right">
-      <a href="" data-toggle="modal" data-target="#modalTambah">
+        <a href="" data-toggle="modal" data-target="#modalTambah">
           <button class="btn btn-icon btn-primary" type="button">
             <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
             <span class="btn-inner--text">Tambah Penelitian</span>
+          </button>
+        </a>
+        <a href="" data-toggle="modal" data-target="#modalImport">
+          <button class="btn btn-icon btn-warning" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Import Penelitian</span>
           </button>
         </a>
       </div>
@@ -132,7 +138,7 @@
             <td>{{$d->judul}}</td>
             <td>{{$d->tipe}}</td>
             <td>{{$d->sumber}}</td>
-            <td>{{$d->jumlah_dana}}</td>
+            <td align="center">{{$d->jumlah_dana}}</td>
             <td class="text-right">
             <div class="dropdown">
                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -204,6 +210,39 @@
   </div>
 </div>
 
+<div class="modal fade" id="modalImport" tabindex="-1" role="dialog" aria-labelledby="modalImportLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalImportLabel">Import Penelitian</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" enctype="multipart/form-data" action="{{url('/penelitianback/import')}}">
+      @csrf
+        <div class="form-group">
+          <label for="file">Pilih File</label>
+          <input type="file" class="form-control" id="file" name="file" accept=".xlsx">
+          <span style="color:red;">
+            *Format File: xlsx
+            <br>
+            *File yang diimport hanya membaca halaman pertama saja
+            <br>
+            *Contoh format, klik <a href="{{ asset('Format_Penelitian.xlsx') }}">disini!</a>
+          </span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('javascript')

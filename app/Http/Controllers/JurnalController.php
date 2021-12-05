@@ -6,6 +6,8 @@ use App\Jurnal;
 use App\Dosen;
 use Illuminate\Http\Request;
 use DB;
+use App\Imports\JurnalImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JurnalController extends Controller
 {
@@ -135,5 +137,11 @@ class JurnalController extends Controller
         INNER JOIN dosens ON jurnals.dosens_nip = dosens.nip"));
 
         return view("jurnal",compact('data'));
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new JurnalImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }

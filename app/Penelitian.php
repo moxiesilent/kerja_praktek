@@ -8,5 +8,5 @@ class Penelitian extends Model
 {
     public $timestamps=false;
     protected $primaryKey = 'idpenelitian';
-
+    protected $fillable = ['tahun', 'judul', 'sumber', 'jumlah_dana', 'tipe'];
 }

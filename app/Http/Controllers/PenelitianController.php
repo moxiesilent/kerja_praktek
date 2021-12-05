@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Penelitian;
 use Illuminate\Http\Request;
 use DB;
+use App\Imports\PenelitianImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PenelitianController extends Controller
 {
@@ -129,5 +131,11 @@ class PenelitianController extends Controller
     {
         $data = Penelitian::all();
         return view("penelitian",compact('data'));
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new PenelitianImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }
