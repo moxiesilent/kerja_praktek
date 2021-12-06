@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Mengambil;
 use Illuminate\Http\Request;
 use DB;
+use App\Imports\MengambilImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class MengambilController extends Controller
 {
     /**
@@ -108,5 +111,11 @@ class MengambilController extends Controller
         else{
             return back()->with('error','Gagal menghapus data');
         }
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new MengambilImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }

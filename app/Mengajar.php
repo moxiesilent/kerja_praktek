@@ -8,6 +8,7 @@ class Mengajar extends Model
 {
     protected $primaryKey = 'idmengajars';
     public $timestamps=false;
+    protected $fillable = ['dosens_nip', 'matakuliah_kodemk', 'jammulai', 'jamberakhir', 'ruangan', 'semester_idsemester', 'hari', 'dosens_nip2', 'dosens_nip3', 'kp'];
 
     public function semesters(){
         return $this->belongsTo("App\Semester","semester_idsemester");

@@ -93,13 +93,13 @@
         <h3 class="mb-0">Daftar User</h3>
       </div>
       <div class="col text-right">
-        <a href="" data-toggle="modal" data-target="#modalTambah">
-          <button class="btn btn-icon btn-primary" type="button">
-            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-            <span class="btn-inner--text">Tambah User</span>
-          </button>
-        </a>
         <div style="display:none;">
+          <a href="" data-toggle="modal" data-target="#modalTambah">
+            <button class="btn btn-icon btn-primary" type="button">
+              <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+              <span class="btn-inner--text">Tambah User</span>
+            </button>
+          </a>
           <a href="" data-toggle="modal" data-target="#modalImport">
             <button class="btn btn-icon btn-warning" type="button">
               <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
@@ -125,11 +125,28 @@
     <table class="table align-items-center table-flush datatable-basic" id="tablesemester">
       <thead class="thead-light">
         <tr>
-          <th scope="col"></th>
+          <th scope="col">No</th>
+          <th scope="col">Nama</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Reset Passowrd</th>
         </tr>
       </thead>
       <tbody>
-        
+        <?php $no = 0; ?>
+        @foreach($data as $d)
+        <?php $no++ ?>
+        <tr>
+          <td>{{ $no }}</td>
+          <td>{{ $d->name }}</td>
+          <td>{{ $d->email }}</td>
+          <td>
+            <form class="dropdown-item" method="POST" action="{{url('user/resetpassword/'.$d->id)}}">
+              @csrf
+              <input class="btn btn-icon btn-warning" type="submit" value="Reset Password" onclick="if(!confirm('Yakin untuk Reset Password?')) return false;">
+            </form>
+          </td>
+        </tr>
+        @endforeach
       </tbody>
     </table>
     </ul>

@@ -100,6 +100,20 @@
             <span class="btn-inner--text">Tambah Jadwal</span>
           </button>
         </a>
+
+        <a href="" data-toggle="modal" data-target="#modalImport">
+          <button class="btn btn-icon btn-warning" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Import Jadwal</span>
+          </button>
+        </a>
+
+        <a href="" data-toggle="modal" data-target="#modalImportMhs">
+          <button class="btn btn-icon btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Import Mahasiswa ke Kelas</span>
+          </button>
+        </a>
       </div>
     </div>
   </div>
@@ -123,9 +137,10 @@
           <th scope="col">Jam Selesai</th>
           <th scope="col">Kode Matakuliah</th>
           <th scope="col">Nama Matakuliah</th>
+          <th scope="col">KP</th>
           <th scope="col">SKS</th>
           <th scope="col">Ruangan</th>
-          <th scope="col">Dosen</th>
+          <th scope="col">PJMK</th>
           <th scope="col">Semester</th>
           <th></th>
         </tr>
@@ -139,6 +154,7 @@
             <td>{{$d->jamberakhir}}</td>
             <td>{{$d->kodemk}}</td>
             <td>{{$d->namamk}}</td>
+            <td>{{$d->kp}}</td>
             <td>{{$d->sks}}</td>
             <td>{{$d->ruangan}}</td>
             <td>{{$d->dosen}}</td>
@@ -201,6 +217,24 @@
           </select>
         </div>
         <div class="form-group">
+          <label for="dosen">Dosen Anggota 1</label>
+          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen2">
+            <option value="">-</option>
+            @foreach($dosen as $dos)
+                <option value="{{$dos->nip}}">{{$dos->nama}}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dosen">Dosen Anggota 2</label>
+          <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Dosen" name="dosen3">
+            <option value="">-</option>
+            @foreach($dosen as $dos)
+                <option value="{{$dos->nip}}">{{$dos->nama}}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="form-group">
           <label for="matakuliah">Matakuliah</label>
           <select class="form-control" data-toggle="select" title="Simple select" data-placeholder="Pilih Matakuliah" name="matakuliah">
             @foreach($matakuliah as $mk)
@@ -209,8 +243,12 @@
           </select>
         </div>
         <div class="form-group">
+          <label for="kp">Kelas Paralel</label>
+          <input type="text" class="form-control" id="kp" placeholder="Kelas Paralel" name="kp">
+        </div>
+        <div class="form-group">
           <label for="hari">Hari</label>
-          <input type="text" class="form-control" id="hari" placeholder="hari" name="hari">
+          <input type="text" class="form-control" id="hari" placeholder="Hari" name="hari">
         </div>
         <div class="form-group">
           <label for="ruangan">Ruangan</label>
@@ -234,6 +272,74 @@
         <button type="submit" class="btn btn-primary">Tambah</button>
       </form>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalImport" tabindex="-1" role="dialog" aria-labelledby="modalImportLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalImportLabel">Import Jadwal Mengajar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" enctype="multipart/form-data" action="{{url('/jadwal/import')}}">
+      @csrf
+        <div class="form-group">
+          <label for="file">Pilih File</label>
+          <input type="file" class="form-control" id="file" name="file" accept=".xlsx">
+          <span style="color:red;">
+            *Format File: xlsx
+            <br>
+            *File yang diimport hanya membaca halaman pertama saja
+            <br>
+            *Contoh format, klik <a href="{{ asset('Format_Jadwal.xlsx') }}">disini!</a>
+          </span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalImportMhs" tabindex="-1" role="dialog" aria-labelledby="modalImportLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalImportLabel">Import Mahasiswa ke Kelas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" enctype="multipart/form-data" action="{{url('/mahasiswa_kelas/import')}}">
+      @csrf
+        <div class="form-group">
+          <label for="file">Pilih File</label>
+          <input type="file" class="form-control" id="file" name="file" accept=".xlsx">
+          <span style="color:red;">
+            *Format File: xlsx
+            <br>
+            *File yang diimport hanya membaca halaman pertama saja
+            <br>
+            *Contoh format, klik <a href="{{ asset('Format_Mahasiswa_Kelas.xlsx') }}">disini!</a>
+          </span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </form>
     </div>
   </div>
 </div>

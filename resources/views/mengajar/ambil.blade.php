@@ -104,7 +104,8 @@
             Semester : {{$d->semester}}<br>
             Kode MK : {{$d->kodemk}}<br>
             Nama MK : {{$d->namamk}}<br>
-            Dosen Pengajar : {{$d->namaDosen}}<br>
+            PJMK : {{$d->namaDosen}}<br>
+            <!-- Dosen Anggota : {{$d->dos2}}, {{$d->dos3}}<br> -->
             Ruangan : {{$d->ruangan}}<br>
             Hari : {{$d->hari}}<br>
             Jam Mulai : {{$d->jammulai}}<br>

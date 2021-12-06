@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = User::all();
+        return view('home', compact('data'));
+    }
+
+    public function resetpass($id){
+        $user = User::find($id);
+        $user->password = Hash::make('12345678');
+        $user->save();
+        return back()->with('status', 'Berhasil Reset');
     }
 }

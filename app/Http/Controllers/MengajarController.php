@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use Illuminate\Pagination\Paginator;
+use App\Imports\MengajarImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MengajarController extends Controller
 {
@@ -34,7 +36,7 @@ class MengajarController extends Controller
         // ->select('idmengajars','matakuliahs.namamk as namamk','matakuliahs.kodemk as kodemk','matakuliahs.sks as sks','hari','jammulai','jamberakhir','ruangan','semesters.nama_semester as semester','dosens.nama as dosen')
         // ->paginate(10);
 
-        $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
+        $data = DB::select(DB::raw("SELECT idmengajars, dosens.nama as dosen, matakuliahs.namamk as namamk, mengajars.kp as kp, matakuliahs.kodemk as kodemk, matakuliahs.sks as sks, 
         matakuliahs.sks as sks, hari, jammulai, jamberakhir, ruangan, semesters.nama_semester as semester FROM `mengajars` inner join dosens on mengajars.dosens_nip = dosens.nip 
         inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk inner join semesters on 
         semester_idsemester = semesters.idsemester ORDER BY idmengajars"));
@@ -64,6 +66,8 @@ class MengajarController extends Controller
         try{
             $data = new Mengajar();
             $data->dosens_nip = $request->get('dosen');
+            $data->dosens_nip2 = $request->get('dosen2');
+            $data->dosens_nip3 = $request->get('dosen3');
             $data->matakuliah_kodemk = $request->get('matakuliah');
             $data->jammulai = $request->get('jammulai');
             $data->jamberakhir = $request->get('jamberakhir');
@@ -172,8 +176,7 @@ class MengajarController extends Controller
     public function detailMengajar($id){
         $this->authorize('admin');
         $mahasiswa = Mahasiswa::all();
-
-        $queryRaw = DB::select(DB::raw("SELECT idmengajars, jammulai, jamberakhir, ruangan, hari, dosens.nip as dosenNip, dosens.nama as namaDosen, matakuliahs.kodemk as kodemk,
+        $queryRaw = DB::select(DB::raw("SELECT idmengajars, jammulai, jamberakhir, ruangan, hari, dosens.nip as dosenNip, dosens.nama as namaDosen, mengajars.dosens_nip2 as dos2, mengajars.dosens_nip3 as dos3, matakuliahs.kodemk as kodemk,
         matakuliahs.namamk as namamk, matakuliahs.sks as sks, semesters.nama_semester as semester FROM mengajars INNER JOIN dosens ON mengajars.dosens_nip =
         dosens.nip INNER JOIN matakuliahs ON mengajars.matakuliah_kodemk = matakuliahs.kodemk INNER JOIN semesters ON mengajars.semester_idsemester = semesters.idsemester
         WHERE mengajars.idmengajars = '$id'"));
@@ -182,5 +185,11 @@ class MengajarController extends Controller
         WHERE mengajars_idmengajars = '$id'"));
 
         return view("mengajar.ambil",["data"=>$queryRaw,"mahasiswa"=>$mahasiswa,"ambil"=>$queryRaw2]);
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new MengajarImport, request()->file('file'));
+        return back()->with('status', 'Berhasil import');
     }
 }

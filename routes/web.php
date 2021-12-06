@@ -41,6 +41,10 @@ Route::get('/galerifasilitas','GaleriController@indexFac');
 Route::get('artikelback/hapus/{id}','ArtikelController@hapusArtikel')->middleware('auth');
 
 Route::get('/user','DashboardController@daftarUser')->middleware('auth');
+Route::post('user/resetpassword/{id}','HomeController@resetpass')->middleware('auth');
+
+Route::post('/jadwal/import', 'MengajarController@import')->middleware('auth');
+Route::post('/mahasiswa_kelas/import', 'MengambilController@import')->middleware('auth');
 
 Route::get('/matakuliahDosen', 'LogindosenController@matakuliahDosen')->middleware('auth');
 Route::get('/matakuliahDosen/{id}', 'LogindosenController@getPertemuan');
