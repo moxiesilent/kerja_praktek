@@ -85,7 +85,7 @@
         </table>
         <br>
         <h2 class="font-600">Panduan Mata Kuliah</h2>
-        <iframe src="{{asset('assets/undana/hero2.jpg')}}" frameborder="1" style="width: 100%; height: 700px;"></iframe>
+        <iframe src="{{asset('assets/undana/Panduan_Mata_Kuliah.pdf')}}" frameborder="1" style="width: 100%; height: 700px;"></iframe>
       </div>
     </div>
   </section>

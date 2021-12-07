@@ -71,11 +71,11 @@
   			<div class="col-md-2 col-md-offset-5">
   				<div class="center-layout">
                 <div class="v-align-middle">
-                  <h2 class="font-600" style="letter-spacing: 14px; color: white;">VIDEO</h2>
-                  <a class="popup-youtube" href="assets/undana/videoprofil.mp4">
+                  <h2 class="font-600" style="letter-spacing: 14px; color: white;"><b>VIDEO</b></h2>
+                  <a class="popup-youtube" href="{{asset('assets/undana/videoprofilfix.mp4')}}">
                     <div class="play-button"><i class="eicon mdi mdi-play"></i> </div>
                   </a>
-                  <h2 class="font-600" style="letter-spacing: 7px; color: white;">PROFIL</h2>
+                  <h2 class="font-600" style="letter-spacing: 7px; color: white;"><b>PROFIL</b></h2>
                 </div>
               </div>
   			</div>
