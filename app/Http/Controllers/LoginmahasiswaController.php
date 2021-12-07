@@ -11,7 +11,7 @@ class LoginmahasiswaController extends Controller
     public function index(){
         $this->authorize('mahasiswa');
         $currentuserid = Auth::user()->email;
-        $queryRaw = DB::select(DB::raw("SELECT namamk, kodemk, mengajars.idmengajars as idmengajar, mengajars.hari as hari, jammulai, jamberakhir, ruangan FROM matakuliahs INNER JOIN mengajars ON 
+        $queryRaw = DB::select(DB::raw("SELECT namamk, kodemk, kp, mengajars.idmengajars as idmengajar, mengajars.hari as hari, jammulai, jamberakhir, ruangan FROM matakuliahs INNER JOIN mengajars ON 
         matakuliahs.kodemk = mengajars.matakuliah_kodemk INNER JOIN mengambils ON mengajars.idmengajars = mengambils.mengajars_idmengajars 
         INNER JOIN mahasiswas ON mahasiswas.idmahasiswa = mengambils.mahasiswas_idmahasiswa WHERE mahasiswas.email = '$currentuserid'"));
 

@@ -39,6 +39,7 @@
         <tr>
           <th>Kode Matakuliah</th>
           <th>Nama Matakuliah</th>
+          <th>Kelas Paralel</th>
           <th>Hari</th>
           <th>Jam Mulai</th>
           <th>Jam Berakhir</th>
@@ -53,6 +54,7 @@
           <tr>
             <td>{{$d->kodemk}}</td>
             <td>{{$d->namamk}}</td>
+            <td align="center">{{$d->kp}}</td>
             <td>{{$d->hari}}</td>
             <td>{{$d->jammulai}}</td>
             <td>{{$d->jamberakhir}}</td>

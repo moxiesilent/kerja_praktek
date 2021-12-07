@@ -26,7 +26,7 @@ class LogindosenController extends Controller
     public function matakuliahDosen(){
         $this->authorize('dosen');
         $currentuserid = Auth::user()->email;
-        $queryRaw = DB::select(DB::raw("SELECT idmengajars, matakuliahs.kodemk as kodemk, matakuliahs.namamk as namamk, jammulai,
+        $queryRaw = DB::select(DB::raw("SELECT idmengajars, kp, matakuliahs.kodemk as kodemk, matakuliahs.namamk as namamk, jammulai,
         jamberakhir,ruangan, semesters.nama_semester as semester, hari, sks FROM mengajars inner join dosens on mengajars.dosens_nip = dosens.nip 
         inner join matakuliahs on mengajars.matakuliah_kodemk = matakuliahs.kodemk INNER JOIN semesters on 
         mengajars.semester_idsemester = semesters.idsemester where dosens.email = '$currentuserid'"));

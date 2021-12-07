@@ -39,6 +39,7 @@
         <tr>
           <th>Kode Matakuliah</th>
           <th>Nama Matakuliah</th>
+          <th>Kelas Paralel</th>
           <th>Hari</th>
           <th>Jam Mulai</th>
           <th>Jam Berakhir</th>
@@ -53,6 +54,7 @@
           <tr>
             <td>{{$d->kodemk}}</td>
             <td>{{$d->namamk}}</td>
+            <td>{{$d->kp}}</td>
             <td>{{$d->hari}}</td>
             <td>{{$d->jammulai}}</td>
             <td>{{$d->jamberakhir}}</td>
@@ -60,17 +62,17 @@
             <td>{{$d->ruangan}}</td>
             <td>{{$d->semester}}</td>
             <td class="text-right">
-            <div class="dropdown">
-                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-ellipsis-v"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                  <div class="dropdown-item">
-                    <a class="dropdown-item" href="{{url('matakuliahDosen/'.$d->idmengajars)}}">Pilih</a>
+              <div class="dropdown">
+                  <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <div class="dropdown-item">
+                      <a class="dropdown-item" href="{{url('matakuliahDosen/'.$d->idmengajars)}}">Pilih</a>
+                    </div>
                   </div>
-                </div>
-            </div>
-          </td>
+              </div>
+            </td>
           </tr>
         @endforeach
       </tbody>

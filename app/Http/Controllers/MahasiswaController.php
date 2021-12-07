@@ -140,7 +140,14 @@ class MahasiswaController extends Controller
 
     public function import(Request $request)
     {
-        Excel::import(new MahasiswaImport, request()->file('file'));
-        return back()->with('status', 'Berhasil import');
+        $this->authorize('admin');
+        try{
+            Excel::import(new MahasiswaImport, request()->file('file'));
+            return back()->with('status', 'Berhasil import');    
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal mengimport data, mohon cek kembali format yang digunakan.";
+            return redirect()->route('dosens.index')->with('error', $msg);
+        }
     }
 }

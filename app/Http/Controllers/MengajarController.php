@@ -189,7 +189,14 @@ class MengajarController extends Controller
 
     public function import(Request $request)
     {
-        Excel::import(new MengajarImport, request()->file('file'));
-        return back()->with('status', 'Berhasil import');
+        $this->authorize('admin');
+        try{
+            Excel::import(new MengajarImport, request()->file('file'));
+            return back()->with('status', 'Berhasil import'); 
+        }
+        catch(\PDOException $e){
+            $msg ="Gagal mengimport data, mohon cek kembali format yang digunakan.";
+            return redirect()->route('dosens.index')->with('error', $msg);
+        }
     }
 }
