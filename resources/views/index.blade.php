@@ -159,7 +159,7 @@
                             <div class="member-description-wrap">
                             <h4 class="member-title">{{$d->nama}}</h4>
                             <p class="member-subtitle">{{$d->bidangkeahlian}}</p>
-                            <ul class="member-icons">
+                            <ul class="member-icons" style="display: none;">
                                 <li class="social-icon"><a href="#"><i class="mdi mdi-facebook"></i></a></li>
                                 <li class="social-icon"><a href="#"><i class="mdi mdi-twitter"></i></a></li>
                                 <li class="social-icon"><a href="#"><i class="mdi mdi-google-plus"></i></a></li>
